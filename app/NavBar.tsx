@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { AiFillPrinter } from "react-icons/ai";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
+  const currentPath = usePathname();
+
   const links = [
     { label: "Bérletek", href: "/" },
     { label: "Ügyfelek", href: "/clients" },
@@ -14,15 +19,17 @@ const NavBar = () => {
       <Link href="/">
         <AiFillPrinter />
       </Link>
-      <ul className="flex space-x-6">
+      <ul className="flex space-x-6 text-zinc">
         {links.map((link) => (
-            <Link
-              key={link.href}
-              className="text-zinc-500 hover:text-zinc-800 transition-colors"
-              href={link.href}
-            >
-              {link.label}
-            </Link>
+          <Link
+            key={link.href}
+            className={`${
+              link.href === currentPath ? "text-zinc-950" : "text-zinc-500"
+            } hover:text-zinc-800 transition-colors`}
+            href={link.href}
+          >
+            {link.label}
+          </Link>
         ))}
       </ul>
     </nav>
