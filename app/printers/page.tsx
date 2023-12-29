@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PrintersPage = () => {
-  return (
-    <div>PrintersPage</div>
-  )
-}
+  return <div>PrintersPage</div>;
+};
 
-export default PrintersPage
+export default PrintersPage;

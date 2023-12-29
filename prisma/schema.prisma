@@ -6,6 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Booker {
+  id        Int    @id @default(autoincrement())
+  name      String
+  address   String @default("8000 Székesfehérvár, Fő utca 1.")
+  taxnumber String @default("1234567812345678")
+  phone     String @default("+36 00 0000000")
+  email     String @default("email@email.em")
 }
