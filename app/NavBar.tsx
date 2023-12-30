@@ -10,7 +10,7 @@ const NavBar = () => {
 
   const links = [
     { label: "Bérletek", href: "/" },
-    { label: "Ügyfelek", href: "/clients" },
+    { label: "Ügyfelek", href: "/bookers" },
     { label: "Printerek", href: "/printers" },
   ];
 
