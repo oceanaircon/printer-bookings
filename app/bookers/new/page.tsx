@@ -19,8 +19,12 @@ const NewBookerPage = () => {
       <h1>Új ügyfél létrehozása</h1>
       <Form.Root
         onSubmit={handleSubmit(async (data) => {
-          await axios.post("/api/bookers", data);
-          router.push("/bookers");
+            try {
+                await axios.post("/api/bookers", data);
+                router.push("/bookers");
+            } catch (error) {
+                
+            }
         })}
       >
         <Form.Field {...register("name")}>
