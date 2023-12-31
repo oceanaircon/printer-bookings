@@ -18,3 +18,10 @@ model Booker {
   phone     String @default("+36 00 0000000")
   email     String @default("email@email.em")
 }
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
+}

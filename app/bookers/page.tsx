@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "../../prisma/client";
 
 const BookersPage = async () => {
   const bookers = await prisma.booker.findMany();

@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-const createBookerSchema = z.object({
-  name: z.string().min(1).max(191),
-});
+import prisma from "../../../prisma/client";
+import { createBookerSchema } from "../../validationSchemas";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
