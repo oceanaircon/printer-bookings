@@ -10,18 +10,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Booker {
-  id        Int    @id @default(autoincrement())
-  name      String
-  address   String @default("8000 Székesfehérvár, Fő utca 1.")
-  taxnumber String @default("1234567812345678")
-  phone     String @default("+36 00 0000000")
-  email     String @default("email@email.em")
-}
-
 model User {
   id       Int     @id @default(autoincrement())
   email    String  @unique
   password String
   name     String?
+}
+
+model Printer {
+  id          Int      @id @default(autoincrement())
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int      @unique
+  serial      Int
+  name        String
+  description String?
+  busy        Boolean
+  Booking     Booking?
+  Service     Service?
+}
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String
+  fee     Int
+  Printer Printer?
+}
+
+model Booker {
+  id        Int      @id @default(autoincrement())
+  name      String
+  address   String   @default("8000 Székesfehérvár, Fő utca 1.")
+  taxnumber String   @default("1234567812345678")
+  phone     String   @default("+36 00 0000000")
+  email     String   @default("email@email.em")
+  Booking   Booking?
+}
+
+model Booking {
+  id        Int      @id @default(autoincrement())
+  booker    Booker   @relation(fields: [bookerId], references: [id])
+  bookerId  Int      @unique
+  printer   Printer  @relation(fields: [printerId], references: [id])
+  printerId Int      @unique
+  createdAt DateTime @default(now())
+  discount  Int      @default(0)
+  service   Service  @relation(fields: [serviceId], references: [id])
+  serviceId Int      @unique
+}
+
+model Service {
+  id            Int         @id @default(autoincrement())
+  printer       Printer     @relation(fields: [printerId], references: [id])
+  printerId     Int         @unique
+  maintenance   Maintenance @relation(fields: [maintenanceId], references: [id])
+  maintenanceId Int         @unique
+  Booking       Booking?
+}
+
+model Maintenance {
+  id      Int      @id @default(autoincrement())
+  name    String
+  Service Service?
 }
