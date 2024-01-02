@@ -21,7 +21,7 @@ model Printer {
   id          Int      @id @default(autoincrement())
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int      @unique
-  serial      Int
+  serial      String   @unique
   name        String
   description String?
   busy        Boolean
@@ -39,7 +39,7 @@ model Category {
 model Booker {
   id        Int      @id @default(autoincrement())
   name      String
-  address   String   @default("8000 Székesfehérvár, Fő utca 1.")
+  address   String   @default("1086 Budapest, Vas utca 1.")
   taxnumber String   @default("1234567812345678")
   phone     String   @default("+36 00 0000000")
   email     String   @default("email@email.em")
