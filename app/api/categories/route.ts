@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/client";
-import { createBookerSchema } from "../../validationSchemas";
+import { createCategorySchema } from "../../validationSchemas";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const validation = createBookerSchema.safeParse(body);
+  const validation = createCategorySchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });
 
-  const newBooker = await prisma.booker.create({
-    data: { name: body.name, email: body.email },
+  const newCategory = await prisma.category.create({
+    data: { name: body.name, fee: body.fee },
   });
 
-  return NextResponse.json(newBooker, { status: 201 });
+  return NextResponse.json(newCategory, { status: 201 });
 }

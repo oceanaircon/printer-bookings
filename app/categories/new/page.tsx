@@ -6,23 +6,23 @@ import * as Form from "@radix-ui/react-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-interface BookerForm {
+interface CategoryForm {
   name: string;
-  email: string;
+  fee: number;
 }
 
-const NewBookerPage = () => {
+const NewCategoryPage = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<BookerForm>();
+  const { register, handleSubmit } = useForm<CategoryForm>();
 
   return (
     <div className="container">
-      <h1>Új ügyfél létrehozása</h1>
+      <h1>Új kategória létrehozása</h1>
       <Form.Root
         onSubmit={handleSubmit(async (data) => {
           try {
-            await axios.post("/api/bookers", data);
-            router.push("/bookers");
+            await axios.post("/api/categories", data);
+            router.push("/categories");
           } catch (error) {
             console.log(error);
           }
@@ -34,10 +34,10 @@ const NewBookerPage = () => {
             <input className="Input" type="text" required />
           </Form.Control>
         </Form.Field>
-        <Form.Field {...register("email")}>
-          <Form.Label>Email</Form.Label>
+        <Form.Field {...register("fee", { valueAsNumber: true })}>
+          <Form.Label>Díj</Form.Label>
           <Form.Control asChild>
-            <input className="Input" type="text" required />
+            <input className="Input" type="number" required />
           </Form.Control>
         </Form.Field>
         <Form.Submit asChild>
@@ -50,4 +50,4 @@ const NewBookerPage = () => {
   );
 };
 
-export default NewBookerPage;
+export default NewCategoryPage;

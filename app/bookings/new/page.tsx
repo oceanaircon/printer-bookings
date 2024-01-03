@@ -7,10 +7,12 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 interface BookingForm {
-  bookerId: number;
+  bookerName: string;
+  bookerEmail: string;
+  categoryName: string;
+  categoryFee: number;
   printerId: number;
   discount: number;
-  serviceId: number;
 }
 
 const NewBookingPage = () => {
@@ -30,26 +32,40 @@ const NewBookingPage = () => {
           }
         })}
       >
-        <Form.Field {...register("bookerId")}>
-          <Form.Label>Ügyfél ID</Form.Label>
+        <h2>Ügyfél adatai</h2>
+        <Form.Field {...register("bookerName")}>
+          <Form.Label>Ügyfél név</Form.Label>
+          <Form.Control asChild>
+            <input className="Input" type="text" required />
+          </Form.Control>
+        </Form.Field>
+        <Form.Field {...register("bookerEmail")}>
+          <Form.Label>Ügyfél email</Form.Label>
+          <Form.Control asChild>
+            <input className="Input" type="text" required />
+          </Form.Control>
+        </Form.Field>
+        <h2>Kategória adatai</h2>
+        <Form.Field {...register("categoryName")}>
+          <Form.Label>Kategória neve</Form.Label>
+          <Form.Control asChild>
+            <input className="Input" type="text" required />
+          </Form.Control>
+        </Form.Field>
+        <Form.Field {...register("categoryFee", { valueAsNumber: true })}>
+          <Form.Label>Kategória díj</Form.Label>
           <Form.Control asChild>
             <input className="Input" type="number" required />
           </Form.Control>
         </Form.Field>
-        <Form.Field {...register("printerId")}>
+        <Form.Field {...register("printerId", { valueAsNumber: true })}>
           <Form.Label>Printer ID</Form.Label>
           <Form.Control asChild>
             <input className="Input" type="number" required />
           </Form.Control>
         </Form.Field>
-        <Form.Field {...register("discount")}>
+        <Form.Field {...register("discount", { valueAsNumber: true })}>
           <Form.Label>Kedvezmény</Form.Label>
-          <Form.Control asChild>
-            <input className="Input" type="number" required />
-          </Form.Control>
-        </Form.Field>
-        <Form.Field {...register("serviceId")}>
-          <Form.Label>Karbantartás ID</Form.Label>
           <Form.Control asChild>
             <input className="Input" type="number" required />
           </Form.Control>

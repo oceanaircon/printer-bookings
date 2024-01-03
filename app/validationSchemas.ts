@@ -2,13 +2,18 @@ import { z } from "zod";
 
 export const createBookerSchema = z.object({
   name: z.string().min(1).max(191),
+  email: z.string().min(1),
 });
 
 export const createBookingSchema = z.object({
-  bookerId: z.number().min(1).max(8),
-  printerId: z.number().min(1).max(8),
-  discount: z.number().min(1).max(8),
-  serviceId: z.number().min(1).max(8),
+  id: z.number(),
+  printerId: z.number(),
+  discount: z.number(),
+});
+
+export const createCategorySchema = z.object({
+  name: z.string().min(1),
+  fee: z.number(),
 });
 
 export const createPrinterSchema = z.object({

@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { AiFillPrinter } from "react-icons/ai";
 import { usePathname } from "next/navigation";
+import { LoginButton } from "./auth";
+import { LogoutButton } from "./auth";
 
 const NavBar = () => {
   const currentPath = usePathname();
@@ -12,6 +14,9 @@ const NavBar = () => {
     { label: "Bérletek", href: "/" },
     { label: "Ügyfelek", href: "/bookers" },
     { label: "Printerek", href: "/printers" },
+    { label: "Kategóriák", href: "/categories" },
+    { label: "Munkák", href: "/services" },
+    { label: "Munkalapok", href: "/worksheets" },
   ];
 
   return (
@@ -31,6 +36,12 @@ const NavBar = () => {
             {link.label}
           </Link>
         ))}
+        <li>
+          <LoginButton></LoginButton>
+        </li>
+        <li>
+          <LogoutButton></LogoutButton>
+        </li>
       </ul>
     </nav>
   );

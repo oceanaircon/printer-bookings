@@ -10,10 +10,35 @@ export async function POST(request: NextRequest) {
 
   const newBooking = await prisma.booking.create({
     data: {
-      bookerId: Number(body.bookerId),
-      printerId: Number(body.printerId),
-      discount: Number(body.discount),
-      serviceId: Number(body.serviceId),
+      booker: {
+        connectOrCreate: {
+          where: {
+            id: body.bookerId,
+          },
+          create: {
+            name: "Def",
+            email: "emil@emil.em",
+          },
+        },
+      },
+      printer: {
+        connectOrCreate: {
+          where: {
+            id: body.printerId,
+          },
+          create: {
+            name: "DefaultPrinter",
+            serial: "DefaultSerial",
+            categoryId: 88888888,
+            busy: true,
+          },
+        },
+      },
+      discount: body.discount,
+    },
+    include: {
+      booker: true,
+      printer: true,
     },
   });
 
