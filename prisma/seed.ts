@@ -22,6 +22,7 @@ async function main() {
     create: {
       name: "Teszt Bérlő",
       address: "8000 Székesfehérvár, Fő utca 1.",
+      email: "tesztemail@tesztemail.hu",
     },
   });
   console.log({ booker });
@@ -48,21 +49,11 @@ async function main() {
   });
   console.log({ printer });
 
-  const maintenance = await prisma.maintenance.upsert({
+  const service = await prisma.service.upsert({
     where: { id: 1 },
     update: {},
     create: {
       name: "Teszt Munka",
-    },
-  });
-  console.log({ maintenance });
-
-  const service = await prisma.service.upsert({
-    where: { printerId: 1 },
-    update: {},
-    create: {
-      maintenanceId: 1,
-      printerId: 1,
     },
   });
   console.log({ service });
@@ -73,10 +64,20 @@ async function main() {
     create: {
       bookerId: 1,
       printerId: 1,
-      serviceId: 1,
+      discount: 0,
     },
   });
   console.log({ booking });
+
+  const maintenance = await prisma.worksheet.upsert({
+    where: { bookingId: 1 },
+    update: {},
+    create: {
+      bookingId: 1,
+      serviceId: 1,
+    },
+  });
+  console.log({ maintenance });
 }
 
 main()

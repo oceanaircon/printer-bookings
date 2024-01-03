@@ -58,7 +58,7 @@ model Booking {
 
 model Service {
   id        Int        @id @default(autoincrement())
-  name      String
+  name      String     @default("Teszt Munka")
   Worksheet Worksheet?
 }
 
@@ -69,7 +69,7 @@ model Worksheet {
   service            Service         @relation(fields: [serviceId], references: [id])
   serviceId          Int             @unique
   errorReportingTime DateTime        @default(now())
-  repairDeadline     DateTime        @default(dbgenerated("(now() + '2 days'::interval)"))
+  repairDeadline     DateTime        @default(dbgenerated("(now() + '2 days')"))
   status             WorksheetStatus @default(IN_PROGRESS)
 }
 
