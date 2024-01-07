@@ -95,6 +95,7 @@ export async function createBooking(formData: FormData) {
   const { bookerId, printerId, discount } = createBookingSchema.parse({
     bookerId: formData.get("bookerId"),
     printerId: formData.get("printerId"),
+    discount: formData.get("discount"),
   });
 
   await prisma.booking.create({

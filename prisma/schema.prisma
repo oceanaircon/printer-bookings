@@ -24,7 +24,7 @@ model Printer {
   serial      String        @unique
   name        String
   description String?
-  status      PrinterStatus @default(AVAILABLE)
+  status      PrinterStatus @default(SZABAD)
   Booking     Booking?
 }
 
@@ -70,15 +70,15 @@ model Worksheet {
   serviceId          Int
   errorReportingTime DateTime        @default(now())
   repairDeadline     DateTime        @default(dbgenerated("(now() + '2 days')"))
-  status             WorksheetStatus @default(IN_PROGRESS)
+  status             WorksheetStatus @default(FOLYAMATBAN)
 }
 
 enum WorksheetStatus {
-  IN_PROGRESS
-  DONE
+  FOLYAMATBAN
+  BEFEJEZETT
 }
 
 enum PrinterStatus {
-  AVAILABLE
-  LEASED
+  SZABAD
+  FOGLALT
 }

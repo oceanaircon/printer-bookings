@@ -19,7 +19,7 @@ const PrintersPage = async () => {
             <th>Név</th>
             <th>Kategória</th>
             <th>Leírás</th>
-            <th>Foglalt</th>
+            <th>Állapot</th>
           </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@ const PrintersPage = async () => {
               <td>{printer.name}</td>
               <td>{printer.category.name}</td>
               <td>{printer.description}</td>
-              <td>{printer.busy ? "igen" : "nem"}</td>
+              <td>{printer.status}</td>
             </tr>
           ))}
         </tbody>

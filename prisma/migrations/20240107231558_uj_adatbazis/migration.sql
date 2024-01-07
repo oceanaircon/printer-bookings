@@ -16,7 +16,7 @@ CREATE TABLE `Printer` (
     `serial` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
-    `status` ENUM('AVAILABLE', 'LEASED') NOT NULL DEFAULT 'AVAILABLE',
+    `status` ENUM('SZABAD', 'FOGLALT') NOT NULL DEFAULT 'SZABAD',
 
     UNIQUE INDEX `Printer_serial_key`(`serial`),
     PRIMARY KEY (`id`)
@@ -71,7 +71,7 @@ CREATE TABLE `Worksheet` (
     `serviceId` INTEGER NOT NULL,
     `errorReportingTime` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `repairDeadline` DATETIME(3) NOT NULL DEFAULT (now() + '2 days'),
-    `status` ENUM('IN_PROGRESS', 'DONE') NOT NULL DEFAULT 'IN_PROGRESS',
+    `status` ENUM('FOLYAMATBAN', 'BEFEJEZETT') NOT NULL DEFAULT 'FOLYAMATBAN',
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

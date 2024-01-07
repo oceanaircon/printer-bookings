@@ -13,5 +13,5 @@ export type BookerField = {
 export type PrinterField = {
   id: number;
   name: string;
-  status: "AVAILABLE" | "LEASED";
+  status: "SZABAD" | "FOGLALT";
 };

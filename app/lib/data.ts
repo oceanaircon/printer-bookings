@@ -22,6 +22,12 @@ export async function loadBookers() {
 // a szabad printerek betöltése új szerződés létrehozásához
 
 export async function loadPrinters() {
-  const printers: PrinterField[] = await prisma.printer.findMany();
+  const printers: PrinterField[] = new Array();
+  const allprinters: PrinterField[] = await prisma.printer.findMany();
+  allprinters.forEach((element) => {
+    if (element.status === "SZABAD") {
+      printers.push(element);
+    }
+  });
   return printers;
 }

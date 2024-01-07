@@ -33,16 +33,11 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
         <div>
           <div>
             <div>
-              <input
-                id="available"
-                name="status"
-                type="radio"
-                value="AVAILABLE"
-              />
+              <input id="available" name="status" type="radio" value="SZABAD" />
               <label htmlFor="available">Szabad</label>
             </div>
             <div className="flex items-center">
-              <input id="leased" name="status" type="radio" value="LEASED" />
+              <input id="leased" name="status" type="radio" value="FOGLALT" />
               <label htmlFor="leased">Foglalt</label>
             </div>
           </div>

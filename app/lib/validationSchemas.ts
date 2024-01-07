@@ -24,7 +24,7 @@ export const createPrinterSchema = z.object({
   serial: z.string().min(1).max(191),
   name: z.string().min(1).max(191),
   description: z.string().min(1).max(191),
-  status: z.enum(["AVAILABLE", "LEASED"]),
+  status: z.enum(["SZABAD", "FOGLALT"]),
 });
 
 export const createServiceSchema = z.object({
