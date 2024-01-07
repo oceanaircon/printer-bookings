@@ -1,7 +1,7 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/prisma/client";
-import {compare} from "bcrypt";
+import { compare } from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -9,12 +9,12 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     CredentialsProvider({
-      name: "Bejelentkezés",
+      name: "Email",
       credentials: {
         email: {
           label: "Email",
           type: "email",
-          placeholder: "printer@peldaul.hu",
+          placeholder: "pelda@peldaul.hu",
         },
         password: { label: "Password", type: "password" },
       },
@@ -43,10 +43,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-            id: user.id + "",
-            email: user.email,
-            name: user.name,
-        }
+          id: user.id + "",
+          email: user.email,
+          name: user.name,
+        };
       },
     }),
   ],

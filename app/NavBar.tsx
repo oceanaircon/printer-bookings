@@ -11,7 +11,7 @@ const NavBar = () => {
   const currentPath = usePathname();
 
   const links = [
-    { label: "Bérletek", href: "/" },
+    { label: "Szerződések", href: "/" },
     { label: "Ügyfelek", href: "/bookers" },
     { label: "Printerek", href: "/printers" },
     { label: "Kategóriák", href: "/categories" },

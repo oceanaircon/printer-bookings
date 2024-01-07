@@ -38,12 +38,11 @@ async function main() {
   console.log({ category });
 
   const printer = await prisma.printer.upsert({
-    where: { categoryId: 1 },
+    where: { id: 1 },
     update: {},
     create: {
       name: "Teszt Printer",
       serial: "12345678ABCD",
-      busy: false,
       categoryId: 1,
     },
   });
@@ -59,25 +58,24 @@ async function main() {
   console.log({ service });
 
   const booking = await prisma.booking.upsert({
-    where: { bookerId: 1 },
+    where: { id: 1 },
     update: {},
     create: {
       bookerId: 1,
       printerId: 1,
-      discount: 0,
     },
   });
   console.log({ booking });
 
-  const maintenance = await prisma.worksheet.upsert({
-    where: { bookingId: 1 },
+  const worksheet = await prisma.worksheet.upsert({
+    where: { id: 1 },
     update: {},
     create: {
       bookingId: 1,
       serviceId: 1,
     },
   });
-  console.log({ maintenance });
+  console.log({ worksheet });
 }
 
 main()

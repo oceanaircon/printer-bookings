@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
 import prisma from "../../prisma/client";
 
@@ -11,31 +10,30 @@ const PrintersPage = async () => {
   return (
     <div>
       <Link href="/printers/new">
-        <Button>Új printer</Button>
+        <p>Új printer</p>
       </Link>
-      <Table.Root>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Serial</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Név</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Kategória</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Leírás</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Foglalt</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
+      <table>
+        <thead>
+          <tr>
+            <th>Cikkszám</th>
+            <th>Név</th>
+            <th>Kategória</th>
+            <th>Leírás</th>
+            <th>Foglalt</th>
+          </tr>
+        </thead>
+        <tbody>
           {printers.map((printer) => (
-            <Table.Row key={printer.id}>
-              <Table.RowHeaderCell>{printer.serial}</Table.RowHeaderCell>
-              <Table.Cell>{printer.name}</Table.Cell>
-              <Table.Cell>{printer.category.name}</Table.Cell>
-              <Table.Cell>{printer.description}</Table.Cell>
-              <Table.Cell>{printer.busy ? "igen" : "nem"}</Table.Cell>
-            </Table.Row>
+            <tr key={printer.id}>
+              <th>{printer.serial}</th>
+              <td>{printer.name}</td>
+              <td>{printer.category.name}</td>
+              <td>{printer.description}</td>
+              <td>{printer.busy ? "igen" : "nem"}</td>
+            </tr>
           ))}
-        </Table.Body>
-      </Table.Root>
+        </tbody>
+      </table>
     </div>
   );
 };

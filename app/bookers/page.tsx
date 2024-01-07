@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
-import prisma from "../../prisma/client";
+import prisma from "@/prisma/client";
 
 const BookersPage = async () => {
   const bookers = await prisma.booker.findMany();
@@ -9,31 +8,30 @@ const BookersPage = async () => {
   return (
     <div>
       <Link href="/bookers/new">
-        <Button>Új ügyfél</Button>
+        <p>Új ügyfél</p>
       </Link>
-      <Table.Root>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Név</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Cím</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Telefon</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Adószám</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
+      <table>
+        <thead>
+          <tr>
+            <th>Név</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Cím</th>
+            <th>Adószám</th>
+          </tr>
+        </thead>
+        <tbody>
           {bookers.map((booker) => (
-            <Table.Row key={booker.id}>
-              <Table.RowHeaderCell>{booker.name}</Table.RowHeaderCell>
-              <Table.Cell>{booker.address}</Table.Cell>
-              <Table.Cell>{booker.email}</Table.Cell>
-              <Table.Cell>{booker.phone}</Table.Cell>
-              <Table.Cell>{booker.taxnumber}</Table.Cell>
-            </Table.Row>
+            <tr key={booker.id}>
+              <th>{booker.name}</th>
+              <td>{booker.email}</td>
+              <td>{booker.phone}</td>
+              <td>{booker.address}</td>
+              <td>{booker.taxnumber}</td>
+            </tr>
           ))}
-        </Table.Body>
-      </Table.Root>
+        </tbody>
+      </table>
     </div>
   );
 };

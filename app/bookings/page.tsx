@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
-import prisma from "../../prisma/client";
+import prisma from "@/prisma/client";
 
 const BookingsPage = async () => {
   const bookings = await prisma.booking.findMany({
@@ -14,42 +13,40 @@ const BookingsPage = async () => {
   return (
     <div>
       <Link href="/bookings/new">
-        <Button>Új bérlet</Button>
+        <p>Új szerződés</p>
       </Link>
-      <Table.Root>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Név</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Printer</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Serial</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Díj</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Start</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Kedvezmény</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Munkalap</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
+      <table>
+        <thead>
+          <tr>
+            <th>Név</th>
+            <th>Email</th>
+            <th>Printer</th>
+            <th>Serial</th>
+            <th>Díj</th>
+            <th>Start</th>
+            <th>Kedvezmény</th>
+            <th>Munkalap</th>
+          </tr>
+        </thead>
+        <tbody>
           {bookings.map((booking) => (
-            <Table.Row key={booking.id}>
-              <Table.RowHeaderCell>{booking.booker.name}</Table.RowHeaderCell>
-              <Table.Cell>{booking.booker.email}</Table.Cell>
-              <Table.Cell>{booking.printer.name}</Table.Cell>
-              <Table.Cell>{booking.printer.serial}</Table.Cell>
-              <Table.Cell>{booking.printer.category.fee}</Table.Cell>
-              <Table.Cell>
-                {booking.createdAt.toString().slice(0, 16)}
-              </Table.Cell>
-              <Table.Cell>{booking.discount}</Table.Cell>
-              <Table.Cell>
+            <tr key={booking.id}>
+              <th>{booking.booker.name}</th>
+              <td>{booking.booker.email}</td>
+              <td>{booking.printer.name}</td>
+              <td>{booking.printer.serial}</td>
+              <td>{booking.printer.category.fee}</td>
+              <td>{booking.createdAt.toString().slice(0, 16)}</td>
+              <td>{booking.discount}</td>
+              <td>
                 <Link href="">
-                  <Button>Új munkalap</Button>
+                  <p>Új munkalap</p>
                 </Link>
-              </Table.Cell>
-            </Table.Row>
+              </td>
+            </tr>
           ))}
-        </Table.Body>
-      </Table.Root>
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -18,56 +18,56 @@ model User {
 }
 
 model Printer {
-  id          Int      @id @default(autoincrement())
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  Int      @unique
-  serial      String   @unique
+  id          Int           @id @default(autoincrement())
+  category    Category      @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  serial      String        @unique
   name        String
   description String?
-  busy        Boolean
+  status      PrinterStatus @default(AVAILABLE)
   Booking     Booking?
 }
 
 model Category {
-  id      Int      @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   name    String
   fee     Int
-  Printer Printer?
+  Printer Printer[]
 }
 
 model Booker {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  address   String   @default("1086 Budapest, Vas utca 1.")
-  taxnumber String   @default("1234567812345678")
-  phone     String   @default("+36 00 0000000")
-  email     String   @unique
-  Booking   Booking?
+  address   String    @default("1086 Budapest, Vas utca 1.")
+  taxnumber String    @default("1234567812345678")
+  phone     String    @default("+36 00 0000000")
+  email     String    @unique
+  Booking   Booking[]
 }
 
 model Booking {
-  id        Int        @id @default(autoincrement())
-  booker    Booker     @relation(fields: [bookerId], references: [id])
-  bookerId  Int        @unique
-  printer   Printer    @relation(fields: [printerId], references: [id])
-  printerId Int        @unique
-  createdAt DateTime   @default(now())
-  discount  Int        @default(0)
-  Worksheet Worksheet?
+  id        Int         @id @default(autoincrement())
+  booker    Booker      @relation(fields: [bookerId], references: [id])
+  bookerId  Int
+  printer   Printer     @relation(fields: [printerId], references: [id])
+  printerId Int         @unique
+  createdAt DateTime    @default(now())
+  discount  Int         @default(0)
+  Worksheet Worksheet[]
 }
 
 model Service {
-  id        Int        @id @default(autoincrement())
-  name      String     @default("Teszt Munka")
-  Worksheet Worksheet?
+  id        Int         @id @default(autoincrement())
+  name      String      @default("Teszt Munka")
+  Worksheet Worksheet[]
 }
 
 model Worksheet {
   id                 Int             @id @default(autoincrement())
   booking            Booking         @relation(fields: [bookingId], references: [id])
-  bookingId          Int             @unique
+  bookingId          Int
   service            Service         @relation(fields: [serviceId], references: [id])
-  serviceId          Int             @unique
+  serviceId          Int
   errorReportingTime DateTime        @default(now())
   repairDeadline     DateTime        @default(dbgenerated("(now() + '2 days')"))
   status             WorksheetStatus @default(IN_PROGRESS)
@@ -76,4 +76,9 @@ model Worksheet {
 enum WorksheetStatus {
   IN_PROGRESS
   DONE
+}
+
+enum PrinterStatus {
+  AVAILABLE
+  LEASED
 }

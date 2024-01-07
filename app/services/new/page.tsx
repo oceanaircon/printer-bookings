@@ -1,7 +1,9 @@
-import React from "react";
+import Form from "@/app/ui/services/create-form";
 
-const NewServicePage = () => {
-  return <div>NewServicePage</div>;
-};
-
-export default NewServicePage;
+export default async function Page() {
+  return (
+    <main>
+      <Form />
+    </main>
+  );
+}
