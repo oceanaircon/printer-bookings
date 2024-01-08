@@ -109,3 +109,22 @@ export async function createBooking(formData: FormData) {
   revalidatePath("/bookings");
   redirect("/bookings");
 }
+
+export async function createWorksheet(formData: FormData) {
+  const { bookingId, serviceId, status } = createWorksheetSchema.parse({
+    bookingId: formData.get("bookingId"),
+    serviceId: formData.get("serviceId"),
+    status: formData.get("status"),
+  });
+
+  await prisma.worksheet.create({
+    data: {
+      bookingId: bookingId,
+      serviceId: serviceId,
+      status: status,
+    },
+  });
+
+  revalidatePath("/worksheets");
+  redirect("/worksheets");
+}

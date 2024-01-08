@@ -38,11 +38,7 @@ const BookingsPage = async () => {
               <td>{booking.printer.category.fee}</td>
               <td>{booking.createdAt.toString().slice(0, 16)}</td>
               <td>{booking.discount}</td>
-              <td>
-                <Link href="">
-                  <p>Új munkalap</p>
-                </Link>
-              </td>
+              <td>UD</td>
             </tr>
           ))}
         </tbody>

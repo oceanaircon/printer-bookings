@@ -3,7 +3,7 @@ import Link from "next/link";
 import prisma from "@/prisma/client";
 
 const CategoriesPage = async () => {
-  const bookers = await prisma.category.findMany();
+  const categories = await prisma.category.findMany();
 
   return (
     <div>
@@ -18,10 +18,10 @@ const CategoriesPage = async () => {
           </tr>
         </thead>
         <tbody>
-          {bookers.map((booker) => (
-            <tr key={booker.id}>
-              <th>{booker.name}</th>
-              <td>{booker.fee}</td>
+          {categories.map((category) => (
+            <tr key={category.id}>
+              <th>{category.name}</th>
+              <td>{category.fee}</td>
             </tr>
           ))}
         </tbody>

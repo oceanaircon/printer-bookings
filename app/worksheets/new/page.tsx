@@ -1,7 +1,13 @@
-import React from "react";
+import Form from "@/app/ui/worksheets/create-form";
+import { loadBookings, loadServices } from "@/app/lib/data";
 
-const NewWorksheetPage = () => {
-  return <div>NewWorksheetPage</div>;
-};
+export default async function NewWorksheetPage() {
+  const bookings = await loadBookings();
+  const services = await loadServices();
 
-export default NewWorksheetPage;
+  return (
+    <main>
+      <Form bookings={bookings} services={services} />
+    </main>
+  );
+}

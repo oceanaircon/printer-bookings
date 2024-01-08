@@ -32,7 +32,7 @@ export const createServiceSchema = z.object({
 });
 
 export const createWorksheetSchema = z.object({
-  id: z.number(),
-  printerId: z.number(),
-  discount: z.number(),
+  bookingId: z.coerce.number(),
+  serviceId: z.coerce.number(),
+  status: z.enum(["FOLYAMATBAN", "BEFEJEZETT"]),
 });
