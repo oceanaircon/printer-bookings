@@ -8,12 +8,12 @@ const ServicesPage = async () => {
   return (
     <div>
       <Link href="/services/new">
-        <p>Új munka</p>
+        <p>Új hiba</p>
       </Link>
       <table>
         <thead>
           <tr>
-            <th>Név</th>
+            <th>Hiba neve</th>
           </tr>
         </thead>
         <tbody>

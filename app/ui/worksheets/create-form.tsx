@@ -23,7 +23,7 @@ export default function Form({
           <div>
             <select id="booking" name="bookingId">
               <option value="" disabled>
-                Válassz ügyfelet
+                Válassz szerződést
               </option>
               {bookings.map((booking) => (
                 <option key={booking.id} value={booking.id}>
@@ -36,11 +36,11 @@ export default function Form({
 
         {/* Service ID */}
         <div className="mb-4">
-          <label htmlFor="customer">Válassz javítást</label>
+          <label htmlFor="customer">Válassz hibát</label>
           <div>
             <select id="service" name="serviceId">
               <option value="" disabled>
-                Válassz javítást
+                Válassz hibát
               </option>
               {services.map((service) => (
                 <option key={service.id} value={service.id}>
@@ -90,14 +90,8 @@ export default function Form({
           </div>
         </fieldset>
       </div>
-      <div className="mt-6 flex justify-end gap-4">
-        <Link
-          href="/worksheets"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-        >
-          Cancel
-        </Link>
-        <button type="submit">Új munkalap</button>
+      <div>
+        <button type="submit">Mehet</button>
       </div>
     </form>
   );

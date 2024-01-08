@@ -15,7 +15,7 @@ const NavBar = () => {
     { label: "Ügyfelek", href: "/bookers" },
     { label: "Printerek", href: "/printers" },
     { label: "Kategóriák", href: "/categories" },
-    { label: "Munkák", href: "/services" },
+    { label: "Hibák", href: "/services" },
     { label: "Munkalapok", href: "/worksheets" },
   ];
 

@@ -106,6 +106,18 @@ export async function createBooking(formData: FormData) {
     },
   });
 
+  // szükséges, hogy ezután a printer státusza FOGLALT legyen!
+
+  await prisma.printer.update({
+    where: {
+      id: printerId,
+    },
+    data: {
+      status: "FOGLALT",
+    },
+  });
+
+  revalidatePath("/printers");
   revalidatePath("/bookings");
   redirect("/bookings");
 }
