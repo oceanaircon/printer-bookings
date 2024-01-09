@@ -15,6 +15,7 @@ const PrintersPage = async () => {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Cikkszám</th>
             <th>Név</th>
             <th>Kategória</th>
@@ -25,6 +26,7 @@ const PrintersPage = async () => {
         <tbody>
           {printers.map((printer) => (
             <tr key={printer.id}>
+              <th>{printer.id}</th>
               <th>{printer.serial}</th>
               <td>{printer.name}</td>
               <td>{printer.category.name}</td>

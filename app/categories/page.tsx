@@ -13,6 +13,7 @@ const CategoriesPage = async () => {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Név</th>
             <th>Díj</th>
           </tr>
@@ -20,6 +21,7 @@ const CategoriesPage = async () => {
         <tbody>
           {categories.map((category) => (
             <tr key={category.id}>
+              <th>{category.id}</th>
               <th>{category.name}</th>
               <td>{category.fee}</td>
             </tr>

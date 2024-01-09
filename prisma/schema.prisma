@@ -60,7 +60,7 @@ model Service {
   id        Int         @id @default(autoincrement())
   name      String      @default("Teszt Munka")
   Worksheet Worksheet[]
-}
+} 
 
 model Worksheet {
   id                 Int             @id @default(autoincrement())

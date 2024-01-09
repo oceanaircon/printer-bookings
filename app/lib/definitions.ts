@@ -1,3 +1,5 @@
+import { DateTime } from "next-auth/providers/kakao";
+
 export type CategoryField = {
   id: number;
   name: string;
@@ -19,6 +21,7 @@ export type BookingField = {
   id: number;
   bookerId: number;
   printerId: number;
+  createdAt: Date;
   discount: number;
 };
 

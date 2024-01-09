@@ -13,13 +13,15 @@ const ServicesPage = async () => {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Hiba neve</th>
           </tr>
         </thead>
         <tbody>
           {services.map((service) => (
             <tr key={service.id}>
-              <th>{service.name}</th>
+              <th>{service.id}</th>
+              <td>{service.name}</td>
             </tr>
           ))}
         </tbody>

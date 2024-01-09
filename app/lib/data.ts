@@ -52,14 +52,16 @@ export async function loadServices() {
   return services;
 }
 
-export async function fetchWorksheetById(id: number) {
+// id alapján kiválasztott szerződés munkalap létrehozásához
+
+export async function fetchBookingById(id: number) {
   noStore();
 
-  const data: WorksheetField[] = await prisma.worksheet.findMany();
+  const booking = await prisma.booking.findFirst({
+    where: {
+      id: Number(id),
+    },
+  });
 
-  const worksheet = data.map((worksheet) => ({
-    ...worksheet,
-  }));
-
-  return worksheet[0];
+  return booking as any;
 }

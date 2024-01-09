@@ -13,6 +13,7 @@ const BookersPage = async () => {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Név</th>
             <th>Email</th>
             <th>Telefon</th>
@@ -23,6 +24,7 @@ const BookersPage = async () => {
         <tbody>
           {bookers.map((booker) => (
             <tr key={booker.id}>
+              <th>{booker.id}</th>
               <th>{booker.name}</th>
               <td>{booker.email}</td>
               <td>{booker.phone}</td>

@@ -1,4 +1,5 @@
 import React from "react";
+import { NewWorksheetButton } from "../ui/bookings/buttons";
 import Link from "next/link";
 import prisma from "@/prisma/client";
 
@@ -18,6 +19,7 @@ const BookingsPage = async () => {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Név</th>
             <th>Email</th>
             <th>Printer</th>
@@ -31,6 +33,7 @@ const BookingsPage = async () => {
         <tbody>
           {bookings.map((booking) => (
             <tr key={booking.id}>
+              <th>{booking.id}</th>
               <th>{booking.booker.name}</th>
               <td>{booking.booker.email}</td>
               <td>{booking.printer.name}</td>
@@ -38,7 +41,9 @@ const BookingsPage = async () => {
               <td>{booking.printer.category.fee}</td>
               <td>{booking.createdAt.toString().slice(0, 16)}</td>
               <td>{booking.discount}</td>
-              <td>UD</td>
+              <td>
+                <NewWorksheetButton id={booking.id} />
+              </td>
             </tr>
           ))}
         </tbody>

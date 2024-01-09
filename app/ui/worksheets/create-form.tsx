@@ -1,35 +1,23 @@
 import { BookingField, ServiceField } from "@/app/lib/definitions";
 import { createWorksheet } from "@/app/lib/actions";
 import Link from "next/link";
-/* import { Button } from "@/app/ui/button";
-import {
-    CheckIcon,
-    ClockIcon,
-  } from '@heroicons/react/24/outline'; */
 
 export default function Form({
-  bookings,
+  booking,
   services,
 }: {
-  bookings: BookingField[];
+  booking: BookingField;
   services: ServiceField[];
 }) {
   return (
     <form action={createWorksheet}>
       <div>
-        {/* Booker ID */}
+        {/* Booking ID */}
         <div className="mb-4">
-          <label htmlFor="customer">Válassz szerződést</label>
+          <label htmlFor="customer">Választott szerződés:</label>
           <div>
-            <select id="booking" name="bookingId">
-              <option value="" disabled>
-                Válassz szerződést
-              </option>
-              {bookings.map((booking) => (
-                <option key={booking.id} value={booking.id}>
-                  {booking.id}
-                </option>
-              ))}
+            <select id="booking" name="bookingId" value={booking.id}>
+              <option value={booking.id}>{booking.id}</option>
             </select>
           </div>
         </div>
@@ -39,9 +27,6 @@ export default function Form({
           <label htmlFor="customer">Válassz hibát</label>
           <div>
             <select id="service" name="serviceId">
-              <option value="" disabled>
-                Válassz hibát
-              </option>
               {services.map((service) => (
                 <option key={service.id} value={service.id}>
                   {service.name}

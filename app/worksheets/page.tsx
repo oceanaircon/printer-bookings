@@ -17,12 +17,10 @@ const WorksheetsPage = async () => {
 
   return (
     <div>
-      <Link href="/worksheets/new">
-        <p>Új munkalap</p>
-      </Link>
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Időpont</th>
             <th>Bejelentő</th>
             <th>Cím</th>
@@ -38,6 +36,7 @@ const WorksheetsPage = async () => {
         <tbody>
           {worksheets.map((worksheet) => (
             <tr key={worksheet.id}>
+              <th>{worksheet.id}</th>
               <th>{worksheet.errorReportingTime.toString().slice(0, 16)}</th>
               <td>{worksheet.booking.booker.name}</td>
               <td>{worksheet.booking.booker.address}</td>
