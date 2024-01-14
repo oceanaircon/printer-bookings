@@ -67,12 +67,16 @@ async function main() {
   });
   console.log({ booking });
 
+  let hatarido = new Date();
+  hatarido.setHours(hatarido.getHours() + 72);
+
   const worksheet = await prisma.worksheet.upsert({
     where: { id: 1 },
     update: {},
     create: {
       bookingId: 1,
       serviceId: 1,
+      repairDeadline: hatarido,
     },
   });
   console.log({ worksheet });

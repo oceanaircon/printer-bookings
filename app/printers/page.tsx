@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import prisma from "../../prisma/client";
+import { UpdatePrinter, DeletePrinter } from "../ui/buttons";
 
 const PrintersPage = async () => {
   const printers = await prisma.printer.findMany({
@@ -32,6 +33,10 @@ const PrintersPage = async () => {
               <td>{printer.category.name}</td>
               <td>{printer.description}</td>
               <td>{printer.status}</td>
+              <td>
+                <UpdatePrinter id={printer.id} />
+                <DeletePrinter id={printer.id} />
+              </td>
             </tr>
           ))}
         </tbody>

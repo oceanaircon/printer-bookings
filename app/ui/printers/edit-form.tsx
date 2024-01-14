@@ -1,13 +1,21 @@
-import { CategoryField } from "@/app/lib/definitions";
-import { createPrinter } from "@/app/lib/actions";
+import { CategoryField, PrinterField } from "@/app/lib/definitions";
+import { updatePrinter } from "@/app/lib/actions";
 
-export default function Form({ categories }: { categories: CategoryField[] }) {
+export default function Form({
+  printer,
+  categories,
+}: {
+  printer: PrinterField;
+  categories: CategoryField[];
+}) {
+  const updatePrinterWithId = updatePrinter.bind(null, printer.id);
+
   return (
-    <form action={createPrinter}>
+    <form action={updatePrinterWithId}>
       <label htmlFor="category" className="mb-2 block text-sm font-medium">
         Kategória
       </label>
-      <select name="categoryId" id="category">
+      <select name="categoryId" id="category" defaultValue={printer.categoryId}>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>
             {category.name}
@@ -18,15 +26,19 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
       <br />
       <label htmlFor="serial">Serial:</label>
       <br />
-      <input type="text" name="serial" />
+      <input type="text" name="serial" defaultValue={printer.serial} />
       <br />
       <label htmlFor="name">Név:</label>
       <br />
-      <input type="text" name="name" />
+      <input type="text" name="name" defaultValue={printer.name} />
       <br />
       <label htmlFor="description">Leírás:</label>
       <br />
-      <input type="text" name="description" />
+      <input
+        type="text"
+        name="description"
+        defaultValue={printer.description}
+      />
       <br />
       <fieldset>
         <legend>Printer állapota</legend>
@@ -38,12 +50,18 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
                 name="status"
                 type="radio"
                 value="SZABAD"
-                defaultChecked={true}
+                defaultChecked={printer.status === "SZABAD"}
               />
               <label htmlFor="available">Szabad</label>
             </div>
-            <div className="flex items-center">
-              <input id="leased" name="status" type="radio" value="FOGLALT" />
+            <div>
+              <input
+                id="leased"
+                name="status"
+                type="radio"
+                value="FOGLALT"
+                defaultChecked={printer.status === "FOGLALT"}
+              />
               <label htmlFor="leased">Foglalt</label>
             </div>
           </div>

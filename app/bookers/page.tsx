@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import prisma from "@/prisma/client";
+import { UpdateBooker, DeleteBooker } from "../ui/buttons";
 
 const BookersPage = async () => {
   const bookers = await prisma.booker.findMany();
@@ -19,6 +20,7 @@ const BookersPage = async () => {
             <th>Telefon</th>
             <th>Cím</th>
             <th>Adószám</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +32,10 @@ const BookersPage = async () => {
               <td>{booker.phone}</td>
               <td>{booker.address}</td>
               <td>{booker.taxnumber}</td>
+              <td>
+                <UpdateBooker id={booker.id} />
+                <DeleteBooker id={booker.id} />
+              </td>
             </tr>
           ))}
         </tbody>

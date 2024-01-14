@@ -60,7 +60,7 @@ model Service {
   id        Int         @id @default(autoincrement())
   name      String      @default("Teszt Munka")
   Worksheet Worksheet[]
-} 
+}
 
 model Worksheet {
   id                 Int             @id @default(autoincrement())
@@ -69,7 +69,7 @@ model Worksheet {
   service            Service         @relation(fields: [serviceId], references: [id])
   serviceId          Int
   errorReportingTime DateTime        @default(now())
-  repairDeadline     DateTime        @default(dbgenerated("(now() + '2 days')"))
+  repairDeadline     DateTime
   status             WorksheetStatus @default(FOLYAMATBAN)
 }
 

@@ -1,5 +1,9 @@
 import React from "react";
-import { NewWorksheetButton } from "../ui/bookings/buttons";
+import {
+  NewWorksheetButton,
+  UpdateBooking,
+  DeleteBooking,
+} from "../ui/buttons";
 import Link from "next/link";
 import prisma from "@/prisma/client";
 
@@ -43,6 +47,10 @@ const BookingsPage = async () => {
               <td>{booking.discount}</td>
               <td>
                 <NewWorksheetButton id={booking.id} />
+              </td>
+              <td>
+                <UpdateBooking id={booking.id}></UpdateBooking>
+                <DeleteBooking id={booking.id}></DeleteBooking>
               </td>
             </tr>
           ))}

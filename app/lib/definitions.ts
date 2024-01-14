@@ -8,12 +8,18 @@ export type CategoryField = {
 export type BookerField = {
   id: number;
   name: string;
+  address: string;
+  taxnumber: string;
+  phone: string;
+  email: string;
 };
 
 export type PrinterField = {
   id: number;
+  categoryId: number;
   name: string;
   serial: string;
+  description: any;
   status: "SZABAD" | "FOGLALT";
 };
 
@@ -34,5 +40,13 @@ export type WorksheetField = {
   id: number;
   bookingId: number;
   serviceId: number;
+  status: "FOLYAMATBAN" | "BEFEJEZETT";
+};
+
+export type UpdateWorksheetField = {
+  id: number;
+  bookingId: number;
+  serviceId: number;
+  repairDeadline: string;
   status: "FOLYAMATBAN" | "BEFEJEZETT";
 };

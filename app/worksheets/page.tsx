@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import prisma from "@/prisma/client";
+import { UpdateWorksheet, DeleteWorksheet } from "../ui/buttons";
 
 const WorksheetsPage = async () => {
   const worksheets = await prisma.worksheet.findMany({
@@ -47,6 +48,10 @@ const WorksheetsPage = async () => {
               <td>{worksheet.service.name}</td>
               <td>{worksheet.repairDeadline.toString().slice(0, 16)}</td>
               <td>{worksheet.status}</td>
+              <td>
+                <UpdateWorksheet id={worksheet.id}></UpdateWorksheet>
+                <DeleteWorksheet id={worksheet.id}></DeleteWorksheet>
+              </td>
             </tr>
           ))}
         </tbody>

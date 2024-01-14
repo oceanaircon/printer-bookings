@@ -52,7 +52,7 @@ export async function loadServices() {
   return services;
 }
 
-// id alapján kiválasztott szerződés munkalap létrehozásához
+// id alapján kiválasztott rekordok UPDATE és DELETE funkciókhoz
 
 export async function fetchBookingById(id: number) {
   noStore();
@@ -64,4 +64,64 @@ export async function fetchBookingById(id: number) {
   });
 
   return booking as any;
+}
+
+export async function fetchBookerById(id: number) {
+  noStore();
+
+  const booker = await prisma.booker.findFirst({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  return booker as any;
+}
+
+export async function fetchPrinterById(id: number) {
+  noStore();
+
+  const printer = await prisma.printer.findFirst({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  return printer as any;
+}
+
+export async function fetchCategoryById(id: number) {
+  noStore();
+
+  const category = await prisma.category.findFirst({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  return category as any;
+}
+
+export async function fetchServiceById(id: number) {
+  noStore();
+
+  const service = await prisma.service.findFirst({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  return service as any;
+}
+
+export async function fetchWorksheetById(id: number) {
+  noStore();
+
+  const worksheet = await prisma.worksheet.findFirst({
+    where: {
+      id: Number(id),
+    },
+  });
+
+  return worksheet as any;
 }
