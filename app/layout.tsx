@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "./ui/NavBar";
+import Nav from "./ui/nav";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import { Providers } from "./providers";
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Theme>
-            <NavBar></NavBar>
+            <Nav></Nav>
             <main>{children}</main>
           </Theme>
         </Providers>
