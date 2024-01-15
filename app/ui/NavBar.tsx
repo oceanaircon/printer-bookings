@@ -4,8 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { AiFillPrinter } from "react-icons/ai";
 import { usePathname } from "next/navigation";
-import { LoginButton } from "../auth";
-import { LogoutButton } from "../auth";
 
 const NavBar = () => {
   const currentPath = usePathname();
@@ -36,12 +34,6 @@ const NavBar = () => {
             {link.label}
           </Link>
         ))}
-        <li>
-          <LoginButton></LoginButton>
-        </li>
-        <li>
-          <LogoutButton></LogoutButton>
-        </li>
       </ul>
     </nav>
   );
