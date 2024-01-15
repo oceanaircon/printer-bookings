@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import prisma from "@/prisma/client";
-import { UpdateWorksheet, DeleteWorksheet } from "../ui/buttons";
+import { UpdateWorksheet } from "../ui/buttons";
+import { DeleteWorksheet } from "../ui/deletebuttons";
 
 const WorksheetsPage = async () => {
   const worksheets = await prisma.worksheet.findMany({

@@ -1,11 +1,8 @@
 import React from "react";
-import {
-  NewWorksheetButton,
-  UpdateBooking,
-  DeleteBooking,
-} from "../ui/buttons";
+import { NewWorksheetButton, UpdateBooking } from "../ui/buttons";
 import Link from "next/link";
 import prisma from "@/prisma/client";
+import { DeleteBooking } from "../ui/deletebuttons";
 
 const BookingsPage = async () => {
   const bookings = await prisma.booking.findMany({

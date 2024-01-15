@@ -1,7 +1,7 @@
 import { BookerField } from "@/app/lib/definitions";
 import { updateBooker } from "@/app/lib/actions";
 
-export default function EditInvoiceForm({ booker }: { booker: BookerField }) {
+export default function Form({ booker }: { booker: BookerField }) {
   const updateBookerWithId = updateBooker.bind(null, booker.id);
 
   return (

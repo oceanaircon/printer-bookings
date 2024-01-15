@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import prisma from "@/prisma/client";
+import { DeleteService } from "../ui/deletebuttons";
+import { UpdateService } from "../ui/buttons";
 
 const ServicesPage = async () => {
   const services = await prisma.service.findMany();
@@ -22,6 +24,10 @@ const ServicesPage = async () => {
             <tr key={service.id}>
               <th>{service.id}</th>
               <td>{service.name}</td>
+              <td>
+                <UpdateService id={service.id}></UpdateService>
+                <DeleteService id={service.id}></DeleteService>
+              </td>
             </tr>
           ))}
         </tbody>
