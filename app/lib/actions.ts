@@ -247,8 +247,9 @@ export async function updateBooking(id: number, formData: FormData) {
 }
 
 export async function updateCategory(id: number, formData: FormData) {
-  const { name } = createCategorySchema.parse({
+  const { name, fee } = createCategorySchema.parse({
     name: formData.get("name"),
+    fee: formData.get("fee"),
   });
 
   await prisma.category.update({
@@ -257,6 +258,7 @@ export async function updateCategory(id: number, formData: FormData) {
     },
     data: {
       name: name,
+      fee: fee,
     },
   });
 
@@ -312,4 +314,29 @@ export async function updateWorksheet(id: number, formData: FormData) {
 export async function deleteBooker(id: number) {
   await prisma.booker.delete({ where: { id: id } });
   revalidatePath("/bookers");
+}
+
+export async function deletePrinter(id: number) {
+  await prisma.printer.delete({ where: { id: id } });
+  revalidatePath("/printers");
+}
+
+export async function deleteCategory(id: number) {
+  await prisma.category.delete({ where: { id: id } });
+  revalidatePath("/categories");
+}
+
+export async function deleteService(id: number) {
+  await prisma.service.delete({ where: { id: id } });
+  revalidatePath("/service");
+}
+
+export async function deleteBooking(id: number) {
+  await prisma.booking.delete({ where: { id: id } });
+  revalidatePath("/bookings");
+}
+
+export async function deleteWorksheet(id: number) {
+  await prisma.worksheet.delete({ where: { id: id } });
+  revalidatePath("/worksheets");
 }

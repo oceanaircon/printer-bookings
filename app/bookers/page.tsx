@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import prisma from "@/prisma/client";
-import { UpdateBooker, DeleteBooker } from "../ui/buttons";
+import { UpdateBooker } from "../ui/buttons";
+import { DeleteBooker } from "../ui/deletebuttons";
 
 const BookersPage = async () => {
   const bookers = await prisma.booker.findMany();

@@ -9,7 +9,7 @@ export default function Form({
   services: ServiceField[];
 }) {
   const updateWorksheetById = updateWorksheet.bind(null, worksheet.id);
-  console.log(worksheet.repairDeadline);
+
   return (
     <form action={updateWorksheetById}>
       <div>
