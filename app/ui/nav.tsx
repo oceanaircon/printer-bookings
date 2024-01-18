@@ -1,18 +1,17 @@
 import NavBar from "@/app/ui/NavBar";
-import { signOut } from "@/auth";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Nav() {
   return (
     <div>
-      <NavBar />
-      <form
-        action={async () => {
-          "use server";
-          await signOut();
-        }}
-      >
-        <button>Kijelentkezés</button>
-      </form>
+      <ul className="flex">
+        <li>
+          <NavBar />
+        </li>
+        <li className="pt-4 pl-6 space-x-6 text-zinc">
+          <UserButton afterSignOutUrl="/" />
+        </li>
+      </ul>
     </div>
   );
 }

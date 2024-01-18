@@ -12,27 +12,6 @@ import {
   createWorksheetSchema,
   updateWorksheetSchema,
 } from "./validationSchemas";
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData
-) {
-  try {
-    await signIn("credentials", formData, { redirectTo: "/bookings" });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return "Érvénytelen bejelentkezés.";
-        default:
-          return "Hiba történt.";
-      }
-    }
-    throw error;
-  }
-}
 
 export async function createPrinter(formData: FormData) {
   const { categoryId, serial, name, description, status } =
