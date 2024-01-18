@@ -4,7 +4,7 @@ import "./globals.css";
 import Nav from "./ui/nav";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
-import { Providers } from "./providers";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
           <Theme>
             <Nav></Nav>
             <main>{children}</main>
           </Theme>
-        </Providers>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

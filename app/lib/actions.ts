@@ -12,27 +12,6 @@ import {
   createWorksheetSchema,
   updateWorksheetSchema,
 } from "./validationSchemas";
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData
-) {
-  try {
-    await signIn("credentials", formData, { redirectTo: "/bookings" });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return "Érvénytelen bejelentkezés.";
-        default:
-          return "Hiba történt.";
-      }
-    }
-    throw error;
-  }
-}
 
 export async function createPrinter(formData: FormData) {
   const { categoryId, serial, name, description, status } =
@@ -44,16 +23,21 @@ export async function createPrinter(formData: FormData) {
       status: formData.get("status"),
     });
 
-  await prisma.printer.create({
-    data: {
-      categoryId: categoryId,
-      serial: serial,
-      name: name,
-      description: description,
-      status: status,
-    },
-  });
-
+  try {
+    await prisma.printer.create({
+      data: {
+        categoryId: categoryId,
+        serial: serial,
+        name: name,
+        description: description,
+        status: status,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült létrehozni a fénymásolót",
+    };
+  }
   revalidatePath("/printers");
   redirect("/printers");
 }
@@ -66,16 +50,21 @@ export async function createBooker(formData: FormData) {
     phone: formData.get("phone"),
     email: formData.get("email"),
   });
-
-  await prisma.booker.create({
-    data: {
-      name: name,
-      address: address,
-      taxnumber: taxnumber,
-      phone: phone,
-      email: email,
-    },
-  });
+  try {
+    await prisma.booker.create({
+      data: {
+        name: name,
+        address: address,
+        taxnumber: taxnumber,
+        phone: phone,
+        email: email,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült létrehozni az ügyfelet.",
+    };
+  }
 
   revalidatePath("/bookers");
   redirect("/bookers");
@@ -86,13 +75,18 @@ export async function createCategory(formData: FormData) {
     name: formData.get("name"),
     fee: formData.get("fee"),
   });
-
-  await prisma.category.create({
-    data: {
-      name: name,
-      fee: fee,
-    },
-  });
+  try {
+    await prisma.category.create({
+      data: {
+        name: name,
+        fee: fee,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült létrehozni a kategóriát.",
+    };
+  }
 
   revalidatePath("/categories");
   redirect("/categories");
@@ -102,12 +96,17 @@ export async function createService(formData: FormData) {
   const { name } = createServiceSchema.parse({
     name: formData.get("name"),
   });
-
-  await prisma.service.create({
-    data: {
-      name: name,
-    },
-  });
+  try {
+    await prisma.service.create({
+      data: {
+        name: name,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült létrehozni a szervízt.",
+    };
+  }
 
   revalidatePath("/services");
   redirect("/services");
@@ -119,26 +118,35 @@ export async function createBooking(formData: FormData) {
     printerId: formData.get("printerId"),
     discount: formData.get("discount"),
   });
-
-  await prisma.booking.create({
-    data: {
-      bookerId: bookerId,
-      printerId: printerId,
-      discount: discount,
-    },
-  });
+  try {
+    await prisma.booking.create({
+      data: {
+        bookerId: bookerId,
+        printerId: printerId,
+        discount: discount,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült létrehozni a szerződést.",
+    };
+  }
 
   // szükséges, hogy új szerződés létrejötte után a printer státusza FOGLALT legyen
-
-  await prisma.printer.update({
-    where: {
-      id: printerId,
-    },
-    data: {
-      status: "FOGLALT",
-    },
-  });
-
+  try {
+    await prisma.printer.update({
+      where: {
+        id: printerId,
+      },
+      data: {
+        status: "FOGLALT",
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni a nyomtató állapotát.",
+    };
+  }
   revalidatePath("/printers");
   revalidatePath("/bookings");
   redirect("/bookings");
@@ -153,15 +161,20 @@ export async function createWorksheet(formData: FormData) {
 
   let hatarido = new Date();
   hatarido.setHours(hatarido.getHours() + 72);
-
-  await prisma.worksheet.create({
-    data: {
-      bookingId: bookingId,
-      serviceId: serviceId,
-      repairDeadline: hatarido,
-      status: status,
-    },
-  });
+  try {
+    await prisma.worksheet.create({
+      data: {
+        bookingId: bookingId,
+        serviceId: serviceId,
+        repairDeadline: hatarido,
+        status: status,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült létrehozni a munkalapot.",
+    };
+  }
 
   revalidatePath("/worksheets");
   redirect("/worksheets");
@@ -177,19 +190,24 @@ export async function updateBooker(id: number, formData: FormData) {
     phone: formData.get("phone"),
     email: formData.get("email"),
   });
-
-  await prisma.booker.update({
-    where: {
-      id: id,
-    },
-    data: {
-      name: name,
-      address: address,
-      taxnumber: taxnumber,
-      phone: phone,
-      email: email,
-    },
-  });
+  try {
+    await prisma.booker.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: name,
+        address: address,
+        taxnumber: taxnumber,
+        phone: phone,
+        email: email,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni az ügyfelet.",
+    };
+  }
 
   revalidatePath("/bookers");
   redirect("/bookers");
@@ -204,43 +222,47 @@ export async function updatePrinter(id: number, formData: FormData) {
       description: formData.get("description"),
       status: formData.get("status"),
     });
-
-  const exists = await prisma.booking.findFirst({
-    where: {
-      printerId: id,
-    },
-  });
-
-  // ha a printer szerepel egy szerződésben, az állapota marad FOGLALT
-
-  if (exists) {
-    await prisma.printer.update({
+  try {
+    const exists = await prisma.booking.findFirst({
       where: {
-        id: id,
-      },
-      data: {
-        categoryId: categoryId,
-        serial: serial,
-        name: name,
-        description: description,
-        status: "FOGLALT",
+        printerId: id,
       },
     });
-  } else {
-    await prisma.printer.update({
-      where: {
-        id: id,
-      },
-      data: {
-        categoryId: categoryId,
-        serial: serial,
-        name: name,
-        description: description,
-        status: status,
-      },
-    });
+
+    // ha a printer szerepel egy szerződésben, az állapota marad FOGLALT
+
+    if (exists) {
+      await prisma.printer.update({
+        where: {
+          id: id,
+        },
+        data: {
+          categoryId: categoryId,
+          serial: serial,
+          name: name,
+          description: description,
+          status: "FOGLALT",
+        },
+      });
+    } else {
+      await prisma.printer.update({
+        where: {
+          id: id,
+        },
+        data: {
+          categoryId: categoryId,
+          serial: serial,
+          name: name,
+          description: description,
+          status: status,
+        },
+      });
+    }
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni a fénymásolót.",
+    };
   }
-
   revalidatePath("/printers");
   redirect("/printers");
 }
@@ -251,17 +273,22 @@ export async function updateBooking(id: number, formData: FormData) {
     printerId: formData.get("printerId"),
     discount: formData.get("discount"),
   });
-
-  await prisma.booking.update({
-    where: {
-      id: id,
-    },
-    data: {
-      bookerId: bookerId,
-      printerId: printerId,
-      discount: discount,
-    },
-  });
+  try {
+    await prisma.booking.update({
+      where: {
+        id: id,
+      },
+      data: {
+        bookerId: bookerId,
+        printerId: printerId,
+        discount: discount,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni a szerződést.",
+    };
+  }
 
   revalidatePath("/bookings");
   redirect("/bookings");
@@ -272,16 +299,21 @@ export async function updateCategory(id: number, formData: FormData) {
     name: formData.get("name"),
     fee: formData.get("fee"),
   });
-
-  await prisma.category.update({
-    where: {
-      id: id,
-    },
-    data: {
-      name: name,
-      fee: fee,
-    },
-  });
+  try {
+    await prisma.category.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: name,
+        fee: fee,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni a kategóriát.",
+    };
+  }
 
   revalidatePath("/categories");
   redirect("/categories");
@@ -291,15 +323,20 @@ export async function updateService(id: number, formData: FormData) {
   const { name } = createServiceSchema.parse({
     name: formData.get("name"),
   });
-
-  await prisma.service.update({
-    where: {
-      id: id,
-    },
-    data: {
-      name: name,
-    },
-  });
+  try {
+    await prisma.service.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: name,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni a szervízt.",
+    };
+  }
 
   revalidatePath("/services");
   redirect("/services");
@@ -313,18 +350,23 @@ export async function updateWorksheet(id: number, formData: FormData) {
       repairDeadline: formData.get("repairDeadline"),
       status: formData.get("status"),
     });
-
-  await prisma.worksheet.update({
-    where: {
-      id: id,
-    },
-    data: {
-      bookingId: bookingId,
-      serviceId: serviceId,
-      repairDeadline: new Date(repairDeadline),
-      status: status,
-    },
-  });
+  try {
+    await prisma.worksheet.update({
+      where: {
+        id: id,
+      },
+      data: {
+        bookingId: bookingId,
+        serviceId: serviceId,
+        repairDeadline: new Date(repairDeadline),
+        status: status,
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Nem sikerült frissíteni a munkalapot.",
+    };
+  }
 
   revalidatePath("/worksheets");
   redirect("/worksheets");
@@ -333,31 +375,67 @@ export async function updateWorksheet(id: number, formData: FormData) {
 // DELETE
 
 export async function deleteBooker(id: number) {
-  await prisma.booker.delete({ where: { id: id } });
+  try {
+    await prisma.booker.delete({ where: { id: id } });
+  } catch (error) {
+    return {
+      message: "Nem sikerült törölni az ügyfelet.",
+    };
+  }
   revalidatePath("/bookers");
 }
 
 export async function deletePrinter(id: number) {
-  await prisma.printer.delete({ where: { id: id } });
+  try {
+    await prisma.printer.delete({ where: { id: id } });
+  } catch (error) {
+    return {
+      message: "Nem sikerült törölni a fénymásolót.",
+    };
+  }
   revalidatePath("/printers");
 }
 
 export async function deleteCategory(id: number) {
-  await prisma.category.delete({ where: { id: id } });
+  try {
+    await prisma.category.delete({ where: { id: id } });
+  } catch (error) {
+    return {
+      message: "Nem sikerült törölni a kategóriát.",
+    };
+  }
   revalidatePath("/categories");
 }
 
 export async function deleteService(id: number) {
-  await prisma.service.delete({ where: { id: id } });
+  try {
+    await prisma.service.delete({ where: { id: id } });
+  } catch (error) {
+    return {
+      message: "Nem sikerült törölni a szervízt.",
+    };
+  }
   revalidatePath("/service");
 }
 
 export async function deleteBooking(id: number) {
-  await prisma.booking.delete({ where: { id: id } });
+  try {
+    await prisma.booking.delete({ where: { id: id } });
+  } catch (error) {
+    return {
+      message: "Nem sikerült törölni a szerződést.",
+    };
+  }
   revalidatePath("/bookings");
 }
 
 export async function deleteWorksheet(id: number) {
-  await prisma.worksheet.delete({ where: { id: id } });
+  try {
+    await prisma.worksheet.delete({ where: { id: id } });
+  } catch (error) {
+    return {
+      message: "Nem sikerült törölni a munkalapot.",
+    };
+  }
   revalidatePath("/worksheets");
 }
