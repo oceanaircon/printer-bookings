@@ -11,6 +11,9 @@ const PrintersPage = async () => {
 
   return (
     <div>
+      <Link href="/categories">
+        <p>Printer kategóriák</p>
+      </Link>
       <Link href="/printers/new">
         <p>Új printer</p>
       </Link>

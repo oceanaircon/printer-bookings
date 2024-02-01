@@ -124,3 +124,83 @@ export async function fetchWorksheetById(id: number) {
 
   return worksheet as any;
 }
+
+const ITEMS_PER_PAGE = 8;
+export async function fetchFilteredBookings(
+  query: string,
+  currentPage: number
+) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    /*     const bookings = await prisma.$queryRaw(
+      Prisma.sql`SELECT Booking.id, 
+      Booker.name, Booker.email, 
+      Printer.name, Printer.serial,
+      Category.fee, 
+      Booking.createdAt, Booking.discount 
+      FROM Booking, Printer
+      INNER JOIN Booker ON Booker.id = Booking.bookerId
+      INNER JOIN Printer ON Printer.id = Booking.printerId
+      INNER JOIN Category ON Category.id = Printer.categoryId
+      Booker.name LIKE ${`%${query}%`} OR
+      Booker.email LIKE ${`%${query}%`}
+      ORDER BY Booking.createdAt DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}`
+    ); */
+
+    const bookings = await prisma.booking.findMany({
+      select: {
+        id: true,
+        booker: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+        printer: {
+          select: {
+            name: true,
+            serial: true,
+            category: {
+              select: {
+                fee: true,
+              },
+            },
+          },
+        },
+        createdAt: true,
+        discount: true,
+      },
+      where: {
+        OR: [
+          {
+            booker: {
+              name: {
+                contains: query,
+              },
+            },
+          },
+          {
+            booker: {
+              email: {
+                contains: query,
+              },
+            },
+          },
+        ],
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+
+    return bookings;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Hiba a lekérdezésben.");
+  }
+}
