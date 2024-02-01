@@ -22,7 +22,7 @@ const BookingsPage = async ({
       </Link>
       <br />
 
-      <Search placeholder="Szerződés kereső..." />
+      <Search placeholder="ügyfél neve vagy email-címe..." />
       <br />
       <br />
       <Suspense key={query + currentPage} fallback={""}>
