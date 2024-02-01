@@ -1,5 +1,6 @@
-import Script from "next/script";
+import AreaChart from "@/app/ui/dashboard/area-chart";
 import React from "react";
+import DoughnutChart from "./doughnut";
 
 const Chart = () => {
   return (
@@ -7,11 +8,13 @@ const Chart = () => {
       <div className="col-xl-7 col-md-7 mb-4">
         <div className="card shadow mb-4 mx-2">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Area Chart</h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              Bevétel és Ügyfélszám
+            </h6>
           </div>
           <div className="card-body">
             <div className="chart-area">
-              <canvas id="myAreaChart"></canvas>
+              <AreaChart></AreaChart>
             </div>
             <hr />
           </div>
@@ -20,17 +23,16 @@ const Chart = () => {
       <div className="col-xl-5 col-md-5 mb-4">
         <div className="card shadow mb-4 mx-2">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Bar Chart</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Printerek</h6>
           </div>
           <div className="card-body">
             <div className="chart-bar">
-              <canvas id="myBarChart"></canvas>
+              <DoughnutChart></DoughnutChart>
             </div>
             <hr />
           </div>
         </div>
       </div>
-      <Script src="@/app/lib/chart-area-demo.js"></Script>
     </div>
   );
 };
