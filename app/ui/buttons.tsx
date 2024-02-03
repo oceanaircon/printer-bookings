@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export function NewWorksheetButton({ id }: { id: number }) {
-  return <Link href={`/worksheets/${id}/new`}>Új munkalap</Link>;
+  return <button><Link href={`/worksheets/${id}/new`}>Új munkalap</Link></button>;
 }
 
 export function UpdateBooker({ id }: { id: number }) {
