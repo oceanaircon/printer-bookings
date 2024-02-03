@@ -1,5 +1,6 @@
 import { fetchServiceById } from "@/app/lib/data";
 import Form from "@/app/ui/services/edit-form";
+import { notFound } from "next/navigation";
 
 export default async function UpdateServicePage({
   params,
@@ -9,6 +10,10 @@ export default async function UpdateServicePage({
   const id = params.id;
   const service = await fetchServiceById(id);
   console.log(service);
+
+  if (!service) {
+    notFound();
+  }
 
   return (
     <main>
