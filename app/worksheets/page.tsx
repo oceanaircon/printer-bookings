@@ -1,10 +1,13 @@
 import React from "react";
-import Link from "next/link";
 import prisma from "@/prisma/client";
 import { UpdateWorksheet } from "../ui/buttons";
 import { DeleteWorksheet } from "../ui/deletebuttons";
+import { revalidatePath } from "next/cache";
+import { updateWorksheetStatus } from "../lib/data";
 
 const WorksheetsPage = async () => {
+  await updateWorksheetStatus();
+  revalidatePath("/worksheets");
   const worksheets = await prisma.worksheet.findMany({
     include: {
       booking: {

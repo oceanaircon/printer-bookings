@@ -330,3 +330,26 @@ export async function fetchCardData() {
     error;
   }
 }
+
+export async function updateWorksheetStatus() {
+  const statuses = await prisma.worksheet.findMany({
+    select: {
+      id: true,
+      repairDeadline: true,
+      status: true,
+    },
+  });
+
+  statuses.forEach(async (element) => {
+    if (Number(element.repairDeadline) < Date.now()) {
+      await prisma.worksheet.update({
+        where: {
+          id: element.id,
+        },
+        data: {
+          status: "BEFEJEZETT",
+        },
+      });
+    }
+  });
+}
