@@ -321,7 +321,7 @@ export async function fetchFilteredPrinters(
     const printers = await prisma.printer.findMany({
       select:{
         id: true,
-        categoryId: true,
+        category: true,
         name: true,
         serial: true,
         description: true,
