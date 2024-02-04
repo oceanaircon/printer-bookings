@@ -8,8 +8,8 @@ import Topnav from "./ui/topnav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Printer Bookings",
-  description: "",
+  title: "Alfa-Kontakt",
+  description: "Printerek bérbeadása",
 };
 
 export default function RootLayout({

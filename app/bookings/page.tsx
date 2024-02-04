@@ -18,6 +18,7 @@ const BookingsPage = async ({
   return (
     <div className="my-3">
       <div className="py-5">
+        <h3>Szerződések</h3>
         <Link href="/bookings/new">
           <p>Új szerződés</p>
         </Link>

@@ -18,6 +18,7 @@ const PrintersPage = async ({
   return (
     <div className="my-3">
       <div className="py-5">
+        <h3>Printerek</h3>
         <Link href="/categories">
           <p>Printer kategóriák</p>
         </Link>
