@@ -204,3 +204,44 @@ export async function fetchFilteredBookings(
     throw new Error("Hiba a lekérdezésben.");
   }
 }
+
+export async function fetchCardData() {
+  try {
+    const monthlyIncomePromise =
+      await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
+        INNER JOIN Printer ON Booking.printerId = Printer.id 
+        INNER JOIN Category ON Printer.categoryId = Category.id;`;
+
+    const pendingWorksheetsPromise = await prisma.worksheet.count({
+      where: {
+        status: "FOLYAMATBAN",
+      },
+    });
+
+    const closedWorksheetsPromise = await prisma.worksheet.count({
+      where: {
+        status: "BEFEJEZETT",
+      },
+    });
+
+    const data = await Promise.all([
+      monthlyIncomePromise,
+      pendingWorksheetsPromise,
+      closedWorksheetsPromise,
+    ]);
+
+    const monthlyIncome = Number(JSON.stringify(data[0]).slice(23, 28));
+    const yearIncome = monthlyIncome * 12;
+    const pendingWorksheets = Number(data[1] ?? "0");
+    const closedWorksheets = Number(data[2] ?? "0");
+
+    return {
+      monthlyIncome,
+      yearIncome,
+      pendingWorksheets,
+      closedWorksheets,
+    } as any;
+  } catch (error) {
+    error;
+  }
+}
