@@ -18,6 +18,7 @@ const BookersPage = async ({
   return (
     <div className="my-3">
       <div className="py-5">
+        <h3>Ügyfelek</h3>
         <Link href="/bookers/new">
           <p>Új ügyfél</p>
         </Link>

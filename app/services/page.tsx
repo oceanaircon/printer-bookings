@@ -10,6 +10,7 @@ const ServicesPage = async () => {
   return (
     <div className="my-3">
       <div className="py-5">
+        <h3>Hibák</h3>
         <Link href="/services/new">
           <p>Új hiba</p>
         </Link>
