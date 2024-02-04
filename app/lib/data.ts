@@ -10,82 +10,52 @@ import { unstable_noStore as noStore } from "next/cache";
 // kategóriák betöltése új printer létrehozásához
 
 export async function loadCategories() {
-  try{
   const categories: CategoryField[] = await prisma.category.findMany();
   return categories;
-} catch (error){
-  console.error("Database Error:", error);
-  throw new Error("Hiba a betöltésben.");
-}
 }
 
 // ügyfelek betöltése új szerződés létrehozásához
 
 export async function loadBookers() {
-  try{
   const bookers: BookerField[] = await prisma.booker.findMany();
   return bookers;
-} catch (error){
-  console.error("Database Error:", error);
-  throw new Error("Hiba a betöltésben.");
-}
 }
 
 // a "szabad" printerek betöltése új szerződés létrehozásához
 
 export async function loadPrinters() {
-try{
   const printers: PrinterField[] = await prisma.printer.findMany({
     where: {
       status: "SZABAD",
     },
   });
   return printers;
-} catch (error){
-  console.error("Database Error:", error);
-  throw new Error("Hiba a betöltésben.");
-}
 }
 
 export async function loadBookings() {
-  try{
   const bookings: BookingField[] = await prisma.booking.findMany();
   return bookings;
-} catch (error){
-  console.error("Database Error:", error);
-  throw new Error("Hiba a betöltésben.");
-}
 }
 
 export async function loadPrintersForService() {
-  try{
   const printers: PrinterField[] = await prisma.printer.findMany({
     where: {
       status: "FOGLALT",
     },
   });
   return printers;
-} catch (error){
-  console.error("Database Error:", error);
-  throw new Error("Hiba a betöltésben.");
-}
 }
 
 export async function loadServices() {
-  try{
   const services = await prisma.service.findMany();
   return services;
-  } catch (error){
-    console.error("Database Error:", error);
-    throw new Error("Hiba a betöltésben.");
-  }
 }
 
 // id alapján kiválasztott rekordok UPDATE és DELETE funkciókhoz
 
 export async function fetchBookingById(id: number) {
   noStore();
-try{
+
   const booking = await prisma.booking.findFirst({
     where: {
       id: Number(id),
@@ -93,15 +63,11 @@ try{
   });
 
   return booking as any;
-} catch (error) {
-  console.error("Database Error:", error);
-  throw new Error("Hiba a lekérdezésben.");
-}
 }
 
 export async function fetchBookerById(id: number) {
   noStore();
-try{
+
   const booker = await prisma.booker.findFirst({
     where: {
       id: Number(id),
@@ -109,15 +75,11 @@ try{
   });
 
   return booker as any;
-} catch (error) {
-  console.error("Database Error:", error);
-  throw new Error("Hiba a lekérdezésben.");
-}
 }
 
 export async function fetchPrinterById(id: number) {
   noStore();
-try{
+
   const printer = await prisma.printer.findFirst({
     where: {
       id: Number(id),
@@ -125,15 +87,11 @@ try{
   });
 
   return printer as any;
-} catch (error) {
-  console.error("Database Error:", error);
-  throw new Error("Hiba a lekérdezésben.");
-}
 }
 
 export async function fetchCategoryById(id: number) {
   noStore();
-try{
+
   const category = await prisma.category.findFirst({
     where: {
       id: Number(id),
@@ -141,15 +99,11 @@ try{
   });
 
   return category as any;
-} catch (error) {
-  console.error("Database Error:", error);
-  throw new Error("Hiba a lekérdezésben.");
-}
 }
 
 export async function fetchServiceById(id: number) {
   noStore();
-try{
+
   const service = await prisma.service.findFirst({
     where: {
       id: Number(id),
@@ -157,15 +111,11 @@ try{
   });
 
   return service as any;
-} catch (error) {
-  console.error("Database Error:", error);
-  throw new Error("Hiba a lekérdezésben.");
-}
 }
 
 export async function fetchWorksheetById(id: number) {
   noStore();
-try{
+
   const worksheet = await prisma.worksheet.findFirst({
     where: {
       id: Number(id),
@@ -173,10 +123,6 @@ try{
   });
 
   return worksheet as any;
-} catch (error) {
-  console.error("Database Error:", error);
-  throw new Error("Hiba a lekérdezésben.");
-}
 }
 
 const ITEMS_PER_PAGE = 8;
@@ -259,52 +205,47 @@ export async function fetchFilteredBookings(
   }
 }
 
-
-export async function fetchFilteredBookers(
-  query: string,
-  currentPage: number
-) {
+export async function fetchFilteredBookers(query: string, currentPage: number) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const bookers = await prisma.booker.findMany({
-    select: {
-      id: true,
-      name: true,
-      address: true,
-      taxnumber: true,
-      phone: true,
-      email: true,
-    },
-    where: {
-      OR: [
-        {
-          name:{
-            contains: query
-          }
-        },
-        {
-          email:{
-            contains: query
-          }
-        },
-        {
-          address:{
-            contains: query
-          }
-        }
-      ]
-    },
-    orderBy: {
-      name: "asc",
-    },
-    take: ITEMS_PER_PAGE,
-    skip: offset,
-
-  });
-  return bookers;
-   } catch(error){
+      select: {
+        id: true,
+        name: true,
+        address: true,
+        taxnumber: true,
+        phone: true,
+        email: true,
+      },
+      where: {
+        OR: [
+          {
+            name: {
+              contains: query,
+            },
+          },
+          {
+            email: {
+              contains: query,
+            },
+          },
+          {
+            address: {
+              contains: query,
+            },
+          },
+        ],
+      },
+      orderBy: {
+        name: "asc",
+      },
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+    return bookers;
+  } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Hiba a lekérdezésben.");
   }
@@ -319,7 +260,7 @@ export async function fetchFilteredPrinters(
 
   try {
     const printers = await prisma.printer.findMany({
-      select:{
+      select: {
         id: true,
         category: true,
         name: true,
@@ -328,23 +269,64 @@ export async function fetchFilteredPrinters(
         status: true,
       },
       where: {
-        OR:[
-        {
-          name:{
-            contains: query
-          }
-        },
-        {
-          serial:{
-            contains: query
-          }
-        },
-        ]
-      }
-    })
+        OR: [
+          {
+            name: {
+              contains: query,
+            },
+          },
+          {
+            serial: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
     return printers;
-  } catch(error){
-   console.error("Database Error:", error);
-   throw new Error("Hiba a lekérdezésben.");
- }
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Hiba a lekérdezésben.");
+  }
+}
+
+export async function fetchCardData() {
+  try {
+    const monthlyIncomePromise =
+      await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
+        INNER JOIN Printer ON Booking.printerId = Printer.id 
+        INNER JOIN Category ON Printer.categoryId = Category.id;`;
+
+    const pendingWorksheetsPromise = await prisma.worksheet.count({
+      where: {
+        status: "FOLYAMATBAN",
+      },
+    });
+
+    const closedWorksheetsPromise = await prisma.worksheet.count({
+      where: {
+        status: "BEFEJEZETT",
+      },
+    });
+
+    const data = await Promise.all([
+      monthlyIncomePromise,
+      pendingWorksheetsPromise,
+      closedWorksheetsPromise,
+    ]);
+
+    const monthlyIncome = Number(JSON.stringify(data[0]).slice(23, 28));
+    const yearIncome = monthlyIncome * 12;
+    const pendingWorksheets = Number(data[1] ?? "0");
+    const closedWorksheets = Number(data[2] ?? "0");
+
+    return {
+      monthlyIncome,
+      yearIncome,
+      pendingWorksheets,
+      closedWorksheets,
+    } as any;
+  } catch (error) {
+    error;
+  }
 }
