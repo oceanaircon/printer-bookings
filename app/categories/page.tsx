@@ -8,32 +8,35 @@ const CategoriesPage = async () => {
   const categories = await prisma.category.findMany();
 
   return (
-    <div>
-      <Link href="/categories/new">
-        <p>Új kategória</p>
-      </Link>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Név</th>
-            <th>Díj</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((category) => (
-            <tr key={category.id}>
-              <th>{category.id}</th>
-              <th>{category.name}</th>
-              <td>{category.fee}</td>
-              <td>
-                <UpdateCategory id={category.id}></UpdateCategory>
-                <DeleteCategory id={category.id}></DeleteCategory>
-              </td>
+    <div className="my-3">
+      <div className="py-5">
+        <h3>Kategóriák</h3>
+        <Link href="/categories/new">
+          <p>Új kategória</p>
+        </Link>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Név</th>
+              <th>Díj</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {categories.map((category) => (
+              <tr key={category.id}>
+                <th>{category.id}</th>
+                <th>{category.name}</th>
+                <td>{category.fee}</td>
+                <td>
+                  <UpdateCategory id={category.id}></UpdateCategory>
+                  <DeleteCategory id={category.id}></DeleteCategory>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
