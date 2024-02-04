@@ -8,30 +8,32 @@ const ServicesPage = async () => {
   const services = await prisma.service.findMany();
 
   return (
-    <div>
-      <Link href="/services/new">
-        <p>Új hiba</p>
-      </Link>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Hiba neve</th>
-          </tr>
-        </thead>
-        <tbody>
-          {services.map((service) => (
-            <tr key={service.id}>
-              <th>{service.id}</th>
-              <td>{service.name}</td>
-              <td>
-                <UpdateService id={service.id}></UpdateService>
-                <DeleteService id={service.id}></DeleteService>
-              </td>
+    <div className="my-3">
+      <div className="py-5">
+        <Link href="/services/new">
+          <p>Új hiba</p>
+        </Link>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Hiba neve</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {services.map((service) => (
+              <tr key={service.id}>
+                <th>{service.id}</th>
+                <td>{service.name}</td>
+                <td>
+                  <UpdateService id={service.id}></UpdateService>
+                  <DeleteService id={service.id}></DeleteService>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
