@@ -66,7 +66,7 @@ export default function Form({
                 />
                 <label
                   htmlFor="BEFEJEZETT"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-gray-600"
                 >
                   BEFEJEZETT {/*<CheckIcon className="h-4 w-4" />*/}
                 </label>
