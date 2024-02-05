@@ -13,8 +13,8 @@ export default async function PrintersTable({
   const printers = await fetchFilteredPrinters(query, currentPage);
 
   return (
-    <div className="py-3">
-      <table>
+    <div className="table-responsive">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
@@ -23,6 +23,16 @@ export default async function PrintersTable({
             <th>Kategória</th>
             <th>Leírás</th>
             <th>Állapot</th>
+            <th>
+              {" "}
+              <a
+                href="/printers/new"
+                className=" btn btn-secondary btn-sm"
+                aria-current="page"
+              >
+                Új printer
+              </a>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -35,8 +45,16 @@ export default async function PrintersTable({
               <td>{printer.description}</td>
               <td>{printer.status}</td>
               <td>
-                <UpdatePrinter id={printer.id} />
-                <DeletePrinter id={printer.id} />
+                <div className="container">
+                  <div className="row">
+                    <div className="col-6">
+                      <UpdatePrinter id={printer.id} />
+                    </div>
+                    <div className="col-6">
+                      <DeletePrinter id={printer.id} />
+                    </div>
+                  </div>
+                </div>
               </td>
             </tr>
           ))}

@@ -16,19 +16,11 @@ const BookersPage = async ({
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <div className="my-3">
-      <div className="py-5">
-        <Link href="/bookers/new">
-          <p>Új ügyfél</p>
-        </Link>
-
-        <Search placeholder="ügyfél neve, címe vagy email-címe..." />
-        <br />
-        <br />
-        <Suspense key={query + currentPage} fallback={""}>
-          <BookersTable query={query} currentPage={currentPage} />
-        </Suspense>
-      </div>
+    <div className="my-4 py-5 text-center">
+      <Search placeholder="ügyfél neve, címe vagy email-címe..." />
+      <Suspense key={query + currentPage} fallback={""}>
+        <BookersTable query={query} currentPage={currentPage} />
+      </Suspense>
     </div>
   );
 };

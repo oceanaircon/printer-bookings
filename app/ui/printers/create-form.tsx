@@ -3,6 +3,7 @@ import { createPrinter } from "@/app/lib/actions";
 
 export default function Form({ categories }: { categories: CategoryField[] }) {
   return (
+    <div className="py-4 my-5 text-center">
     <form action={createPrinter}>
       <label htmlFor="category" className="mb-2 block text-sm font-medium">
         Kategória
@@ -14,20 +15,24 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
           </option>
         ))}
       </select>
-      <br />
-      <br />
-      <label htmlFor="serial">Serial:</label>
-      <br />
-      <input type="text" name="serial" />
-      <br />
-      <label htmlFor="name">Név:</label>
-      <br />
-      <input type="text" name="name" />
-      <br />
-      <label htmlFor="description">Leírás:</label>
-      <br />
-      <input type="text" name="description" />
-      <br />
+      <div className="">
+        <label htmlFor="serial">Serial:</label>
+      </div>
+      <div>
+        <input type="text" name="serial" />
+      </div>
+      <div>
+        <label htmlFor="name">Név:</label>
+      </div>
+      <div>
+        <input type="text" name="name" />
+      </div>
+      <div>
+        <label htmlFor="description">Leírás:</label>
+      </div>
+      <div>
+        <input type="text" name="description" />
+      </div>
       <fieldset>
         <legend>Printer állapota</legend>
         <div>
@@ -53,5 +58,6 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
       <br />
       <input type="submit" value="Mehet" />
     </form>
+    </div>
   );
 }

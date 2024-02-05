@@ -8,16 +8,23 @@ const ServicesPage = async () => {
   const services = await prisma.service.findMany();
 
   return (
-    <div className="my-3">
-      <div className="py-5">
-        <Link href="/services/new">
-          <p>Új hiba</p>
-        </Link>
-        <table>
+    <div className="my-3 py-5">
+      <div className="table-responsive text-center">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
               <th>Hiba neve</th>
+              <th>
+                {" "}
+                <a
+                  href="/services/new"
+                  className=" btn btn-secondary btn-sm"
+                  aria-current="page"
+                >
+                  Új hiba
+                </a>
+              </th>
             </tr>
           </thead>
           <tbody>

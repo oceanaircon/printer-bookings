@@ -27,7 +27,7 @@ const Topnav = () => {
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav me-auto mb-2 mb-md-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" href="/">
+                <Link className="nav-link" aria-current="page" href="/">
                   Főoldal
                 </Link>
               </li>
@@ -54,6 +54,11 @@ const Topnav = () => {
               <li className="nav-item">
                 <Link className="nav-link" href="/services">
                   Hibák
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/categories">
+                  Printer kategóriák
                 </Link>
               </li>
             </ul>

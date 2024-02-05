@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import prisma from "@/prisma/client";
 import { UpdateWorksheet } from "../ui/buttons";
 import { DeleteWorksheet } from "../ui/deletebuttons";
@@ -18,9 +17,9 @@ const WorksheetsPage = async () => {
   });
 
   return (
-    <div className="my-3">
-      <div className="py-5">
-        <table>
+    <div className="my-4 py-5">
+      <div className="table-responsive">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
@@ -34,6 +33,7 @@ const WorksheetsPage = async () => {
               <th>Hiba neve</th>
               <th>Határidő</th>
               <th>Állapot</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -51,8 +51,16 @@ const WorksheetsPage = async () => {
                 <td>{worksheet.repairDeadline.toString().slice(0, 16)}</td>
                 <td>{worksheet.status}</td>
                 <td>
+                  <div className="container">
+                  <div className="row">
+                    <div className="col-6">
                   <UpdateWorksheet id={worksheet.id}></UpdateWorksheet>
+                    </div>
+                    <div className="col-6">
                   <DeleteWorksheet id={worksheet.id}></DeleteWorksheet>
+                    </div>
+                  </div>
+                  </div>
                 </td>
               </tr>
             ))}
