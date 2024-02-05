@@ -16,7 +16,16 @@ const PrintersPage = async ({
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <div className="my-4 py-5 text-center">
+    <div className="my-3">
+      <div className="py-5">
+        <h3>Printerek</h3>
+        <Link href="/categories">
+          <p>Printer kategóriák</p>
+        </Link>
+        <Link href="/printers/new">
+          <p>Új printer</p>
+        </Link>
+
         <Search placeholder="printer neve vagy szériaszáma..." />
         <Suspense key={query + currentPage} fallback={""}>
           <PrintersTable query={query} currentPage={currentPage} />

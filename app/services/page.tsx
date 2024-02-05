@@ -11,6 +11,13 @@ const ServicesPage = async () => {
     <div className="my-3 py-5">
       <div className="table-responsive text-center">
         <table className="table table-hover">
+    <div className="my-3">
+      <div className="py-5">
+        <h3>Hibák</h3>
+        <Link href="/services/new">
+          <p>Új hiba</p>
+        </Link>
+        <table>
           <thead>
             <tr>
               <th>ID</th>

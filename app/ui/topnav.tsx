@@ -1,77 +1,44 @@
-import Link from "next/link";
+"use client";
+
 import React from "react";
 import { UserButton } from "@clerk/nextjs";
 import { AiOutlinePrinter } from "react-icons/ai";
-import Script from "next/script";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { usePathname } from "next/navigation";
 
-const Topnav = () => {
+function Topnav() {
+  const pathname = usePathname();
+  const color = { color: "white", fontSize: "1.5em" };
   return (
-    <div>
-      <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div className="container-fluid">
-          <Link className="navbar-brand" href="/">
-            <AiOutlinePrinter size={24} />
-            &nbsp;&nbsp; Printer Bookings
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarCollapse">
-            <ul className="navbar-nav me-auto mb-2 mb-md-0">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" href="/">
-                  Főoldal
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/bookings">
-                  Szerződések
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/bookers">
-                  Ügyfelek
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/printers">
-                  Printerek
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/worksheets">
-                  Munkalapok
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/services">
-                  Hibák
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/categories">
-                  Printer kategóriák
-                </Link>
-              </li>
-            </ul>
-            <div className="pt-2 px-4">
-              <UserButton afterSignOutUrl="/" />
-            </div>
-          </div>
+    <Navbar
+      fixed="top"
+      collapseOnSelect
+      expand="md"
+      className="bg-body-tertiary"
+      data-bs-theme="dark"
+    >
+      <Container className="m-0">
+        <div className="mx-3">
+          <AiOutlinePrinter style={color}></AiOutlinePrinter>
         </div>
-      </nav>
-      <Script type="text/javascript" src="../lib/scripts.js" />
-      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></Script>
-    </div>
+        <Navbar.Brand href="/">Alfa-Kontakt</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav activeKey={pathname} className="me-auto">
+            <Nav.Link href="/">Főoldal</Nav.Link>
+            <Nav.Link href="/bookings">Szerződések</Nav.Link>
+            <Nav.Link href="/bookers">Ügyfelek</Nav.Link>
+            <Nav.Link href="/printers">Printerek</Nav.Link>
+            <Nav.Link href="/worksheets">Munkalapok</Nav.Link>
+            <Nav.Link href="/services">Hibák</Nav.Link>
+          </Nav>
+          <UserButton afterSignOutUrl="/" />
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-};
+}
 
 export default Topnav;
