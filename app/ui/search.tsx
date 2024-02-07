@@ -24,13 +24,16 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }, 300);
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div
+      className="input-group mb-3"
+      id="inputGroup-sizing-default">
       <label htmlFor="search" className="sr-only">
-        <span>Keresés:</span>
+        <span className="input-group-text">Keresés:</span>
       </label>
       &nbsp;&nbsp;
       <input
-        className="w-25 rounded-md border border-gray-200 py-1 outline-2 placeholder:text-gray-500"
+        type="text"
+        className=" form-control"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);

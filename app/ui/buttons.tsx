@@ -1,29 +1,109 @@
 import Link from "next/link";
 
 export function NewWorksheetButton({ id }: { id: number }) {
-  return <button><Link href={`/worksheets/${id}/new`}>Új munkalap</Link></button>;
+  return (
+    <a
+      type="button"
+      className="btn btn-dark btn-sm"
+      href={`/worksheets/${id}/new`}
+    >
+      Új munkalap
+    </a>
+  );
 }
 
 export function UpdateBooker({ id }: { id: number }) {
-  return <Link href={`/bookers/${id}/edit`}>Szerkesztés</Link>;
+  return (
+    <a className="" href={`/bookers/${id}/edit`}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="grey"
+        viewBox="0 0 16 16"
+      >
+        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z" />
+      </svg>
+    </a>
+  );
 }
 
 export function UpdatePrinter({ id }: { id: number }) {
-  return <Link href={`/printers/${id}/edit`}>Szerkesztés</Link>;
+  return (
+    <a className="" href={`/printers/${id}/edit`}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="grey"
+        viewBox="0 0 16 16"
+      >
+        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z" />
+      </svg>
+    </a>
+  );
 }
 
 export function UpdateBooking({ id }: { id: number }) {
-  return <Link href={`/bookings/${id}/edit`}>Szerkesztés</Link>;
+  return (
+    <a className="" href={`/bookings/${id}/edit`}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="grey"
+        viewBox="0 0 16 16"
+      >
+        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z" />
+      </svg>
+    </a>
+  );
 }
 
 export function UpdateWorksheet({ id }: { id: number }) {
-  return <Link href={`/worksheets/${id}/edit`}>Szerkesztés</Link>;
+  return(
+  <a className="" href={`/worksheets/${id}/edit`}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      fill="grey"
+      viewBox="0 0 16 16"
+    >
+      <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z" />
+    </svg>
+  </a>
+  )
 }
 
 export function UpdateCategory({ id }: { id: number }) {
-  return <Link href={`/categories/${id}/edit`}>Szerkesztés</Link>;
+  return (
+        <a className="" href={`/categories/${id}/edit`}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="grey"
+        viewBox="0 0 16 16"
+      >
+        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z" />
+      </svg>
+    </a>
+  )
 }
 
 export function UpdateService({ id }: { id: number }) {
-  return <Link href={`/services/${id}/edit`}>Szerkesztés</Link>;
+  return (
+    <a className="" href={`/services/${id}/edit`}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      fill="grey"
+      viewBox="0 0 16 16"
+    >
+      <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11z" />
+    </svg>
+  </a>
+  )
 }

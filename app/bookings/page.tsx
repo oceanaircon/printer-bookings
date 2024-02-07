@@ -16,13 +16,8 @@ const BookingsPage = async ({
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <div className="my-3">
-      <div className="py-5">
-        <h3>Szerződések</h3>
-        <Link href="/bookings/new">
-          <p>Új szerződés</p>
-        </Link>
-
+    <div className=" py-5 my-4 row justify-content-evenly">
+      <div className="col row-auto text-center">
         <Search placeholder="ügyfél neve vagy email-címe..." />
         <Suspense key={query + currentPage} fallback={""}>
           <BookingsTable query={query} currentPage={currentPage} />
