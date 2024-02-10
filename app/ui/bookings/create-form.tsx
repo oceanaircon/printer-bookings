@@ -9,69 +9,82 @@ export default function Form({
   printers: PrinterField[];
 }) {
   return (
-    <div className="container mx-auto text-center">
+    <div className="container py-5 my-5 mx-auto text-center">
       <form
-        className="py-4 my-5"
+        className="container mx-auto p-4 bg-white shadow-md rounded-md text-center"
         action={createBooking}
         style={{
           maxWidth: "400px",
           margin: "auto",
           background: "white",
-          padding: "20px",
+          padding: "40px",
           borderRadius: "10px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <div className="input-group">
-          <label htmlFor="booker" className="form-label">
-            Ügyfél
-          </label>
+        <h3 className="mb-4">Szerződés létrehozása</h3>
+        <div className="mb-4">
+          <div>
+            <label
+              htmlFor="booker"
+              className="block text-sm font-medium text-gray-600 input-group justify-content-center"
+            >
+              Ügyfél
+            </label>
+          </div>
+          <div>
+            <select
+              name="bookerId"
+              id="booker"
+              defaultValue=""
+              className="input-group-text"
+            >
+              {bookers.map((booker) => (
+                <option key={booker.id} value={booker.id}>
+                  {booker.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="mb-4 input-group">
-          <select
-            name="bookerId"
-            id="booker"
-            defaultValue=""
-            className="input-group-text col-7"
+        <div>
+          <div>
+            <label
+              htmlFor="printer"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Printer
+            </label>
+          </div>
+          <div className="mb-4">
+            <select
+              name="printerId"
+              id="printer"
+              defaultValue=""
+              className="input-group-text mb-4"
+            >
+              {printers.map((printer) => (
+                <option key={printer.id} value={printer.id}>
+                  {printer.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="discount"
+            className="block text-sm font-medium text-gray-600"
           >
-            {bookers.map((booker) => (
-              <option key={booker.id} value={booker.id}>
-                {booker.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="input-group">
-          <label htmlFor="printer" className="mb-2 block text-sm font-medium">
-            Printer
+            Kedvezmény
           </label>
+          <input type="number" name="discount" className="input-group-text" />
         </div>
-        <div className="input-group mb-5 ">
-          <select
-            name="printerId"
-            id="printer"
-            defaultValue=""
-            className="input-group-text col-7"
-          >
-            {printers.map((printer) => (
-              <option key={printer.id} value={printer.id}>
-                {printer.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="input-group">
-          <label htmlFor="discount">Kedvezmény:</label>
-        </div>
-        <div className="input-group mb-4">
-          <input
-            type="number"
-            name="discount"
-            className="input-group-text col-7"
-          />
-        </div>
-        <div className="mb-3">
-          <button type="submit" className="btn btn-outline-success ">
+        <div className="mb-4">
+          <button type="submit" className="btn btn-outline-success w-full">
             Mehet
           </button>
         </div>

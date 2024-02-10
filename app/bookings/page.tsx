@@ -18,6 +18,7 @@ const BookingsPage = async ({
   return (
     <div className=" py-5 my-4 row justify-content-evenly">
       <div className="col row-auto text-center">
+      <h3>Szerződések</h3>
         <Search placeholder="ügyfél neve vagy email-címe..." />
         <Suspense key={query + currentPage} fallback={""}>
           <BookingsTable query={query} currentPage={currentPage} />

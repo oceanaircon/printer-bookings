@@ -8,9 +8,9 @@ const ServicesPage = async () => {
   const services = await prisma.service.findMany();
 
   return (
-    <div className="my-3 py-5">
+    <div className="my-4 py-5">
       <div className="table-responsive text-center">
-      <h3>Hibák</h3>
+        <h3>Hibák</h3>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -34,8 +34,14 @@ const ServicesPage = async () => {
                 <th>{service.id}</th>
                 <td>{service.name}</td>
                 <td>
-                  <UpdateService id={service.id}></UpdateService>
-                  <DeleteService id={service.id}></DeleteService>
+                  <div className="row container">
+                    <div className="col-6">
+                      <UpdateService id={service.id}></UpdateService>
+                    </div>
+                    <div className="col-6">
+                      <DeleteService id={service.id}></DeleteService>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}

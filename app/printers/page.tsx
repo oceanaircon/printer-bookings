@@ -18,14 +18,7 @@ const PrintersPage = async ({
   return (
     <div className="my-4 py-5 text-center">
       <h3>Printerek</h3>
-      <Link href="/categories">
-        <p>Printer kategóriák</p>
-      </Link>
-      <Link href="/printers/new">
-        <p>Új printer</p>
-      </Link>
-
-      <Search placeholder="printer neve vagy szériaszáma..." />
+      <Search placeholder="printer neve vagy cikkszáma..." />
       <Suspense key={query + currentPage} fallback={""}>
         <PrintersTable query={query} currentPage={currentPage} />
       </Suspense>

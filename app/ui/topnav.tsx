@@ -33,8 +33,9 @@ function Topnav() {
             <Nav.Link href="/printers">Printerek</Nav.Link>
             <Nav.Link href="/worksheets">Munkalapok</Nav.Link>
             <Nav.Link href="/services">Hibák</Nav.Link>
+            <Nav.Link href="/categories">Kategóriák</Nav.Link>
           </Nav>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton afterSignOutUrl="/"/>
         </Navbar.Collapse>
       </Container>
     </Navbar>

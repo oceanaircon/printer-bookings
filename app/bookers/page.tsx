@@ -17,6 +17,7 @@ const BookersPage = async ({
 
   return (
     <div className="my-4 py-5 text-center">
+      <h3>Ügyfelek</h3>
       <Search placeholder="ügyfél neve, címe vagy email-címe..." />
       <Suspense key={query + currentPage} fallback={""}>
         <BookersTable query={query} currentPage={currentPage} />

@@ -251,6 +251,7 @@ export async function fetchFilteredBookers(query: string, currentPage: number) {
   }
 }
 
+
 export async function fetchFilteredPrinters(
   query: string,
   currentPage: number
@@ -289,6 +290,93 @@ export async function fetchFilteredPrinters(
     throw new Error("Hiba a lekérdezésben.");
   }
 }
+
+export async function fetchFilteredWorksheets(
+  query: string,
+  currentPage: number
+) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const worksheets = await prisma.worksheet.findMany({  
+      select: {
+        id: true,
+        errorReportingTime: true,
+        repairDeadline: true,
+        booking: { 
+          select:{
+            booker:{
+              select:{
+                name: true,
+                email: true,
+                address: true,
+                phone: true,
+              },
+            },
+            printer: {
+              select: {
+                name: true,
+                serial: true,
+                category: {
+                  select: {
+                    fee: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        service: {
+          select: {
+            name: true,
+          }
+          
+        },
+        status: true,
+      },
+            where: {
+        OR: [
+          {
+            booking: {
+              booker: {
+                name: {
+                  contains: query
+                }
+              }
+            }
+          },
+          
+          {
+            booking: {
+              printer: {
+                name: {
+                  contains: query
+                }
+              }
+            }
+          },
+          {
+            service: {
+              name: {
+                contains: query
+              }
+            }
+          }
+        ]
+      },
+
+
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+    return worksheets
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Hiba a lekérdezésben.");
+  }
+}
+
 
 export async function fetchCardData() {
   try {

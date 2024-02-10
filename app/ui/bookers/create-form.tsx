@@ -2,22 +2,26 @@ import { createBooker } from "@/app/lib/actions";
 
 export default function Form() {
   return (
-    <div className="container mx-auto">
+    <div className="container py-5 my-5 mx-auto text-center">
       <form
-        className="py-4 my-5"
+        className="container mx-auto p-4 bg-white shadow-md rounded-md text-center"
         action={createBooker}
         style={{
           maxWidth: "400px",
           margin: "auto",
           background: "white",
-          padding: "20px",
+          padding: "40px",
           borderRadius: "10px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
+        <h3 className="mb-4">Ügyfél létrehozása</h3>
         <div className="mb-3">
           <label htmlFor="name" className="block text-sm font-medium">
-            Név:
+            Név
           </label>
           <input
             type="text"
@@ -27,7 +31,7 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="address" className="block text-sm font-medium">
-            Cím:
+            Cím
           </label>
           <input
             type="text"
@@ -37,7 +41,7 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="taxnumber" className="block text-sm font-medium">
-            Adószám:
+            Adószám
           </label>
           <input
             type="text"
@@ -47,7 +51,7 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="phone" className="block text-sm font-medium">
-            Telefon:
+            Telefon
           </label>
           <input
             type="text"
@@ -57,12 +61,12 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="block text-sm font-medium">
-            Email:
+            Email
           </label>
           <input
             type="email"
             name="email"
-            className="input-group-text w-full border"
+            className="input-group-text w-full border mb-3"
           />
         </div>
         <div className="mb-3 text-center">

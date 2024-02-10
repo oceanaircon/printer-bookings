@@ -52,14 +52,12 @@ export default async function BookingsTable({
                 <NewWorksheetButton id={booking.id} />
               </td>
               <td>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-6">
-                      <UpdateBooking id={booking.id}></UpdateBooking>
-                    </div>
-                    <div className="col-6">
-                      <DeleteBooking id={booking.id}></DeleteBooking>
-                    </div>
+                <div className="container row">
+                  <div className="col-6">
+                    <UpdateBooking id={booking.id}></UpdateBooking>
+                  </div>
+                  <div className="col-6">
+                    <DeleteBooking id={booking.id}></DeleteBooking>
                   </div>
                 </div>
               </td>

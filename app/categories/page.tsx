@@ -10,6 +10,7 @@ const CategoriesPage = async () => {
   return (
     <div className="my-4 py-5">
       <div className="table-responsive text-center">
+        <h3>Kategóriák</h3>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -34,8 +35,14 @@ const CategoriesPage = async () => {
                 <th>{category.name}</th>
                 <td>{category.fee}</td>
                 <td>
-                  <UpdateCategory id={category.id}></UpdateCategory>
-                  <DeleteCategory id={category.id}></DeleteCategory>
+                  <div className="container row">
+                    <div className="col-6">
+                      <UpdateCategory id={category.id}></UpdateCategory>
+                    </div>
+                    <div className="col-6">
+                      <DeleteCategory id={category.id}></DeleteCategory>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}
