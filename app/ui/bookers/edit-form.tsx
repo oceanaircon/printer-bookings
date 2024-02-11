@@ -68,9 +68,21 @@ export default function Form({ booker }: { booker: BookerField }) {
           className="input-group-text mb-5"
           defaultValue={booker.email}
         />
-        <button type="submit" className="btn btn-outline-success w-full">
-          Mehet
-        </button>
+        <div className="mb-3 d-flex justify-content-between">
+          <input
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          />
+          <a
+            href="/bookers"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
+          </div>
       </form>
     </div>
   );

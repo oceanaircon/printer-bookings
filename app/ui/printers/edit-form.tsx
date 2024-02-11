@@ -128,9 +128,21 @@ export default function Form({
             </div>
           </fieldset>
         </div>
-        <button type="submit" className="btn btn-outline-success mt-3">
-          Mehet
-        </button>
+        <div className="mb-3 d-flex justify-content-between">
+          <input
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          />
+          <a
+            href="/printers"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
+        </div>
       </form>
     </div>
   );

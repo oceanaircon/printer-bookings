@@ -69,12 +69,20 @@ export default function Form() {
             className="input-group-text w-full border mb-3"
           />
         </div>
-        <div className="mb-3 text-center">
+        <div className="mb-3 d-flex justify-content-between">
           <input
             type="submit"
             value="Mehet"
-            className="btn btn-outline-success w-full"
+            className="btn btn-outline-success"
           />
+          <a
+            href="/bookers"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
         </div>
       </form>
     </div>

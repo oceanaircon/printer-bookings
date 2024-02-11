@@ -83,10 +83,20 @@ export default function Form({
           </label>
           <input type="number" name="discount" className="input-group-text" />
         </div>
-        <div className="mb-4">
-          <button type="submit" className="btn btn-outline-success w-full">
-            Mehet
-          </button>
+        <div className="mb-3 d-flex justify-content-between">
+          <input
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          />
+          <a
+            href="/bookings"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
         </div>
       </form>
     </div>
