@@ -94,7 +94,7 @@ export default function Form({
             />
           </div>
 
-          <div className="mb-3 d-flex justify-content-between">
+          <div className="mb-3 justify-content-between">
             <input
               type="submit"
               value="Mehet"
@@ -104,7 +104,7 @@ export default function Form({
               href="/bookings"
               type="button"
               className="btn btn-outline-danger"
-              style={{ marginLeft: "10px" }} 
+              style={{ marginLeft: "10px" }}
             >
               Mégse
             </a>
