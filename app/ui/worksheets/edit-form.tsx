@@ -11,89 +11,139 @@ export default function Form({
   const updateWorksheetById = updateWorksheet.bind(null, worksheet.id);
 
   return (
-    <form action={updateWorksheetById}>
-      <div>
-        {/* Booking ID */}
-        <div className="mb-4">
-          <label htmlFor="customer">Választott szerződés:</label>
-          <div>
-            <select id="booking" name="bookingId" value={worksheet.bookingId}>
-              <option value={worksheet.bookingId}>{worksheet.bookingId}</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Service ID */}
-        <div className="mb-4">
-          <label htmlFor="customer">Válassz hibát</label>
-          <div>
-            <select
-              id="service"
-              name="serviceId"
-              defaultValue={worksheet.serviceId}
+    <div className="container py-5 my-5 mx-auto text-center">
+      <form
+        action={updateWorksheetById}
+        className="container mx-auto bg-white shadow-md rounded-md text-center"
+        style={{
+          maxWidth: "400px",
+          margin: "auto",
+          background: "white",
+          padding: "40px",
+          borderRadius: "10px",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h3 className="mb-4">Munkalap szerkesztése</h3>
+        <div className="mb-3 justify-center">
+          {/* Booking ID */}
+          <div className="mb-4">
+            <label
+              htmlFor="customer"
+              className="justify-content-center text-center"
             >
-              {services.map((service) => (
-                <option key={service.id} value={service.id}>
-                  {service.name}
+              Választott szerződés:
+            </label>
+            <div>
+              <select
+                id="booking"
+                name="bookingId"
+                className="form-control text-center"
+              >
+                <option value={worksheet.bookingId}>
+                  {worksheet.bookingId}
                 </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <br />
-        <div>
-          <label htmlFor="repairDeadline">Határidő:</label>
-          <input
-            type="datetime"
-            name="repairDeadline"
-            defaultValue={worksheet.repairDeadline}
-          ></input>
-        </div>
-
-        {/* Status */}
-        <fieldset>
-          <legend className="mb-2 block text-sm font-medium">Állapot</legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
-            <div className="flex gap-4">
-              <div className="flex items-center">
-                <input
-                  id="FOLYAMATBAN"
-                  name="status"
-                  type="radio"
-                  value="FOLYAMATBAN"
-                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
-                  defaultChecked={worksheet.status === "FOLYAMATBAN"}
-                />
-                <label
-                  htmlFor="FOLYAMATBAN"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
-                >
-                  FOLYAMATBAN {/*<ClockIcon className="h-4 w-4" />*/}
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  id="BEFEJEZETT"
-                  name="status"
-                  type="radio"
-                  value="BEFEJEZETT"
-                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
-                  defaultChecked={worksheet.status === "BEFEJEZETT"}
-                />
-                <label
-                  htmlFor="BEFEJEZETT"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-gray-600"
-                >
-                  BEFEJEZETT {/*<CheckIcon className="h-4 w-4" />*/}
-                </label>
-              </div>
+              </select>
             </div>
           </div>
-        </fieldset>
-      </div>
-      <div>
-        <button type="submit">Mehet</button>
-      </div>
-    </form>
+
+          {/* Service ID */}
+          <div className="mb-4">
+            <label htmlFor="customer">Válassz hibát</label>
+            <div className="input-group">
+              <select
+                id="service"
+                name="serviceId"
+                className="input-group-text"
+                defaultValue={worksheet.serviceId}
+              >
+                {services.map((service) => (
+                  <option key={service.id} value={service.id}>
+                    {service.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div>
+            <label htmlFor="repairDeadline">Határidő:</label>
+          </div>
+          <div>
+            <input
+              type="datetime"
+              name="repairDeadline"
+              className="input-group-text mb-3"
+              defaultValue={worksheet.repairDeadline}
+            ></input>
+          </div>
+
+          {/* Status */}
+          <fieldset>
+            <div>
+              <legend className="form-label">Állapot</legend>
+              <div
+                className="py-3 input-group-text mb-2"
+                style={{
+                  maxWidth: "400px",
+                  margin: "auto",
+                  background: "white",
+                  padding: "20px",
+                  borderRadius: "10px",
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div className="form-check">
+                  <input
+                    id="FOLYAMATBAN"
+                    name="status"
+                    type="radio"
+                    value="FOLYAMATBAN"
+                    className="form-check-input"
+                    defaultChecked={worksheet.status === "FOLYAMATBAN"}
+                  />
+                  <label htmlFor="FOLYAMATBAN" className="form-check-label">
+                    FOLYAMATBAN {/*<ClockIcon className="h-4 w-4" />*/}
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    id="BEFEJEZETT"
+                    name="status"
+                    type="radio"
+                    value="BEFEJEZETT"
+                    className="form-check-input"
+                    defaultChecked={worksheet.status === "BEFEJEZETT"}
+                  />
+                  <label htmlFor="BEFEJEZETT" className="form-check-label ml-2">
+                    BEFEJEZETT {/*<CheckIcon className="h-4 w-4" />*/}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div className="mb-3 d-flex justify-content-between">
+          <input
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          />
+          <a
+            href="/worksheets"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
+        </div>
+      </form>
+    </div>
   );
 }

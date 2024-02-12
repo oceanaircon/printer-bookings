@@ -9,75 +9,126 @@ export default function Form({
   services: ServiceField[];
 }) {
   return (
-    <form action={createWorksheet}>
-      <div>
-        {/* Booking ID */}
-        <div className="mb-4">
-          <label htmlFor="customer">Választott szerződés:</label>
-          <div>
-            <select id="booking" name="bookingId" value={booking.id}>
+    <div className="container py-5 my-5 mx-auto text-center">
+      <form
+        action={createWorksheet}
+        className="container mx-auto bg-white shadow-md rounded-md text-center "
+        style={{
+          maxWidth: "400px",
+          margin: "auto",
+          background: "white",
+          padding: "40px",
+          borderRadius: "10px",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h3 className="mb-4">Új munkalap</h3>
+        <div className="justify-content-center">
+          {/* Booking ID */}
+          <div className="mb-4">
+            <label htmlFor="customer">Választott szerződés</label>
+            <select
+              id="booking"
+              name="bookingId"
+              value={booking.id}
+              className="form-control col-3"
+              style={{ textAlign: "center" }}
+            >
               <option value={booking.id}>{booking.id}</option>
             </select>
           </div>
-        </div>
 
-        {/* Service ID */}
-        <div className="mb-4">
-          <label htmlFor="customer">Válassz hibát</label>
-          <div>
-            <select id="service" name="serviceId">
-              {services.map((service) => (
-                <option key={service.id} value={service.id}>
-                  {service.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Status */}
-        <fieldset>
-          <legend className="mb-2 block text-sm font-medium">Állapot</legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
-            <div className="flex gap-4">
-              <div className="flex items-center">
-                <input
-                  id="FOLYAMATBAN"
-                  name="status"
-                  type="radio"
-                  value="FOLYAMATBAN"
-                  checked
-                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
-                />
-                <label
-                  htmlFor="FOLYAMATBAN"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
-                >
-                  FOLYAMATBAN {/*<ClockIcon className="h-4 w-4" />*/}
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  id="BEFEJEZETT"
-                  name="status"
-                  type="radio"
-                  value="BEFEJEZETT"
-                  className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
-                />
-                <label
-                  htmlFor="BEFEJEZETT"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-gray-600"
-                >
-                  BEFEJEZETT {/*<CheckIcon className="h-4 w-4" />*/}
-                </label>
-              </div>
+          {/* Service ID */}
+          <div className="mb-4">
+            <label htmlFor="customer">Válassz hibát</label>
+            <div className="input-group">
+              <select
+                id="service"
+                name="serviceId"
+                className="input-group-text"
+              >
+                {services.map((service) => (
+                  <option key={service.id} value={service.id}>
+                    {service.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-        </fieldset>
-      </div>
-      <div>
-        <button type="submit">Mehet</button>
-      </div>
-    </form>
+
+          {/* Status */}
+          <fieldset>
+            <div className="input-group ">
+              <legend>Állapot</legend>
+            </div>
+            <div
+              className="py-3 input-group-text mb-3"
+              style={{
+                maxWidth: "300px",
+                margin: "auto",
+                background: "white",
+                padding: "20px",
+                borderRadius: "10px",
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div>
+                <div>
+                  <input
+                    id="FOLYAMATBAN"
+                    name="status"
+                    type="radio"
+                    value="FOLYAMATBAN"
+                    checked
+                    className="mb-3 h-3 w-3 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2 form-check-input mt-0"
+                  />
+                  <label
+                    htmlFor="FOLYAMATBAN"
+                    className="ml-2 flex cursor-pointer gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
+                  >
+                    FOLYAMATBAN {/*<ClockIcon className="h-4 w-4" />*/}
+                  </label>
+                </div>
+                <div>
+                  <input
+                    id="BEFEJEZETT"
+                    name="status"
+                    type="radio"
+                    value="BEFEJEZETT"
+                    className="h-3 w-3 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2 form-check-input mt-0"
+                  />
+                  <label
+                    htmlFor="BEFEJEZETT"
+                    className="ml-2 flex cursor-pointergap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-black"
+                  >
+                    BEFEJEZETT {/*<CheckIcon className="h-4 w-4" />*/}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div className="mb-3 d-flex justify-content-between">
+          <input
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          />
+          <a
+            href="/bookings"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
+        </div>
+      </form>
+    </div>
   );
 }

@@ -8,18 +8,24 @@ const CategoriesPage = async () => {
   const categories = await prisma.category.findMany();
 
   return (
-    <div className="my-3">
-      <div className="py-5">
+    <div className="my-4 py-5">
+      <div className="table-responsive text-center">
         <h3>Kategóriák</h3>
-        <Link href="/categories/new">
-          <p>Új kategória</p>
-        </Link>
-        <table>
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
               <th>Név</th>
               <th>Díj</th>
+              <th>
+                <a
+                  href="/categories/new"
+                  className=" btn btn-secondary btn-sm"
+                  aria-current="page"
+                >
+                  Új kategória
+                </a>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -29,8 +35,14 @@ const CategoriesPage = async () => {
                 <th>{category.name}</th>
                 <td>{category.fee}</td>
                 <td>
-                  <UpdateCategory id={category.id}></UpdateCategory>
-                  <DeleteCategory id={category.id}></DeleteCategory>
+                  <div className="container row">
+                    <div className="col-6">
+                      <UpdateCategory id={category.id}></UpdateCategory>
+                    </div>
+                    <div className="col-6">
+                      <DeleteCategory id={category.id}></DeleteCategory>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}
