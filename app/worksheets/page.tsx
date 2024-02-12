@@ -1,9 +1,8 @@
 import React from "react";
-import prisma from "@/prisma/client";
-import { revalidatePath } from "next/cache";
-import { updateWorksheetStatus } from "../lib/data";
+import Pagination from "@/app/ui/worksheets/pagination";
 import Search from "../ui/search";
 import { Suspense } from "react";
+import { fetchWorksheetPages } from "@/app/lib/data";
 import WorksheetsTable from "../ui/worksheets/worksheetsTable";
 
 const WorksheetsPage = async ({
@@ -17,6 +16,8 @@ const WorksheetsPage = async ({
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
+  const totalPages = await fetchWorksheetPages(query);
+
   return (
     <div className="my-4 py-5 text-center">
       <h3>Munkalapok</h3>
@@ -24,6 +25,11 @@ const WorksheetsPage = async ({
       <Suspense key={query + currentPage} fallback={""}>
         <WorksheetsTable query={query} currentPage={currentPage} />
       </Suspense>
+
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
+
     </div>
   );
 };
