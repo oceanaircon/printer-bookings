@@ -23,6 +23,7 @@ export default function Form({ service }: { service: ServiceField }) {
       >
         <h3 className="mb-5">Hiba szerkesztése</h3>
         <input type="hidden" name="id" value={service.id} />
+
         <div className="justify-content-center text-center">
           <label htmlFor="name">Hiba leírása</label>
         </div>
