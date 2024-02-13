@@ -263,6 +263,7 @@ export async function fetchFilteredBookers(query: string, currentPage: number) {
   }
 }
 
+
 export async function fetchFilteredPrinters(
   query: string,
   currentPage: number
@@ -313,7 +314,9 @@ export async function fetchFilteredWorksheets(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
+
     const worksheets = await prisma.worksheet.findMany({
+
       select: {
         id: true,
         errorReportingTime: true,
@@ -359,7 +362,6 @@ export async function fetchFilteredWorksheets(
               },
             },
           },
-
           {
             booking: {
               printer: {
