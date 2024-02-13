@@ -29,7 +29,7 @@ export default function Form({
         <div className="mb-4">
           <div>
             <label
-              htmlFor="booker"
+              htmlFor="bookerId"
               className="block text-sm font-medium text-gray-600 input-group justify-content-center"
             >
               Ügyfél
@@ -53,7 +53,7 @@ export default function Form({
         <div>
           <div>
             <label
-              htmlFor="printer"
+              htmlFor="printerId"
               className="block text-sm font-medium text-gray-600"
             >
               Printer
