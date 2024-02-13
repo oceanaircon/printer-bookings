@@ -56,6 +56,7 @@ export default function Form({
           <input
             type="text"
             name="serial"
+            id="serial"
             className="input-group-text"
             defaultValue={printer.serial}
           />
@@ -69,6 +70,7 @@ export default function Form({
           <input
             type="text"
             name="name"
+            id="name"
             className="input-group-text"
             defaultValue={printer.name}
           />
@@ -82,6 +84,7 @@ export default function Form({
           <input
             type="text"
             name="description"
+            id="description"
             defaultValue={printer.description}
             className="input-group-text mb-3"
           />

@@ -24,15 +24,14 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }, 300);
 
   return (
-    <div
-      className="input-group mb-3"
-      id="inputGroup-sizing-default">
+    <div className="input-group mb-3" id="inputGroup-sizing-default">
       <label htmlFor="search" className="sr-only">
         <span className="input-group-text">Keresés:</span>
       </label>
       &nbsp;&nbsp;
       <input
         type="text"
+        id="search"
         className=" form-control"
         placeholder={placeholder}
         onChange={(e) => {

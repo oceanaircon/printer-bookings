@@ -55,6 +55,7 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
             <input
               type="text"
               name="serial"
+              id="serial"
               className="input-group-text mb-3"
             />
           </div>
@@ -81,6 +82,7 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
             <input
               type="text"
               name="description"
+              id="description"
               className="input-group-text"
             />
           </div>

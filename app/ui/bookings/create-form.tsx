@@ -29,7 +29,7 @@ export default function Form({
         <div className="mb-4">
           <div>
             <label
-              htmlFor="bookerId"
+              htmlFor="booker"
               className="block text-sm font-medium text-gray-600 input-group justify-content-center"
             >
               Ügyfél
@@ -53,7 +53,7 @@ export default function Form({
         <div>
           <div>
             <label
-              htmlFor="printerId"
+              htmlFor="printer"
               className="block text-sm font-medium text-gray-600"
             >
               Printer
@@ -81,7 +81,12 @@ export default function Form({
           >
             Kedvezmény
           </label>
-          <input type="number" name="discount" className="input-group-text" />
+          <input
+            type="number"
+            name="discount"
+            id="discount"
+            className="input-group-text"
+          />
         </div>
         <div className="mb-3 d-flex justify-content-between">
           <input
