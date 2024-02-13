@@ -1,5 +1,5 @@
 import React from "react";
-import Pagination from "@/app/ui/worksheets/pagination";
+import Pagination from "@/app/ui/pagination";
 import Search from "../ui/search";
 import { Suspense } from "react";
 import { fetchWorksheetPages } from "@/app/lib/data";
@@ -25,8 +25,7 @@ const WorksheetsPage = async ({
       <Suspense key={query + currentPage} fallback={""}>
         <WorksheetsTable query={query} currentPage={currentPage} />
       </Suspense>
-
-      <div className="mt-5 flex w-full justify-center">
+      <div className="mt-1 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
       </div>
 
