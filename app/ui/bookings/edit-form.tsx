@@ -89,6 +89,7 @@ export default function Form({
             <input
               type="number"
               name="discount"
+              id="discount"
               defaultValue={booking.discount}
               className="input-group-text"
             />

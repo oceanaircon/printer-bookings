@@ -21,7 +21,7 @@ export default async function BookingsTable({
             <th>Név</th>
             <th>Email</th>
             <th>Printer</th>
-            <th>Serial</th>
+            <th>Cikkszám</th>
             <th>Díj</th>
             <th>Start</th>
             <th>Kedvezmény</th>

@@ -36,20 +36,20 @@ export default function Form() {
           />
         </div>
         <div className="mb-3 d-flex justify-content-between">
-            <input
-              type="submit"
-              value="Mehet"
-              className="btn btn-outline-success"
-            />
-            <a
-              href="/categories"
-              type="button"
-              className="btn btn-outline-danger"
-              style={{ marginLeft: "10px" }}
-            >
-              Mégse
-            </a>
-            </div>
+          <input
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          />
+          <a
+            href="/categories"
+            type="button"
+            className="btn btn-outline-danger"
+            style={{ marginLeft: "10px" }}
+          >
+            Mégse
+          </a>
+        </div>
       </form>
     </div>
   );

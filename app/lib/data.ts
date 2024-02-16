@@ -7,6 +7,10 @@ import {
 } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
+// darab / oldal *********************************************************
+
+const ITEMS_PER_PAGE = 8;
+
 // kategóriák betöltése új printer létrehozásához
 
 export async function loadCategories() {
@@ -125,7 +129,8 @@ export async function fetchWorksheetById(id: number) {
   return worksheet as any;
 }
 
-const ITEMS_PER_PAGE = 8;
+// a kereséshez és a táblázatban való megjelenítéshez szükséges lekérdezések **************
+
 export async function fetchFilteredBookings(
   query: string,
   currentPage: number
@@ -185,6 +190,13 @@ export async function fetchFilteredBookings(
           {
             booker: {
               email: {
+                contains: query,
+              },
+            },
+          },
+          {
+            printer: {
+              serial: {
                 contains: query,
               },
             },
@@ -283,6 +295,9 @@ export async function fetchFilteredPrinters(
           },
         ],
       },
+
+      take: ITEMS_PER_PAGE,
+      skip: offset,
     });
     return printers;
   } catch (error) {
@@ -299,15 +314,17 @@ export async function fetchFilteredWorksheets(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-    const worksheets = await prisma.worksheet.findMany({  
+
+    const worksheets = await prisma.worksheet.findMany({
+
       select: {
         id: true,
         errorReportingTime: true,
         repairDeadline: true,
-        booking: { 
-          select:{
-            booker:{
-              select:{
+        booking: {
+          select: {
+            booker: {
+              select: {
                 name: true,
                 email: true,
                 address: true,
@@ -330,53 +347,51 @@ export async function fetchFilteredWorksheets(
         service: {
           select: {
             name: true,
-          }
-          
+          },
         },
         status: true,
       },
-            where: {
+      where: {
         OR: [
           {
             booking: {
               booker: {
                 name: {
-                  contains: query
-                }
-              }
-            }
+                  contains: query,
+                },
+              },
+            },
           },
-          
           {
             booking: {
               printer: {
                 name: {
-                  contains: query
-                }
-              }
-            }
+                  contains: query,
+                },
+              },
+            },
           },
           {
             service: {
               name: {
-                contains: query
-              }
-            }
-          }
-        ]
+                contains: query,
+              },
+            },
+          },
+        ],
       },
-
 
       take: ITEMS_PER_PAGE,
       skip: offset,
     });
-    return worksheets
+    return worksheets;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Hiba a lekérdezésben.");
   }
 }
 
+// FŐOLDALI KÁRTYÁK ************************************************************
 
 export async function fetchCardData() {
   try {
@@ -440,4 +455,149 @@ export async function updateWorksheetStatus() {
       });
     }
   });
+}
+
+// LAPOZÁS **********************************************************************
+
+export async function fetchWorksheetPages(query: string) {
+  noStore();
+  try {
+    const count = await prisma.worksheet.count({
+      where: {
+        OR: [
+          {
+            booking: {
+              booker: {
+                name: {
+                  contains: query,
+                },
+              },
+            },
+          },
+
+          {
+            booking: {
+              printer: {
+                name: {
+                  contains: query,
+                },
+              },
+            },
+          },
+          {
+            service: {
+              name: {
+                contains: query,
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Nem sikerült megszámolni az oldalakat.");
+  }
+}
+
+export async function fetchBookerPages(query: string) {
+  noStore();
+  try {
+    const count = await prisma.booker.count({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: query,
+            },
+          },
+          {
+            address: {
+              contains: query,
+            },
+          },
+          {
+            email: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Nem sikerült megszámolni az oldalakat.");
+  }
+}
+
+export async function fetchBookingPages(query: string) {
+  noStore();
+  try {
+    const count = await prisma.booking.count({
+      where: {
+        OR: [
+          {
+            booker: {
+              name: {
+                contains: query,
+              },
+            },
+          },
+          {
+            booker: {
+              email: {
+                contains: query,
+              },
+            },
+          },
+          {
+            printer: {
+              serial: {
+                contains: query,
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Nem sikerült megszámolni az oldalakat.");
+  }
+}
+
+export async function fetchPrinterPages(query: string) {
+  try {
+    const count = await prisma.printer.count({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: query,
+            },
+          },
+          {
+            serial: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Nem sikerült megszámolni az oldalakat.");
+  }
 }

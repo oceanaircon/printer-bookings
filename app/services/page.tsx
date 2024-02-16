@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import prisma from "@/prisma/client";
 import { DeleteService } from "../ui/deletebuttons";
 import { UpdateService } from "../ui/buttons";

@@ -412,7 +412,7 @@ export async function deleteService(id: number) {
     await prisma.service.delete({ where: { id: id } });
   } catch (error) {
     return {
-      message: "Nem sikerült törölni a szervízt.",
+      message: "Nem sikerült törölni a hibát.",
     };
   }
   revalidatePath("/service");
