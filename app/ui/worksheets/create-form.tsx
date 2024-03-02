@@ -1,5 +1,7 @@
+"use client";
 import { BookingField, ServiceField } from "@/app/lib/definitions";
 import { createWorksheet } from "@/app/lib/actions";
+import React, { useState } from "react";
 
 export default function Form({
   booking,
@@ -8,10 +10,23 @@ export default function Form({
   booking: BookingField;
   services: ServiceField[];
 }) {
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
+
+  const disableButton = () => {
+    setButtonDisabled(true);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    createWorksheet(formData)
+    disableButton();
+  }
+
   return (
     <div className="container py-5 my-5 mx-auto text-center">
       <form
-        action={createWorksheet}
+      onSubmit={handleSubmit}
         className="container mx-auto bg-white shadow-md rounded-md text-center "
         style={{
           maxWidth: "400px",
@@ -114,11 +129,14 @@ export default function Form({
           </fieldset>
         </div>
         <div className="mb-3 d-flex justify-content-between">
-          <input
+          <button
+            disabled={isButtonDisabled}
             type="submit"
             value="Mehet"
             className="btn btn-outline-success"
-          />
+          >
+            Mehet
+          </button>
           <a
             href="/bookings"
             type="button"

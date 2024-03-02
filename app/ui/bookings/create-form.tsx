@@ -1,7 +1,7 @@
 "use client";
 import { BookerField, PrinterField } from "@/app/lib/definitions";
 import { createBooking } from "@/app/lib/actions";
-import { useState } from "react";
+import React ,{ useState } from "react";
 
 export default function Form({
   bookers,
@@ -23,11 +23,24 @@ export default function Form({
     }
   };
 
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
+
+  const disableButton = () => {
+    setButtonDisabled(true);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    createBooking(formData)
+    disableButton();
+  }
+
   return (
     <div className="container py-5 my-5 mx-auto text-center">
       <form
+      onSubmit={handleSubmit}
         className="container mx-auto p-4 bg-white shadow-md rounded-md text-center"
-        action={createBooking}
         style={{
           maxWidth: "400px",
           margin: "auto",
@@ -127,11 +140,14 @@ export default function Form({
           />
         </div>
         <div className="mb-3 d-flex justify-content-between">
-          <input
+        <button
+            disabled={isButtonDisabled}
             type="submit"
             value="Mehet"
             className="btn btn-outline-success"
-          />
+          >
+            Mehet
+          </button>
           <a
             href="/bookings"
             type="button"

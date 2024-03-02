@@ -1,6 +1,36 @@
+"use client";
 import { createCategory } from "@/app/lib/actions";
+import React, { useState } from "react";
 
 export default function Form() {
+  const [isButtonDisabled, setButtonDisabled] = useState(true);
+
+  const [formData, setFormData] = useState({
+    name: "",
+  });
+
+  const disableButton = () => {
+    setButtonDisabled(true);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    createCategory(formData);
+    disableButton();
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    const isAnyFieldEmpty = Object.values(formData).some(
+      (field) => field === ""
+    );
+    setButtonDisabled(isAnyFieldEmpty);
+  };
   return (
     <div className="container py-5 my-5 mx-auto text-center">
       <form
@@ -23,7 +53,12 @@ export default function Form() {
           <label htmlFor="name">Név</label>
         </div>
         <div>
-          <input type="text" name="name" className="input-group-text mb-4" />
+          <input
+            type="text"
+            name="name"
+            className="input-group-text mb-4"
+            onChange={handleInputChange}
+          />
         </div>
         <div>
           <label htmlFor="fee">Díj</label>
@@ -36,11 +71,14 @@ export default function Form() {
           />
         </div>
         <div className="mb-3 d-flex justify-content-between">
-          <input
+          <button
+            disabled={isButtonDisabled}
             type="submit"
             value="Mehet"
             className="btn btn-outline-success"
-          />
+          >
+            Mehet
+          </button>
           <a
             href="/categories"
             type="button"
