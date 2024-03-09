@@ -2,6 +2,7 @@ import React from "react";
 import { NewWorksheetButton, UpdateBooking } from "../buttons";
 import { DeleteBooking } from "../deletebuttons";
 import { fetchFilteredBookings } from "../../lib/data";
+import '../custom.scss'
 
 export default async function BookingsTable({
   query,
@@ -13,7 +14,6 @@ export default async function BookingsTable({
   const bookings = await fetchFilteredBookings(query, currentPage);
 
   return (
-    <div className="table-responsive">
       <table className="table table-hover">
         <thead>
           <tr>
@@ -40,23 +40,23 @@ export default async function BookingsTable({
         <tbody>
           {bookings?.map((booking) => (
             <tr key={booking.id}>
-              <th>{booking.id}</th>
-              <th>{booking.booker.name}</th>
-              <td>{booking.booker.email}</td>
-              <td>{booking.printer.name}</td>
-              <td>{booking.printer.serial}</td>
-              <td>{booking.printer.category.fee}</td>
-              <td>{booking.createdAt.toString().slice(0, 16)}</td>
-              <td>{booking.discount}</td>
+              <td data-label="ID">{booking.id}</td>
+              <td data-label="Név">{booking.booker.name}</td>
+              <td data-label="Email">{booking.booker.email}</td>
+              <td data-label="Printer">{booking.printer.name}</td>
+              <td data-label="Cikkszám">{booking.printer.serial}</td>
+              <td data-label="Díj">{booking.printer.category.fee}</td>
+              <td data-label="Start">{booking.createdAt.toString().slice(0, 16)}</td>
+              <td data-label="Kedvezmény">{booking.discount}</td>
               <td>
                 <NewWorksheetButton id={booking.id} />
               </td>
               <td>
                 <div className="container row">
-                  <div className="col-6">
+                  <div className=" justify-center">
                     <UpdateBooking id={booking.id}></UpdateBooking>
                   </div>
-                  <div className="col-6">
+                  <div>
                     <DeleteBooking id={booking.id}></DeleteBooking>
                   </div>
                 </div>
@@ -65,6 +65,5 @@ export default async function BookingsTable({
           ))}
         </tbody>
       </table>
-    </div>
   );
 }

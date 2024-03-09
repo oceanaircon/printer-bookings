@@ -2,6 +2,7 @@ import React from "react";
 import { UpdateBooker } from "../buttons";
 import { DeleteBooker } from "../deletebuttons";
 import { fetchFilteredBookers } from "../../lib/data";
+import '../custom.scss'
 
 export default async function BookersTable({
   query,
@@ -37,12 +38,12 @@ export default async function BookersTable({
         <tbody>
           {bookers?.map((booker) => (
             <tr key={booker.id}>
-              <th>{booker.id}</th>
-              <th>{booker.name}</th>
-              <td>{booker.email}</td>
-              <td>{booker.phone}</td>
-              <td>{booker.address}</td>
-              <td>{booker.taxnumber}</td>
+              <td data-label="ID">{booker.id}</td>
+              <td data-label="Név">{booker.name}</td>
+              <td data-label="Email">{booker.email}</td>
+              <td data-label="Telefon">{booker.phone}</td>
+              <td data-label="Cím">{booker.address}</td>
+              <td data-label="Adószám">{booker.taxnumber}</td>
               <td>
                 <div>
                 <div className="container">

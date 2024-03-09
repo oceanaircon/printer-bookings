@@ -2,6 +2,7 @@ import React from "react";
 import { UpdatePrinter } from "../buttons";
 import { DeletePrinter } from "../deletebuttons";
 import { fetchFilteredPrinters } from "../../lib/data";
+import '../custom.scss';
 
 export default async function PrintersTable({
   query,
@@ -38,12 +39,12 @@ export default async function PrintersTable({
         <tbody>
           {printers?.map((printer) => (
             <tr key={printer.id}>
-              <th>{printer.id}</th>
-              <th>{printer.serial}</th>
-              <td>{printer.name}</td>
-              <td>{printer.category.name}</td>
-              <td>{printer.description}</td>
-              <td>{printer.status}</td>
+              <td data-label="ID">{printer.id}</td>
+              <td data-label="Cikkszám">{printer.serial}</td>
+              <td data-label="Név">{printer.name}</td>
+              <td data-label="Kategória">{printer.category.name}</td>
+              <td data-label="Leírás">{printer.description}</td>
+              <td data-label="Állapot">{printer.status}</td>
               <td>
                 <div className="container">
                   <div className="row">
