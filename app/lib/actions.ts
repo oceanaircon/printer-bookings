@@ -13,11 +13,10 @@ import {
   updateWorksheetSchema,
 } from "./validationSchemas";
 
-export async function createUser(name: string, email: string, userid: string) {
+export async function createUser(email: string, userid: string) {
   try {
     await prisma.user.create({
       data: {
-        name: name,
         email: email,
         userId: userid,
       },
