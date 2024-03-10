@@ -1,5 +1,5 @@
 import { Webhook } from "svix";
-import { headers, cookies } from "next/headers";
+import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { createUser } from "@/app/lib/actions";
 
