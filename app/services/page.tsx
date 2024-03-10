@@ -3,6 +3,7 @@ import prisma from "@/prisma/client";
 import { DeleteService } from "../ui/deletebuttons";
 import { UpdateService } from "../ui/buttons";
 
+
 const ServicesPage = async () => {
   const services = await prisma.service.findMany();
 

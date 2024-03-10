@@ -1,11 +1,43 @@
+"use client";
 import { CategoryField } from "@/app/lib/definitions";
 import { createPrinter } from "@/app/lib/actions";
+import React, { useState } from "react";
 
 export default function Form({ categories }: { categories: CategoryField[] }) {
+  const [isButtonDisabled, setButtonDisabled] = useState(true);
+
+  const [formData, setFormData] = useState({
+    serial: "",
+    name: "",
+  });
+
+  const disableButton = () => {
+    setButtonDisabled(true);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    createPrinter(formData);
+    disableButton();
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    const isAnyFieldEmpty = Object.values(formData).some(
+      (field) => field === ""
+    );
+    setButtonDisabled(isAnyFieldEmpty);
+  };
+
   return (
     <div className="container py-5 my-5 mx-auto text-center">
       <form
-        action={createPrinter}
+        onSubmit={handleSubmit}
         className="container mx-auto bg-white shadow-md rounded-md text-center"
         style={{
           maxWidth: "400px",
@@ -57,6 +89,7 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
               name="serial"
               id="serial"
               className="input-group-text mb-3"
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -68,7 +101,12 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
             </label>
           </div>
           <div>
-            <input type="text" name="name" className="input-group-text" />
+            <input
+              type="text"
+              name="name"
+              className="input-group-text"
+              onChange={handleInputChange}
+            />
           </div>
         </div>
 
@@ -136,11 +174,14 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
         </fieldset>
         <div>
           <div className="mb-3 d-flex justify-content-between">
-            <input
-              type="submit"
-              value="Mehet"
-              className="btn btn-outline-success"
-            />
+          <button
+            disabled={isButtonDisabled}
+            type="submit"
+            value="Mehet"
+            className="btn btn-outline-success"
+          >
+            Mehet
+          </button>
             <a
               href="/printers"
               type="button"

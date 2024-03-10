@@ -391,6 +391,35 @@ export async function fetchFilteredWorksheets(
   }
 }
 
+
+export async function fetchFilteredServices(
+  query: string,
+  currentPage: number
+) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+
+    const services = await prisma.service.findMany({
+
+      select: {
+        id: true,
+        name: true,
+
+      },
+      where:  {
+        OR: [
+          {
+          name: {
+              contains: query,
+          }
+        }]}})
+     return services
+    } catch(error) {
+    console.error("Database Error:", error);
+    throw new Error("Hiba a lekérdezésben.");
+     }}
 // FŐOLDALI KÁRTYÁK ************************************************************
 
 export async function fetchCardData() {

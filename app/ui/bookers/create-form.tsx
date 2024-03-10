@@ -1,11 +1,47 @@
+"use client";
 import { createBooker } from "@/app/lib/actions";
+import React, { useState } from "react";
 
 export default function Form() {
+  const [isButtonDisabled, setButtonDisabled] = useState(true);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    taxnumber: "",
+    phone: "",
+    email: "",
+  });
+
+  const disableButton = () => {
+    setButtonDisabled(true);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    createBooker(formData);
+    disableButton();
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    const isAnyFieldEmpty = Object.values(formData).some(
+      (field) => field === ""
+    );
+    setButtonDisabled(isAnyFieldEmpty);
+
+  };
+
   return (
     <div className="container py-5 my-5 mx-auto text-center">
       <form
         className="container mx-auto p-4 bg-white shadow-md rounded-md text-center"
-        action={createBooker}
+        onSubmit={handleSubmit}
         style={{
           maxWidth: "400px",
           margin: "auto",
@@ -27,6 +63,7 @@ export default function Form() {
             type="text"
             name="name"
             className="input-group-text w-full border"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">
@@ -37,6 +74,7 @@ export default function Form() {
             type="text"
             name="address"
             className="input-group-text w-full border"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">
@@ -47,6 +85,7 @@ export default function Form() {
             type="text"
             name="taxnumber"
             className="input-group-text w-full border"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">
@@ -57,6 +96,7 @@ export default function Form() {
             type="text"
             name="phone"
             className="input-group-text w-full border"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">
@@ -67,14 +107,18 @@ export default function Form() {
             type="email"
             name="email"
             className="input-group-text w-full border mb-3"
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-3 d-flex justify-content-between">
-          <input
+          <button
+            disabled={isButtonDisabled}
             type="submit"
             value="Mehet"
             className="btn btn-outline-success"
-          />
+          >
+            Mehet
+          </button>
           <a
             href="/bookers"
             type="button"

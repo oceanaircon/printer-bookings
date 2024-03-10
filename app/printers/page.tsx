@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import PrintersTable from "../ui/printers/printersTable";
 import Pagination from "@/app/ui/pagination";
 import { fetchPrinterPages } from "../lib/data";
+import "../ui/custom.scss";
 
 const PrintersPage = async ({
   searchParams,
@@ -22,6 +23,13 @@ const PrintersPage = async ({
     <div className="my-4 py-5 text-center">
       <h3>Printerek</h3>
       <Search placeholder="printer neve vagy cikkszáma..." />
+      <a
+        href="/printers/new"
+        className="mobile-button"
+        aria-current="page"
+      >
+        Új printer
+      </a>
       <Suspense key={query + currentPage} fallback={""}>
         <PrintersTable query={query} currentPage={currentPage} />
       </Suspense>
