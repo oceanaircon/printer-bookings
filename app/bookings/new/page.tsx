@@ -8,11 +8,12 @@ export default async function NewBookingPage() {
 
   const user = await currentUser();
   const email = user?.emailAddresses[0].emailAddress;
-  const userid = (await getCurrentUserId(email as any)) as any;
+  const userid = await getCurrentUserId(email as any);
 
   return (
     <main>
-      <Form bookers={bookers} printers={printers} userid={userid} />
+      <h3>{userid as any}</h3>
+      <Form bookers={bookers} printers={printers} userid={userid as any} />
     </main>
   );
 }
