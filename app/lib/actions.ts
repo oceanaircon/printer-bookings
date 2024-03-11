@@ -12,7 +12,7 @@ import {
   createWorksheetSchema,
   updateWorksheetSchema,
 } from "./validationSchemas";
-import { currentUser } from "@clerk/nextjs";
+import { getCurrentUser } from "./data";
 
 export async function createUser(email: string, userid: string) {
   try {
@@ -133,15 +133,7 @@ export async function createBooking(formData: FormData) {
     discount: formData.get("discount"),
   });
 
-  const user = await currentUser();
-  const userid = await prisma.user.findFirst({
-    where: {
-      userId: user?.id,
-    },
-    select: {
-      id: true,
-    },
-  });
+  const userid = await getCurrentUser();
 
   try {
     await prisma.booking.create({
