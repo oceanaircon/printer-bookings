@@ -12,7 +12,7 @@ import {
   createWorksheetSchema,
   updateWorksheetSchema,
 } from "./validationSchemas";
-import { getCurrentUser } from "./data";
+import { getCurrentUserId } from "./data";
 
 export async function createUser(email: string, userid: string) {
   try {
@@ -132,8 +132,7 @@ export async function createBooking(formData: FormData) {
     printerId: formData.get("printerId"),
     discount: formData.get("discount"),
   });
-
-  const userid = await getCurrentUser();
+  const userId = formData.get("userid") as any;
 
   try {
     await prisma.booking.create({
@@ -141,7 +140,7 @@ export async function createBooking(formData: FormData) {
         bookerId: bookerId,
         printerId: printerId,
         discount: discount,
-        createdBy: userid as any,
+        createdBy: userId,
       },
     });
   } catch (error) {
