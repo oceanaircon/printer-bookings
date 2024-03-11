@@ -12,7 +12,7 @@ export default async function NewBookingPage() {
 
   return (
     <main>
-      <h3>{userid}</h3>
+      <h3>{email}</h3>
       <Form bookers={bookers} printers={printers} userid={userid as any} />
     </main>
   );
