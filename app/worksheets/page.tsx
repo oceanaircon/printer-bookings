@@ -2,7 +2,7 @@ import React from "react";
 import Pagination from "@/app/ui/pagination";
 import Search from "../ui/search";
 import { Suspense } from "react";
-import { fetchWorksheetPages } from "@/app/lib/data";
+import { fetchWorksheetPages, updateWorksheetStatus } from "@/app/lib/data";
 import WorksheetsTable from "../ui/worksheets/worksheetsTable";
 
 const WorksheetsPage = async ({
@@ -13,6 +13,12 @@ const WorksheetsPage = async ({
     page?: string;
   };
 }) => {
+  try {
+    await updateWorksheetStatus();
+  } catch (error) {
+    console.error("A státuszfrissítés sikertelen volt.");
+  }
+  
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -28,7 +34,6 @@ const WorksheetsPage = async ({
       <div className="mt-1 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
       </div>
-
     </div>
   );
 };

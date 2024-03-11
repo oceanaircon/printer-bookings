@@ -263,7 +263,6 @@ export async function fetchFilteredBookers(query: string, currentPage: number) {
   }
 }
 
-
 export async function fetchFilteredPrinters(
   query: string,
   currentPage: number
@@ -314,9 +313,7 @@ export async function fetchFilteredWorksheets(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-
     const worksheets = await prisma.worksheet.findMany({
-
       select: {
         id: true,
         errorReportingTime: true,
@@ -391,7 +388,6 @@ export async function fetchFilteredWorksheets(
   }
 }
 
-
 export async function fetchFilteredServices(
   query: string,
   currentPage: number
@@ -400,26 +396,27 @@ export async function fetchFilteredServices(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-
     const services = await prisma.service.findMany({
-
       select: {
         id: true,
         name: true,
-
       },
-      where:  {
+      where: {
         OR: [
           {
-          name: {
+            name: {
               contains: query,
-          }
-        }]}})
-     return services
-    } catch(error) {
+            },
+          },
+        ],
+      },
+    });
+    return services;
+  } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Hiba a lekérdezésben.");
-     }}
+  }
+}
 // FŐOLDALI KÁRTYÁK ************************************************************
 
 export async function fetchCardData() {
@@ -447,7 +444,7 @@ export async function fetchCardData() {
       closedWorksheetsPromise,
     ]);
 
-    const monthlyIncome = Number(JSON.stringify(data[0]).slice(23, 28));
+    const monthlyIncome = Number(JSON.stringify(data[0]).slice(23, 28) ?? "0");
     const yearIncome = monthlyIncome * 12;
     const pendingWorksheets = Number(data[1] ?? "0");
     const closedWorksheets = Number(data[2] ?? "0");
@@ -473,7 +470,7 @@ export async function updateWorksheetStatus() {
   });
 
   statuses.forEach(async (element) => {
-    if (Number(element.repairDeadline) < Date.now()) {
+    if (Number(element.repairDeadline) < Number(Date.now())) {
       await prisma.worksheet.update({
         where: {
           id: element.id,

@@ -44,6 +44,7 @@ export type WorksheetField = {
   id: number;
   bookingId: number;
   serviceId: number;
+  createdBy: number;
   status: "FOLYAMATBAN" | "BEFEJEZETT";
 };
 
@@ -52,5 +53,6 @@ export type UpdateWorksheetField = {
   bookingId: number;
   serviceId: number;
   repairDeadline: string;
+  createdBy: number;
   status: "FOLYAMATBAN" | "BEFEJEZETT";
 };
