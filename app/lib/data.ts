@@ -7,6 +7,7 @@ import {
 } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
 import { currentUser } from "@clerk/nextjs";
+import { number } from "zod";
 
 // darab / oldal *********************************************************
 
@@ -16,9 +17,10 @@ const ITEMS_PER_PAGE = 8;
 
 export async function getCurrentUser() {
   const user = await currentUser();
-  const userid = await prisma.user.findFirst({
+  const email = user?.emailAddresses[0].emailAddress;
+  const userid = await prisma.user.findUnique({
     where: {
-      userId: user?.id,
+      email: email,
     },
     select: {
       id: true,
