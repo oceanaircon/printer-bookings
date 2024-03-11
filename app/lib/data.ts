@@ -12,10 +12,9 @@ import { currentUser } from "@clerk/nextjs";
 
 const ITEMS_PER_PAGE = 8;
 
-// aktív user és id lekérdezése
+// aktív userid lekérdezése
 
 export async function getCurrentUserId(email: string) {
-
   const userid = await prisma.user.findUnique({
     where: {
       email: email,
@@ -24,7 +23,7 @@ export async function getCurrentUserId(email: string) {
       id: true,
     },
   });
-  return userid;
+  return userid?.id;
 }
 
 // kategóriák betöltése új printer létrehozásához
