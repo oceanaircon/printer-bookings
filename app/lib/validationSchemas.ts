@@ -12,6 +12,7 @@ export const createBookingSchema = z.object({
   bookerId: z.coerce.number(),
   printerId: z.coerce.number(),
   discount: z.coerce.number(),
+  createdBy: z.coerce.number(),
 });
 
 export const createCategorySchema = z.object({
@@ -35,6 +36,7 @@ export const createWorksheetSchema = z.object({
   bookingId: z.coerce.number(),
   serviceId: z.coerce.number(),
   status: z.enum(["FOLYAMATBAN", "BEFEJEZETT"]),
+  createdBy: z.coerce.number(),
 });
 
 export const updateWorksheetSchema = z.object({
@@ -42,4 +44,5 @@ export const updateWorksheetSchema = z.object({
   serviceId: z.coerce.number(),
   repairDeadline: z.string(),
   status: z.enum(["FOLYAMATBAN", "BEFEJEZETT"]),
+  createdBy: z.coerce.number(),
 });
