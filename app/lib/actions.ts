@@ -140,7 +140,7 @@ export async function createBooking(formData: FormData) {
         bookerId: bookerId,
         printerId: printerId,
         discount: discount,
-        createdBy: userId,
+        createdBy: Number(userId),
       },
     });
   } catch (error) {
