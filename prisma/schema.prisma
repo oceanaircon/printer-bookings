@@ -14,8 +14,8 @@ datasource db {
 model User {
   id        Int         @id @default(autoincrement())
   email     String      @unique
-  name      String?   
-  userId    String      @default("user_1")
+  name      String?
+  userId    String      @unique @default("user_1")
   Booking   Booking[]
   Worksheet Worksheet[]
 }
@@ -56,8 +56,8 @@ model Booking {
   printerId Int         @unique
   createdAt DateTime    @default(now())
   discount  Int         @default(0)
-  user      User        @relation(fields: [createdBy], references: [id])
-  createdBy Int         @default(1)
+  user      User        @relation(fields: [createdBy], references: [userId])
+  createdBy String
   Worksheet Worksheet[]
 }
 
@@ -75,8 +75,8 @@ model Worksheet {
   serviceId          Int
   errorReportingTime DateTime        @default(now())
   repairDeadline     DateTime
-  user               User            @relation(fields: [createdBy], references: [id])
-  createdBy          Int             @default(1)
+  user               User            @relation(fields: [createdBy], references: [userId])
+  createdBy          String
   status             WorksheetStatus @default(FOLYAMATBAN)
 }
 

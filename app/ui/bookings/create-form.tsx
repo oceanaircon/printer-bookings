@@ -6,11 +6,11 @@ import React, { useState } from "react";
 export default function Form({
   bookers,
   printers,
-  userid,
+  userId,
 }: {
   bookers: BookerField[];
   printers: PrinterField[];
-  userid: number;
+  userId: string;
 }) {
   const initialPrinterSerial = printers.length > 0 ? printers[0].serial : "";
   const [selectedPrinterSerial, setSelectedPrinterSerial] =
@@ -140,7 +140,7 @@ export default function Form({
             className="input-group-text"
           />
         </div>
-        <input type="hidden" name="userid" id="userid" value={userid} />
+        <input type="hidden" name="userId" id="userId" value={userId} />
         <div className="mb-3 d-flex justify-content-between">
           <button
             disabled={isButtonDisabled}

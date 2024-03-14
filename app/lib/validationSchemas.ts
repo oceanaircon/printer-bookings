@@ -12,7 +12,7 @@ export const createBookingSchema = z.object({
   bookerId: z.coerce.number(),
   printerId: z.coerce.number(),
   discount: z.coerce.number(),
-  createdBy: z.coerce.number(),
+  createdBy: z.string(),
 });
 
 export const createCategorySchema = z.object({
