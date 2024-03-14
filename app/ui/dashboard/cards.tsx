@@ -1,5 +1,6 @@
 import { BsCoin, BsCashCoin, BsHourglass, BsCollection } from "react-icons/bs";
 import { fetchCardData } from "@/app/lib/data";
+import { unstable_noStore as noStore } from "next/cache";
 
 const iconMap = {
   first: BsCoin,
@@ -9,6 +10,7 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
+  noStore();
   const { monthlyIncome, yearIncome, pendingWorksheets, closedWorksheets } =
     await fetchCardData();
 
