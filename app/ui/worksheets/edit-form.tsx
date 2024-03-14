@@ -4,9 +4,11 @@ import { updateWorksheet } from "@/app/lib/actions";
 export default function Form({
   worksheet,
   services,
+  userId,
 }: {
   worksheet: UpdateWorksheetField;
   services: ServiceField[];
+  userId: string;
 }) {
   const updateWorksheetById = updateWorksheet.bind(null, worksheet.id);
 
@@ -128,6 +130,7 @@ export default function Form({
             </div>
           </fieldset>
         </div>
+        <input type="hidden" name="userId" value={userId} />
         <div className="mb-3 d-flex justify-content-between">
           <input
             type="submit"

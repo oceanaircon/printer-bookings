@@ -6,9 +6,11 @@ import React, { useState } from "react";
 export default function Form({
   booking,
   services,
+  userId,
 }: {
   booking: BookingField;
   services: ServiceField[];
+  userId: string;
 }) {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
@@ -128,6 +130,7 @@ export default function Form({
             </div>
           </fieldset>
         </div>
+        <input type="hidden" name="userId" id="userId" value={userId} />
         <div className="mb-3 d-flex justify-content-between">
           <button
             disabled={isButtonDisabled}
