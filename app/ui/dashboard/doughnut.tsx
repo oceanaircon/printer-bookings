@@ -8,7 +8,7 @@ const DoughnutChart = () => {
     <div>
       <Doughnut
         data={{
-          labels: ["Új", "Javított", "Javítás alatt", "Seljt"],
+          labels: ["Új", "Javított", "Javítás alatt", "Selejt"],
           datasets: [
             {
               label: "Printerek",
