@@ -12,7 +12,6 @@ import {
   createWorksheetSchema,
   updateWorksheetSchema,
 } from "./validationSchemas";
-import { getCurrentUserId } from "./data";
 
 export async function createUser(email: string, userid: string) {
   try {
@@ -132,7 +131,7 @@ export async function createBooking(formData: FormData) {
       bookerId: formData.get("bookerId"),
       printerId: formData.get("printerId"),
       discount: formData.get("discount"),
-      createdBy: formData.get("userid"),
+      createdBy: formData.get("userId"),
     });
 
   try {
@@ -186,6 +185,7 @@ export async function createWorksheet(formData: FormData) {
         serviceId: serviceId,
         repairDeadline: hatarido,
         status: status,
+        createdBy: "tralalla",
       },
     });
   } catch (error) {

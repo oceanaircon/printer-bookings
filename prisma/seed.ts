@@ -62,7 +62,7 @@ async function main() {
     create: {
       bookerId: 1,
       printerId: 1,
-      createdBy: 1,
+      createdBy: "string",
     },
   });
   console.log({ booking });
@@ -77,7 +77,7 @@ async function main() {
       bookingId: 1,
       serviceId: 1,
       repairDeadline: hatarido,
-      createdBy: 1,
+      createdBy: "string",
     },
   });
   console.log({ worksheet });

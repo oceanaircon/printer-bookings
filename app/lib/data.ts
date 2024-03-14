@@ -6,7 +6,6 @@ import {
   BookingField,
 } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
-import { currentUser } from "@clerk/nextjs";
 
 // darab / oldal *********************************************************
 
@@ -14,17 +13,7 @@ const ITEMS_PER_PAGE = 8;
 
 // aktív userid lekérdezése
 
-export async function getCurrentUserId(email: string) {
-  const userid = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-    select: {
-      id: true,
-    },
-  });
-  return userid?.id;
-}
+
 
 // kategóriák betöltése új printer létrehozásához
 
