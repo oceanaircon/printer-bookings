@@ -19,7 +19,7 @@ const BookersPage = async ({
 
   const totalPages = await fetchBookerPages(query);
 
-  const data = fetchCardData();
+  const data = await fetchCardData();
 
   return (
     <div className="my-4 py-5 text-center">
