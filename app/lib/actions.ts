@@ -127,12 +127,13 @@ export async function createService(formData: FormData) {
 }
 
 export async function createBooking(formData: FormData) {
-  const { bookerId, printerId, discount } = createBookingSchema.parse({
-    bookerId: formData.get("bookerId"),
-    printerId: formData.get("printerId"),
-    discount: formData.get("discount"),
-  });
-  const userId = formData.get("userid") as any;
+  const { bookerId, printerId, discount, createdBy } =
+    createBookingSchema.parse({
+      bookerId: formData.get("bookerId"),
+      printerId: formData.get("printerId"),
+      discount: formData.get("discount"),
+      createdBy: formData.get("userid"),
+    });
 
   try {
     await prisma.booking.create({
@@ -140,7 +141,7 @@ export async function createBooking(formData: FormData) {
         bookerId: bookerId,
         printerId: printerId,
         discount: discount,
-        createdBy: Number(userId),
+        createdBy: createdBy,
       },
     });
   } catch (error) {
