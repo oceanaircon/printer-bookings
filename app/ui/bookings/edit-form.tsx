@@ -5,10 +5,12 @@ export default function Form({
   booking,
   bookers,
   printers,
+  userId,
 }: {
   booking: BookingField;
   bookers: BookerField[];
   printers: PrinterField[];
+  userId: string;
 }) {
   const updateBookingWithId = updateBooking.bind(null, booking.id);
 
@@ -94,7 +96,7 @@ export default function Form({
               className="input-group-text"
             />
           </div>
-
+          <input type="hidden" name="userId" id="userId" value={userId} />
           <div className="mb-3 justify-content-between">
             <input
               type="submit"

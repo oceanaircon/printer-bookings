@@ -11,7 +11,6 @@ export default async function NewBookingPage() {
   return (
     <main>
       <Form bookers={bookers} printers={printers} userId={userId} />
-      <h3>{userId}</h3>
     </main>
   );
 }

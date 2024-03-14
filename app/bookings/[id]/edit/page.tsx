@@ -1,5 +1,6 @@
 import { fetchBookingById, loadBookers, loadPrinters } from "@/app/lib/data";
 import Form from "@/app/ui/bookings/edit-form";
+import { auth } from "@clerk/nextjs";
 import { notFound } from "next/navigation";
 
 export default async function UpdateBookingPage({
@@ -11,6 +12,7 @@ export default async function UpdateBookingPage({
   const booking = await fetchBookingById(id);
   const bookers = await loadBookers();
   const printers = await loadPrinters();
+  const { userId } = auth() as any;
 
   if (!booking) {
     notFound();
@@ -18,7 +20,12 @@ export default async function UpdateBookingPage({
 
   return (
     <main>
-      <Form booking={booking} bookers={bookers} printers={printers} />
+      <Form
+        booking={booking}
+        bookers={bookers}
+        printers={printers}
+        userId={userId}
+      />
     </main>
   );
 }

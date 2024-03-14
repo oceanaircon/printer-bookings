@@ -1,5 +1,6 @@
 import Form from "@/app/ui/worksheets/create-form";
 import { loadServices, fetchBookingById } from "@/app/lib/data";
+import { auth } from "@clerk/nextjs";
 
 export default async function NewWorksheetPage({
   params,
@@ -12,9 +13,11 @@ export default async function NewWorksheetPage({
 
   const services = await loadServices();
 
+  const { userId } = auth() as any;
+
   return (
     <main>
-      <Form booking={booking} services={services} />
+      <Form booking={booking} services={services} userId={userId} />
     </main>
   );
 }

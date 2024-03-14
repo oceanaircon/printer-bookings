@@ -170,11 +170,13 @@ export async function createBooking(formData: FormData) {
 }
 
 export async function createWorksheet(formData: FormData) {
-  const { bookingId, serviceId, status } = createWorksheetSchema.parse({
-    bookingId: formData.get("bookingId"),
-    serviceId: formData.get("serviceId"),
-    status: formData.get("status"),
-  });
+  const { bookingId, serviceId, status, createdBy } =
+    createWorksheetSchema.parse({
+      bookingId: formData.get("bookingId"),
+      serviceId: formData.get("serviceId"),
+      status: formData.get("status"),
+      createdBy: formData.get("userId"),
+    });
 
   let hatarido = new Date();
   hatarido.setHours(hatarido.getHours() + 72);
@@ -185,7 +187,7 @@ export async function createWorksheet(formData: FormData) {
         serviceId: serviceId,
         repairDeadline: hatarido,
         status: status,
-        createdBy: "tralalla",
+        createdBy: createdBy,
       },
     });
   } catch (error) {
@@ -286,11 +288,13 @@ export async function updatePrinter(id: number, formData: FormData) {
 }
 
 export async function updateBooking(id: number, formData: FormData) {
-  const { bookerId, printerId, discount } = createBookingSchema.parse({
-    bookerId: formData.get("bookerId"),
-    printerId: formData.get("printerId"),
-    discount: formData.get("discount"),
-  });
+  const { bookerId, printerId, discount, createdBy } =
+    createBookingSchema.parse({
+      bookerId: formData.get("bookerId"),
+      printerId: formData.get("printerId"),
+      discount: formData.get("discount"),
+      createdBy: formData.get("userId"),
+    });
   try {
     await prisma.booking.update({
       where: {
@@ -300,6 +304,7 @@ export async function updateBooking(id: number, formData: FormData) {
         bookerId: bookerId,
         printerId: printerId,
         discount: discount,
+        createdBy: createdBy,
       },
     });
   } catch (error) {
@@ -361,12 +366,13 @@ export async function updateService(id: number, formData: FormData) {
 }
 
 export async function updateWorksheet(id: number, formData: FormData) {
-  const { bookingId, serviceId, repairDeadline, status } =
+  const { bookingId, serviceId, repairDeadline, status, createdBy } =
     updateWorksheetSchema.parse({
       bookingId: formData.get("bookingId"),
       serviceId: formData.get("serviceId"),
       repairDeadline: formData.get("repairDeadline"),
       status: formData.get("status"),
+      createdBy: formData.get("userId"),
     });
   try {
     await prisma.worksheet.update({
@@ -378,6 +384,7 @@ export async function updateWorksheet(id: number, formData: FormData) {
         serviceId: serviceId,
         repairDeadline: new Date(repairDeadline),
         status: status,
+        createdBy: createdBy,
       },
     });
   } catch (error) {

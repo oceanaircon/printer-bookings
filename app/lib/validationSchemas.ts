@@ -36,7 +36,7 @@ export const createWorksheetSchema = z.object({
   bookingId: z.coerce.number(),
   serviceId: z.coerce.number(),
   status: z.enum(["FOLYAMATBAN", "BEFEJEZETT"]),
-  createdBy: z.coerce.number(),
+  createdBy: z.string(),
 });
 
 export const updateWorksheetSchema = z.object({
@@ -44,5 +44,5 @@ export const updateWorksheetSchema = z.object({
   serviceId: z.coerce.number(),
   repairDeadline: z.string(),
   status: z.enum(["FOLYAMATBAN", "BEFEJEZETT"]),
-  createdBy: z.coerce.number(),
+  createdBy: z.string(),
 });
