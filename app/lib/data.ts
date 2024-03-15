@@ -464,11 +464,11 @@ export async function fetchCardData() {
 }
 
 export async function getChartData() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const bookers = [];
+  const income = [];
   try {
-    const date = new Date();
-    const year = date.getFullYear();
-    const bookers = [12];
-    const income = [12];
     for (let index = 1; index < 13; index++) {
       if (index > 9) {
         bookers[index] =
