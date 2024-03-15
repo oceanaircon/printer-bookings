@@ -8,12 +8,12 @@ const DoughnutChart = () => {
     <div>
       <Doughnut
         data={{
-          labels: ["Új", "Javított", "Javítás alatt", "Selejt"],
+          labels: ["Új", "Javított", "Javítás alatt"],
           datasets: [
             {
               label: "Printerek",
-              data: [150, 120, 60, 70],
-              backgroundColor: ["blue", "yellow", "orange", "red"],
+              data: [150, 120, 60],
+              backgroundColor: ["blue", "yellow", "orange"],
               hoverOffset: 4,
             },
           ],

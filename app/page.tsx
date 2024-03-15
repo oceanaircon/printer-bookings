@@ -1,7 +1,9 @@
+import { getChartData } from "./lib/data";
 import Cards from "./ui/dashboard/cards";
 import Chart from "./ui/dashboard/chart";
 
 export default async function Home() {
+  
   return (
     <div className="container-fluid">
       <div className="row py-3 px-4">
@@ -15,7 +17,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="col-md-12">
-          <Chart></Chart>
+          <Chart />
         </div>
       </div>
     </div>

@@ -6,14 +6,13 @@ import {
   BookingField,
 } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
+import { number } from "zod";
 
 // darab / oldal *********************************************************
 
 const ITEMS_PER_PAGE = 8;
 
 // aktív userid lekérdezése
-
-
 
 // kategóriák betöltése új printer létrehozásához
 
@@ -463,6 +462,41 @@ export async function fetchCardData() {
     error;
   }
 }
+
+export async function getChartData() {
+  try {
+    const date = new Date();
+    const year = date.getFullYear();
+    const bookers = [12];
+    const income = [12];
+    for (let index = 1; index < 13; index++) {
+      if (index > 9) {
+        bookers[index] =
+          await prisma.$queryRaw`SELECT DISTINCT Count(bookerId) FROM Booking
+              WHERE createdAt LIKE "%(${year})-(${index})%"`;
+        income[index] =
+          await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
+              INNER JOIN Printer ON Booking.printerId = Printer.id 
+              INNER JOIN Category ON Printer.categoryId = Category.id
+              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%"`;
+      }
+      bookers[index] =
+        await prisma.$queryRaw`SELECT DISTINCT Count(bookerId) FROM Booking
+              WHERE createdAt LIKE "%(${year})-0(${index})%"`;
+      income[index] =
+        await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
+              INNER JOIN Printer ON Booking.printerId = Printer.id 
+              INNER JOIN Category ON Printer.categoryId = Category.id
+              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%"`;
+    }
+
+    return { bookers, income };
+  } catch (error) {
+    console.error("Hiba");
+  }
+}
+
+// A lejárt munkalap állapota BEFEJEZETT ******************************************
 
 export async function updateWorksheetStatus() {
   const statuses = await prisma.worksheet.findMany({
