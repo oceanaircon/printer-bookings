@@ -4,7 +4,7 @@ import DoughnutChart from "./doughnut";
 import { getChartData } from "@/app/lib/data";
 
 const Chart = async () => {
-  const { bookers, income } = await getChartData() as any;
+  const { bookers, income } = (await getChartData()) as any;
   return (
     <div className="row col-md-12 py-4">
       <div className="col-xl-7 col-md-7 mb-4">
@@ -12,6 +12,9 @@ const Chart = async () => {
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">
               Bevétel és Ügyfélszám
+            </h6>
+            <h6>
+              {bookers} {income}
             </h6>
           </div>
           <div className="card-body">
