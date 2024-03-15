@@ -3,7 +3,14 @@
 import "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 
-const AreaChart = () => {
+const AreaChart = ({
+  bookers,
+  income,
+} : {
+  bookers: Number[];
+  income: Number[];
+}) => {
+  
   return (
     <div>
       <Bar
@@ -24,14 +31,14 @@ const AreaChart = () => {
           datasets: [
             {
               label: "Bevétel",
-              data: [77, 87, 100, 120, 120, 120, 144, 178, 200, 400, 500, 700],
+              data: bookers,
               backgroundColor: "yellow",
               borderColor: "orange",
               borderWidth: 5,
             },
             {
               label: "Ügyfelek",
-              data: [10, 11, 13, 14, 14, 14, 16, 18, 20, 40, 50, 70],
+              data: income,
               backgroundColor: "blue",
               borderColor: "blue",
               borderWidth: 5,

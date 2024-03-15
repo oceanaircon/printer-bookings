@@ -1,8 +1,10 @@
 import AreaChart from "@/app/ui/dashboard/area-chart";
 import React from "react";
 import DoughnutChart from "./doughnut";
+import { getChartData } from "@/app/lib/data";
 
-const Chart = () => {
+const Chart = async () => {
+  const { bookers, income } = await getChartData() as any;
   return (
     <div className="row col-md-12 py-4">
       <div className="col-xl-7 col-md-7 mb-4">
@@ -14,7 +16,7 @@ const Chart = () => {
           </div>
           <div className="card-body">
             <div className="chart-area">
-              <AreaChart></AreaChart>
+              <AreaChart bookers={bookers} income={income}></AreaChart>
             </div>
             <hr />
           </div>
