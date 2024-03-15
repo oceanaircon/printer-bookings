@@ -473,21 +473,21 @@ export async function getChartData() {
       if (index > 9) {
         bookers[index] =
           await prisma.$queryRaw`SELECT DISTINCT Count(bookerId) FROM Booking
-              WHERE createdAt LIKE "%(${year})-(${index})%"`;
+              WHERE createdAt LIKE "%(${year})-(${index})%";`;
         income[index] =
           await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
               INNER JOIN Printer ON Booking.printerId = Printer.id 
               INNER JOIN Category ON Printer.categoryId = Category.id
-              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%"`;
+              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%";`;
       }
       bookers[index] =
         await prisma.$queryRaw`SELECT DISTINCT Count(bookerId) FROM Booking
-              WHERE createdAt LIKE "%(${year})-0(${index})%"`;
+              WHERE createdAt LIKE "%(${year})-0(${index})%";`;
       income[index] =
         await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
               INNER JOIN Printer ON Booking.printerId = Printer.id 
               INNER JOIN Category ON Printer.categoryId = Category.id
-              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%"`;
+              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%";`;
     }
 
     return { bookers, income };
