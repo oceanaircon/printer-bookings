@@ -15,8 +15,7 @@ async function getData() {
 
 async function main() {
   // const { users } = await getData();
-
-  for (let index = 22; index < 80; index++) {
+  /*  for (let index = 22; index < 80; index++) {
     // const element = users[index];
 
     const printerid = Math.floor(Math.random() * 80) + 22;
@@ -30,9 +29,8 @@ async function main() {
         createdBy: "user_2dVD3hLSqDhy2HxXtO4u9YohBmW",
       },
     });
-    console.log({ booking });
-
-    /*     const serialnum = Math.floor(Math.random() * 100000) + 10000;
+    console.log({ booking }); */
+  /*     const serialnum = Math.floor(Math.random() * 100000) + 10000;
 
     const printer = await prisma.printer.upsert({
       where: { id: index },
@@ -46,8 +44,7 @@ async function main() {
       },
     });
     console.log({ printer }); */
-
-    /*    const booker = await prisma.booker.upsert({
+  /*    const booker = await prisma.booker.upsert({
       where: { email: element.email },
       update: {
         name: element.firstName + " " + element.lastName,
@@ -65,9 +62,9 @@ async function main() {
       },
     });
     console.log({ booker }); */
-  }
+}
 
-  /*  const category = await prisma.category.upsert({
+/*  const category = await prisma.category.upsert({
     where: { id: 1 },
     update: {},
     create: {
@@ -106,7 +103,7 @@ async function main() {
   console.log({ worksheet });
 }
  */
-}
+//}
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {
