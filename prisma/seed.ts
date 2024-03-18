@@ -1,32 +1,70 @@
 import { PrismaClient } from "@prisma/client";
-import { hash } from "bcrypt";
+import { promises as fs } from "fs";
 
 const prisma = new PrismaClient();
 
+async function getData() {
+  const jsonData = await fs.readFile(
+    process.cwd() + "/prisma/users.json",
+    "utf-8"
+  );
+  const users = JSON.parse(jsonData);
+
+  return users;
+}
+
 async function main() {
-  const password = await hash("bagoly1234", 12);
-  const user = await prisma.user.upsert({
-    where: { email: "kakukk@kakukk.com" },
-    update: {},
-    create: {
-      email: "kakukk@kakukk.com",
-      name: "Kakukk",
-    },
-  });
-  console.log({ user });
+  // const { users } = await getData();
+  /*  for (let index = 22; index < 80; index++) {
+    // const element = users[index];
 
-  const booker = await prisma.booker.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      name: "Teszt Bérlő",
-      address: "8000 Székesfehérvár, Fő utca 1.",
-      email: "tesztemail@tesztemail.hu",
-    },
-  });
-  console.log({ booker });
+    const printerid = Math.floor(Math.random() * 80) + 22;
 
-  const category = await prisma.category.upsert({
+    const booking = await prisma.booking.upsert({
+      where: { id: index },
+      update: {},
+      create: {
+        bookerId: index,
+        printerId: printerid,
+        createdBy: "user_2dVD3hLSqDhy2HxXtO4u9YohBmW",
+      },
+    });
+    console.log({ booking }); */
+  /*     const serialnum = Math.floor(Math.random() * 100000) + 10000;
+
+    const printer = await prisma.printer.upsert({
+      where: { id: index },
+      update: {},
+      create: {
+        name: "Canon IR 3570",
+        serial: String(serialnum),
+        description:
+          "Fast and productive colour A4 multifunction printer, with integrated cloud-based software and smart technologies for secure collaboration from anywhere.",
+        categoryId: 2,
+      },
+    });
+    console.log({ printer }); */
+  /*    const booker = await prisma.booker.upsert({
+      where: { email: element.email },
+      update: {
+        name: element.firstName + " " + element.lastName,
+        address: element.address.address + ", " + element.address.city,
+        phone: element.phone,
+        email: element.email,
+        taxnumber: element.bank.cardNumber,
+      },
+      create: {
+        name: element.firstName + " " + element.lastName,
+        address: element.address.address + ", " + element.address.city,
+        phone: element.phone,
+        email: element.email,
+        taxnumber: element.bank.cardNumber,
+      },
+    });
+    console.log({ booker }); */
+}
+
+/*  const category = await prisma.category.upsert({
     where: { id: 1 },
     update: {},
     create: {
@@ -36,16 +74,7 @@ async function main() {
   });
   console.log({ category });
 
-  const printer = await prisma.printer.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      name: "Teszt Printer",
-      serial: "12345678ABCD",
-      categoryId: 1,
-    },
-  });
-  console.log({ printer });
+
 
   const service = await prisma.service.upsert({
     where: { id: 1 },
@@ -56,16 +85,7 @@ async function main() {
   });
   console.log({ service });
 
-  const booking = await prisma.booking.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      bookerId: 1,
-      printerId: 1,
-      createdBy: "string",
-    },
-  });
-  console.log({ booking });
+  
 
   let hatarido = new Date();
   hatarido.setHours(hatarido.getHours() + 72);
@@ -82,7 +102,8 @@ async function main() {
   });
   console.log({ worksheet });
 }
-
+ */
+//}
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {

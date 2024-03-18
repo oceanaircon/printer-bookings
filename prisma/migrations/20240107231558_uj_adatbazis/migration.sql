@@ -35,9 +35,9 @@ CREATE TABLE `Category` (
 CREATE TABLE `Booker` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `address` VARCHAR(191) NOT NULL DEFAULT '1086 Budapest, Vas utca 1.',
-    `taxnumber` VARCHAR(191) NOT NULL DEFAULT '1234567812345678',
-    `phone` VARCHAR(191) NOT NULL DEFAULT '+36 00 0000000',
+    `address` VARCHAR(191) NOT NULL,
+    `taxnumber` VARCHAR(191) NOT NULL,
+    `phone` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `Booker_email_key`(`email`),
