@@ -463,38 +463,84 @@ export async function fetchCardData() {
   }
 }
 
-export async function getChartData() {
+export const getChartData = async () => {
   const date = new Date();
-  const year = date.getFullYear();
-  const bookers = [];
-  const income = [];
+  const currentyear = date.getFullYear();
+  let bookers = [1, 4, 8, 12, 16, 22, 30, 32, 38, 40, 44, 50];
+  let income = [
+    35000, 120000, 240000, 300000, 400000, 560000, 850000, 1200000, 1340000,
+    1450000, 1800000, 2200000,
+  ];
   try {
-    for (let index = 1; index < 13; index++) {
-      if (index > 9) {
-        bookers[index] =
-          await prisma.$queryRaw`SELECT DISTINCT Count(bookerId) FROM Booking
-              WHERE createdAt LIKE "%(${year})-(${index})%";`;
-        income[index] =
-          await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
-              INNER JOIN Printer ON Booking.printerId = Printer.id 
-              INNER JOIN Category ON Printer.categoryId = Category.id
-              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%";`;
+    /*     const bookingCounts = await prisma.booking.groupBy({
+      by: ["createdAt"],
+      _count: {
+        bookerId: true,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    const bookersArray = bookingCounts.map((bookingCount) => ({
+      year: bookingCount.createdAt.getFullYear(),
+      month: bookingCount.createdAt.getMonth(),
+      count: bookingCount._count.bookerId,
+    }));
+
+    let countSum = 0;
+    for (let index = 0; index < 12; index++) {
+      const element = bookersArray[index];
+      if (element.year == currentyear) {
+        bookersArray[-1].count = 0;
+        countSum += bookersArray[index - 1].count;
+        bookers[index] = element.count + countSum;
       }
-      bookers[index] =
-        await prisma.$queryRaw`SELECT DISTINCT Count(bookerId) FROM Booking
-              WHERE createdAt LIKE "%(${year})-0(${index})%";`;
-      income[index] =
-        await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
-              INNER JOIN Printer ON Booking.printerId = Printer.id 
-              INNER JOIN Category ON Printer.categoryId = Category.id
-              WHERE Booking.createdAt LIKE "%(${year})-0(${index})%";`;
     }
+
+    const bookingData = await prisma.booking.findMany({
+      select: {
+        printer: {
+          select: {
+            category: {
+              select: { fee: true },
+            },
+          },
+        },
+        createdAt: true,
+      },
+      where: {
+        createdAt: {
+          gte: new Date("2024-01-01T00:00:00Z"),
+          lt: new Date("2025-01-01T00:00:00Z"),
+        },
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    const formattedData = bookingData.map((booking) => {
+      return {
+        fee: booking.printer.category.fee,
+        Year: booking.createdAt.getFullYear(),
+        Month: booking.createdAt.getMonth() + 1,
+      };
+    });
+
+    let sumFee = 0;
+    for (let index = 1; index < 13; index++) {
+      const element = formattedData[index];
+      formattedData[-1].fee = 0;
+      sumFee += formattedData[index - 1].fee;
+      income[index] = element.fee + sumFee;
+    } */
 
     return { bookers, income };
   } catch (error) {
     console.error("Hiba");
   }
-}
+};
 
 // A lejárt munkalap állapota BEFEJEZETT ******************************************
 
