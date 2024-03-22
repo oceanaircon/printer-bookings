@@ -6,11 +6,10 @@ import { Bar } from "react-chartjs-2";
 const AreaChart = ({
   bookers,
   income,
-} : {
+}: {
   bookers: Number[];
   income: Number[];
 }) => {
-  
   return (
     <div>
       <Bar
@@ -31,15 +30,15 @@ const AreaChart = ({
           datasets: [
             {
               label: "Bevétel",
-              data: bookers,
+              data: income,
               backgroundColor: "yellow",
               borderColor: "orange",
               borderWidth: 5,
             },
             {
-              label: "Ügyfelek",
-              data: income,
-              backgroundColor: "blue",
+              label: "Ügyfelek / 10000",
+              data: bookers,
+              backgroundColor: "green",
               borderColor: "blue",
               borderWidth: 5,
             },

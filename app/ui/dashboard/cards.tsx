@@ -16,7 +16,7 @@ export default async function CardWrapper() {
 
   return (
     <>
-      <Card title="Havi bevétel" value={monthlyIncome} type="first" />
+      <Card title="Havi átlag" value={monthlyIncome} type="first" />
       <Card title="Éves bevétel" value={yearIncome} type="second" />
       <Card title="Függő munkalapok" value={pendingWorksheets} type="third" />
       <Card title="Lezárt munkalapok" value={closedWorksheets} type="fourth" />

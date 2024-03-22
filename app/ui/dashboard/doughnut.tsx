@@ -3,7 +3,15 @@
 import "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 
-const DoughnutChart = () => {
+const DoughnutChart = ({
+  newPrinters,
+  repairedPrinters,
+  repairingPrinters,
+}: {
+  newPrinters: number;
+  repairedPrinters: number;
+  repairingPrinters: number;
+}) => {
   return (
     <div>
       <Doughnut
@@ -12,7 +20,7 @@ const DoughnutChart = () => {
           datasets: [
             {
               label: "Printerek",
-              data: [150, 120, 60],
+              data: [newPrinters, repairedPrinters, repairingPrinters],
               backgroundColor: ["blue", "yellow", "orange"],
               hoverOffset: 4,
             },

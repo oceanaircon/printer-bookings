@@ -6,7 +6,6 @@ import {
   BookingField,
 } from "@/app/lib/definitions";
 import { unstable_noStore as noStore } from "next/cache";
-import { number } from "zod";
 
 // darab / oldal *********************************************************
 
@@ -422,12 +421,37 @@ export async function fetchFilteredServices(
 }
 // FŐOLDALI KÁRTYÁK ************************************************************
 
-export async function fetchCardData() {
+async function getFeesPerMonth() {
+  noStore();
+
+  type printerData = [{ fee: number; month: number }];
+  let feesPerMonth: printerData;
+
   try {
-    const monthlyIncomePromise =
-      await prisma.$queryRaw`SELECT SUM(Category.fee) FROM Booking 
-        INNER JOIN Printer ON Booking.printerId = Printer.id 
-        INNER JOIN Category ON Printer.categoryId = Category.id;`;
+    feesPerMonth =
+      await prisma.$queryRaw`SELECT SUM(Category.fee) AS "fee", MONTH(createdAt) AS "month" FROM Booking 
+      INNER JOIN Printer ON Booking.printerId = Printer.id 
+      INNER JOIN Category ON Printer.categoryId = Category.id
+      WHERE YEAR(createdAt) LIKE (YEAR(CURDATE())-1)
+      GROUP BY MONTH(createdAt)
+      ORDER BY MONTH(createdAt);`;
+
+    return feesPerMonth;
+  } catch (error) {
+    console.error("Hiba: havi bevétel lekérdezés");
+  }
+}
+
+export async function fetchCardData() {
+  noStore();
+  let feesPerYear = 0;
+
+  try {
+    const feesPerMonth = (await getFeesPerMonth()) as any;
+
+    for (let index = 0; index < feesPerMonth.length; index++) {
+      feesPerYear += Number(feesPerMonth[index].fee);
+    }
 
     const pendingWorksheetsPromise = await prisma.worksheet.count({
       where: {
@@ -442,15 +466,14 @@ export async function fetchCardData() {
     });
 
     const data = await Promise.all([
-      monthlyIncomePromise,
       pendingWorksheetsPromise,
       closedWorksheetsPromise,
     ]);
 
-    const monthlyIncome = Number(JSON.stringify(data[0]).slice(23, 28) ?? "0");
-    const yearIncome = monthlyIncome * 12;
-    const pendingWorksheets = Number(data[1] ?? "0");
-    const closedWorksheets = Number(data[2] ?? "0");
+    const monthlyIncome = feesPerYear / 12;
+    const yearIncome = feesPerYear;
+    const pendingWorksheets = Number(data[0] ?? "0");
+    const closedWorksheets = Number(data[1] ?? "0");
 
     return {
       monthlyIncome,
@@ -459,92 +482,80 @@ export async function fetchCardData() {
       closedWorksheets,
     } as any;
   } catch (error) {
-    error;
+    console.error("Hiba: fetchCardData");
   }
 }
 
 export const getChartData = async () => {
-  const date = new Date();
-  const currentyear = date.getFullYear();
-  let bookers = [1, 4, 8, 12, 16, 22, 30, 32, 38, 40, 44, 50];
-  let income = [
-    35000, 120000, 240000, 300000, 400000, 560000, 850000, 1200000, 1340000,
-    1450000, 1800000, 2200000,
-  ];
-  try {
-    /*     const bookingCounts = await prisma.booking.groupBy({
-      by: ["createdAt"],
-      _count: {
-        bookerId: true,
-      },
-      orderBy: {
-        createdAt: "asc",
-      },
-    });
+  noStore();
 
-    const bookersArray = bookingCounts.map((bookingCount) => ({
-      year: bookingCount.createdAt.getFullYear(),
-      month: bookingCount.createdAt.getMonth(),
-      count: bookingCount._count.bookerId,
-    }));
+  type bookersData = [{ bookers: number; month: number }];
 
-    let countSum = 0;
-    for (let index = 0; index < 12; index++) {
-      const element = bookersArray[index];
-      if (element.year == currentyear) {
-        bookersArray[-1].count = 0;
-        countSum += bookersArray[index - 1].count;
-        bookers[index] = element.count + countSum;
-      }
-    }
+  let bookers = [];
+  let income = [];
 
-    const bookingData = await prisma.booking.findMany({
-      select: {
-        printer: {
-          select: {
-            category: {
-              select: { fee: true },
-            },
-          },
-        },
-        createdAt: true,
-      },
-      where: {
-        createdAt: {
-          gte: new Date("2024-01-01T00:00:00Z"),
-          lt: new Date("2025-01-01T00:00:00Z"),
-        },
-      },
-      orderBy: {
-        createdAt: "asc",
-      },
-    });
+  const feesPerMonth = (await getFeesPerMonth()) as any;
 
-    const formattedData = bookingData.map((booking) => {
-      return {
-        fee: booking.printer.category.fee,
-        Year: booking.createdAt.getFullYear(),
-        Month: booking.createdAt.getMonth() + 1,
-      };
-    });
-
-    let sumFee = 0;
-    for (let index = 1; index < 13; index++) {
-      const element = formattedData[index];
-      formattedData[-1].fee = 0;
-      sumFee += formattedData[index - 1].fee;
-      income[index] = element.fee + sumFee;
-    } */
-
-    return { bookers, income };
-  } catch (error) {
-    console.error("Hiba");
+  for (let index = 0; index < feesPerMonth.length; index++) {
+    const element = feesPerMonth[index];
+    income[index] = Number(element.fee);
   }
+
+  try {
+    const bookersPerMonth: bookersData =
+      await prisma.$queryRaw`SELECT COUNT(bookerId) AS "bookers", MONTH(createdAt) AS "month"
+  FROM Booking GROUP BY MONTH(createdAt) ORDER BY MONTH(createdAt);`;
+
+    for (let index = 0; index < bookersPerMonth.length; index++) {
+      const element = bookersPerMonth[index];
+      bookers[index] = Number(Number(element.bookers) * 10000);
+    }
+  } catch (error) {
+    console.error("Hiba: havi ügyfélszám lekérdezés");
+  }
+
+  return { bookers, income };
 };
+
+export async function getDoughnutData() {
+  noStore();
+
+  try {
+    const repairingPrintersPromise = await prisma.worksheet.count({
+      where: {
+        status: "FOLYAMATBAN",
+      },
+    });
+
+    const repairedPrintersPromise = await prisma.worksheet.count({
+      where: {
+        status: "BEFEJEZETT",
+      },
+    });
+
+    const allPrintersPromise = await prisma.printer.count();
+
+    const data = await Promise.all([
+      repairingPrintersPromise,
+      repairedPrintersPromise,
+      allPrintersPromise,
+    ]);
+
+    const repairingPrinters = data[0];
+    const repairedPrinters = data[1];
+    const allPrinters = data[2];
+    const newPrinters = allPrinters - repairedPrinters - repairingPrinters;
+
+    return { repairingPrinters, repairedPrinters, newPrinters };
+  } catch (error) {
+    console.error("Hiba: doughnut adat lekérdezés");
+  }
+}
 
 // A lejárt munkalap állapota BEFEJEZETT ******************************************
 
 export async function updateWorksheetStatus() {
+  noStore();
   const statuses = await prisma.worksheet.findMany({
     select: {
       id: true,
