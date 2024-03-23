@@ -34,7 +34,7 @@ export type BookingField = {
   printerId: number;
   createdAt: Date;
   discount: number;
-  createdBy: string;
+  createdBy?: string;
 };
 
 export type ServiceField = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { UpdateWorksheet } from "../buttons";
+import { PrintWorksheet, UpdateWorksheet } from "../buttons";
 import { DeleteWorksheet } from "../deletebuttons";
 import { fetchFilteredWorksheets } from "../../lib/data";
 import "../custom.scss";
@@ -54,10 +54,10 @@ export default async function WorksheetsTable({
                 <div className="container">
                   <div className="row">
                     <div className="col">
-                      <UpdateWorksheet id={worksheet.id}></UpdateWorksheet>
+                      <UpdateWorksheet id={worksheet.id}/>
                     </div>
                     <div className="col">
-                      <DeleteWorksheet id={worksheet.id}></DeleteWorksheet>
+                      <DeleteWorksheet id={worksheet.id}/>
                     </div>
                   </div>
                 </div>

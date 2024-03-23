@@ -23,7 +23,7 @@ export default function Form({
           background: "white",
           padding: "40px",
           borderRadius: "10px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
@@ -43,7 +43,7 @@ export default function Form({
               <select
                 id="booking"
                 name="bookingId"
-                className="form-control text-center"
+                className="form-control text-center col-9"
               >
                 <option value={worksheet.bookingId}>
                   {worksheet.bookingId}
@@ -59,7 +59,7 @@ export default function Form({
               <select
                 id="service"
                 name="serviceId"
-                className="input-group-text"
+                className="input-group-text col-12"
                 defaultValue={worksheet.serviceId}
               >
                 {services.map((service) => (
@@ -77,7 +77,7 @@ export default function Form({
             <input
               type="datetime"
               name="repairDeadline"
-              className="input-group-text mb-3"
+              className="input-group-text mb-3 col-12"
               defaultValue={worksheet.repairDeadline}
             ></input>
           </div>

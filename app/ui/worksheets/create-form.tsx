@@ -36,7 +36,7 @@ export default function Form({
           background: "white",
           padding: "40px",
           borderRadius: "10px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
@@ -65,7 +65,7 @@ export default function Form({
               <select
                 id="service"
                 name="serviceId"
-                className="input-group-text"
+                className="input-group-text col-12"
               >
                 {services.map((service) => (
                   <option key={service.id} value={service.id}>

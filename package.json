@@ -38,6 +38,7 @@
     "react-router-dom": "^6.22.0",
     "react-select": "^5.8.0",
     "react-super-responsive-table": "^5.2.2",
+    "react-to-print": "^2.15.1",
     "sass": "^1.71.1",
     "svix": "^1.21.0",
     "use-debounce": "^10.0.0",

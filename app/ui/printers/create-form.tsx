@@ -45,7 +45,7 @@ export default function Form({ categories }: { categories: CategoryField[] }) {
           background: "white",
           padding: "40px",
           borderRadius: "10px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
