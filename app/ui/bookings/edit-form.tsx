@@ -31,7 +31,7 @@ export default function Form({
           flexDirection: "column",
         }}
       >
-        <h3>Ügyfél szerkesztése</h3>
+        <h3>Szerződés szerkesztése</h3>
         <div className="py-4 justify-content-center">
           <div className="mb-4">
             <div>
@@ -93,7 +93,7 @@ export default function Form({
               name="discount"
               id="discount"
               defaultValue={booking.discount}
-              className="input-group-text"
+              className="input-group-text col-12"
             />
           </div>
           <input type="hidden" name="userId" id="userId" value={userId} />
