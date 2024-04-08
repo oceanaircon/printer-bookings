@@ -56,7 +56,9 @@ export async function GET(
     `;
 
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      
+    });
     const page = await browser.newPage();
 
     await page.setContent(html, { waitUntil: "networkidle0" });
