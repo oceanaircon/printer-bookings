@@ -78,7 +78,7 @@ export function UpdateWorksheet({ id }: { id: number }) {
 
 export function PrintWorksheet({ id }: { id: number }) {
   return (
-    <a className="" href={`/worksheets/${id}/print`}>
+    <a className="" href={`/api/worksheetToPdf/${id}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
