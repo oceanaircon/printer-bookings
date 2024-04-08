@@ -15,8 +15,7 @@ export async function GET(
   const date1 = new Date(value[1]);
   const date2 = new Date(value[2]);
 
-  try {
-    const html = `
+  const html = `
       <div><br>
         <ul>
           <li>
@@ -56,6 +55,7 @@ export async function GET(
       </div>
     `;
 
+  try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
