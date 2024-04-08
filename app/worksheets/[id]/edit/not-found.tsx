@@ -1,16 +1,17 @@
 import Link from 'next/link';
- 
+
 export default function NotFound() {
   return (
-    <main className="flex h-full flex-col items-center justify-center gap-2">
-      <h2 className="text-xl font-semibold">404 Not Found</h2>
-      <p>Nem található a kért munkalap.</p>
-      <Link
-        href="/dashboard/invoices"
-        className="mt-4 rounded-md text-sm"
-      >
-        Vissza
-      </Link>
-    </main>
+    <div className="flex items-center justify-center h-screen mt-5 pt-5">
+      <div className="bg-white shadow-md rounded-lg p-8 text-center">
+        <h2 className="text-2xl font-semibold">404 Not Found</h2>
+        <p className="mt-4">A keresett munkalap nem található.</p>
+        <div className="mt-6">
+          <Link href="/worksheets">
+            Vissza
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

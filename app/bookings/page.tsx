@@ -23,6 +23,9 @@ const BookingsPage = async ({
       <div className="col row-auto text-center">
         <h3>Szerződések</h3>
         <Search placeholder="ügyfél neve, email-címe vagy cikkszám..." />
+        <a href="/bookings/new" className="mobile-button" aria-current="page">
+        Új szerződés
+      </a>
         <Suspense key={query + currentPage} fallback={""}>
           <BookingsTable query={query} currentPage={currentPage} />
         </Suspense>

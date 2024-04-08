@@ -25,13 +25,13 @@ export default function Form({
           background: "white",
           padding: "40px",
           borderRadius: "10px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <h3>Ügyfél szerkesztése</h3>
+        <h3>Szerződés szerkesztése</h3>
         <div className="py-4 justify-content-center">
           <div className="mb-4">
             <div>
@@ -93,7 +93,7 @@ export default function Form({
               name="discount"
               id="discount"
               defaultValue={booking.discount}
-              className="input-group-text"
+              className="input-group-text col-12"
             />
           </div>
           <input type="hidden" name="userId" id="userId" value={userId} />
