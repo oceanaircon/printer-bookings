@@ -56,7 +56,16 @@ export async function GET(
     `;
 
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: "/usr/bin/chromium-browser",
+      args: [
+        "--headless",
+        "--disable-gpu",
+        "--disable-setuid-sandbox",
+        "--no-sandbox",
+        "--no-zygote",
+      ],
+    });
 
     const page = await browser.newPage();
 
