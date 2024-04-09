@@ -34,6 +34,8 @@
     "pdf-lib": "^1.17.1",
     "prisma": "^5.7.1",
     "puppeteer": "^22.6.3",
+    "puppeteer-chromium-resolver": "^22.0.0",
+    "puppeteer-core": "^22.6.3",
     "react": "^18",
     "react-bootstrap": "^2.10.0",
     "react-chartjs-2": "^5.2.0",
