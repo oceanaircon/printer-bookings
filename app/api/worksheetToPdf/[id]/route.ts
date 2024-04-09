@@ -60,12 +60,12 @@ export async function GET(
     const browser = await chromium.puppeteer.launch({
       executablePath: await chromium.executablePath,
     });
-    
+
     const page = await browser.newPage();
 
     await page.setContent(html, { waitUntil: "networkidle0" });
 
-    const pdf = await page.pdf({ format: "A4" });
+    const pdf = await page.pdf({ format: "a4" });
     await browser.close();
 
     return new NextResponse(pdf, {
