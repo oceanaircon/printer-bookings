@@ -1,6 +1,5 @@
 import { fetchWorksheetByIdToPDF } from "@/app/lib/data";
 import puppeteer from "puppeteer";
-import chromium from "chrome-aws-lambda";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -57,9 +56,7 @@ export async function GET(
     `;
 
   try {
-    const browser = await puppeteer.launch({
-      executablePath: await chromium.executablePath,
-    });
+    const browser = await puppeteer.launch();
 
     const page = await browser.newPage();
 
