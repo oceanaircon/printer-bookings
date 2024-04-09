@@ -57,7 +57,7 @@ export async function GET(
     `;
 
   try {
-    const browser = await chromium.puppeteer.launch({
+    const browser = await puppeteer.launch({
       executablePath: await chromium.executablePath,
     });
 
