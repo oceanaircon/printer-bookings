@@ -390,6 +390,55 @@ export async function fetchFilteredWorksheets(
   }
 }
 
+export async function fetchWorksheetByIdToPDF(id: number) {
+  try {
+    const worksheet = await prisma.worksheet.findFirst({
+      select: {
+        id: true,
+        errorReportingTime: true,
+        repairDeadline: true,
+        booking: {
+          select: {
+            booker: {
+              select: {
+                name: true,
+                email: true,
+                address: true,
+                phone: true,
+              },
+            },
+            printer: {
+              select: {
+                name: true,
+                serial: true,
+                category: {
+                  select: {
+                    fee: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        service: {
+          select: {
+            name: true,
+          },
+        },
+        status: true,
+      },
+      where: {
+        id: Number(id),
+      }
+    });
+
+    return worksheet as any;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Hiba a lekérdezésben.");
+  }
+}
+
 export async function fetchFilteredServices(
   query: string,
   currentPage: number

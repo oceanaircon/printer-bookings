@@ -59,6 +59,9 @@ export default async function WorksheetsTable({
                     <div className="col">
                       <DeleteWorksheet id={worksheet.id}/>
                     </div>
+                    <div className="col">
+                      <PrintWorksheet id={worksheet.id}/>
+                    </div>
                   </div>
                 </div>
               </td>
