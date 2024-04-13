@@ -13,10 +13,8 @@ async function Print({ params }: { params: { id: number } }) {
   const date2 = new Date(value[2]);
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
+    <div style={{ margin: "3rem" }}>
+
       <div>
         <br />
         <table>
@@ -61,12 +59,7 @@ async function Print({ params }: { params: { id: number } }) {
               <th>Szerviz:</th>
               <td><b>{Object.values(value[4])[0]}</b></td>
             </tr>
-            <tr>
-              <th colSpan={2}>
-                <div style={{ borderBottom: "1px solid black", marginBottom: "10px" }} />
-              </th>
-            </tr>
-            <br></br>
+            <br />
             <tr>
               <th>Ügyfél aláírása:</th>
               <td>_____________________</td>
@@ -74,6 +67,11 @@ async function Print({ params }: { params: { id: number } }) {
             <br />
             <tr>
               <th>Szerviz aláírása:</th>
+              <td>_____________________</td>
+            </tr>
+            <br />
+            <tr>
+              <th>Dátum:</th>
               <td>_____________________</td>
             </tr>
           </tbody>
