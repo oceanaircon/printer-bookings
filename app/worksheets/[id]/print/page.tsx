@@ -59,23 +59,17 @@ async function Print({ params }: { params: { id: number } }) {
               <th>Szerviz:</th>
               <td><b>{Object.values(value[4])[0]}</b></td>
             </tr>
-            <tr>
-              <th></th>
-            </tr>
+
             <tr>
               <th>Ügyfél aláírása:</th>
               <td>_____________________</td>
             </tr>
-            <tr>
-              <th></th>
-            </tr>
-            <tr>
+
+            <tr style={{ margin: "3rem" }}>
               <th>Szerviz aláírása:</th>
               <td>_____________________</td>
             </tr>
-            <tr>
-              <th></th>
-            </tr>
+
             <tr>
               <th>Dátum:</th>
               <td>_____________________</td>
