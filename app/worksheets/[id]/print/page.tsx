@@ -62,17 +62,17 @@ async function Print({ params }: { params: { id: number } }) {
             <br />
             <tr>
               <th>Ügyfél aláírása:</th>
-              <td>_____________________</td>
+              
             </tr>
             <br />
             <tr>
               <th>Szerviz aláírása:</th>
-              <td>_____________________</td>
+              
             </tr>
             <br />
             <tr>
               <th>Dátum:</th>
-              <td>_____________________</td>
+              
             </tr>
           </tbody>
         </table>
