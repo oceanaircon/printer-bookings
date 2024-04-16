@@ -4,6 +4,7 @@ import DoughnutChart from "./doughnut";
 import { getChartData, getDoughnutData } from "@/app/lib/data";
 
 const Chart = async () => {
+  const year = new Date().getFullYear() - 1;
   const { bookers, income } = (await getChartData()) as any;
   const { newPrinters, repairedPrinters, repairingPrinters } =
     (await getDoughnutData()) as any;
@@ -13,7 +14,7 @@ const Chart = async () => {
         <div className="card shadow mb-4 mx-2">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">
-              Bevétel és ügyfélszám
+              Bevétel és ügyfélszám ({year})
             </h6>
           </div>
           <div className="card-body">
