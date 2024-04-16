@@ -7,7 +7,7 @@ import Topnav from "./ui/topnav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Alfa-Kontakt",
+  title: "Printer Bookings",
   description: "Printerek bérbeadása",
 };
 

@@ -23,7 +23,7 @@ function Topnav() {
         <div className="mx-3">
           <AiOutlinePrinter style={color}></AiOutlinePrinter>
         </div>
-        <Navbar.Brand href="/">Alfa-Kontakt</Navbar.Brand>
+        <Navbar.Brand href="/">Printer Bookings</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav activeKey={pathname} className="me-auto">
@@ -35,7 +35,7 @@ function Topnav() {
             <Nav.Link href="/services">Hibák</Nav.Link>
             <Nav.Link href="/categories">Kategóriák</Nav.Link>
           </Nav>
-          <UserButton afterSignOutUrl="/"/>
+          <UserButton afterSignOutUrl="/" />
         </Navbar.Collapse>
       </Container>
     </Navbar>
