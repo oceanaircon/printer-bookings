@@ -34,11 +34,7 @@ const CategoriesPage = async () => {
                 <th>{category.name}</th>
                 <td>{category.fee}</td>
                 <td>
-                  <div className="container row">
-                    <div className="col-6">
                       <UpdateCategory id={category.id}></UpdateCategory>
-                    </div>
-                  </div>
                 </td>
               </tr>
             ))}
