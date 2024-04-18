@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import prisma from "@/prisma/client";
 import { UpdateCategory } from "../ui/buttons";
-import { DeleteCategory } from "../ui/deletebuttons";
 
 const CategoriesPage = async () => {
   const categories = await prisma.category.findMany();
@@ -38,9 +37,6 @@ const CategoriesPage = async () => {
                   <div className="container row">
                     <div className="col-6">
                       <UpdateCategory id={category.id}></UpdateCategory>
-                    </div>
-                    <div className="col-6">
-                      <DeleteCategory id={category.id}></DeleteCategory>
                     </div>
                   </div>
                 </td>
