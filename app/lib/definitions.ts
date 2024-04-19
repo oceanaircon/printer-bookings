@@ -31,7 +31,7 @@ export type PrinterField = {
 export type BookingField = {
   id: number;
   bookerId: number;
-  printerId: number;
+  printerId: number | null;
   createdAt: Date;
   discount: number;
   createdBy?: string;
@@ -45,7 +45,7 @@ export type ServiceField = {
 export type WorksheetField = {
   id: number;
   bookingId: number;
-  serviceId: number;
+  serviceId: number | null;
   createdBy: string;
   status: "FOLYAMATBAN" | "BEFEJEZETT";
 };
