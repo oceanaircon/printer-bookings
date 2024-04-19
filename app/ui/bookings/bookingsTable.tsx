@@ -43,9 +43,9 @@ export default async function BookingsTable({
             <td data-label="ID">{booking.id}</td>
             <td data-label="Név">{booking.booker.name}</td>
             <td data-label="Email">{booking.booker.email}</td>
-            <td data-label="Printer">{booking.printer.name}</td>
-            <td data-label="Cikkszám">{booking.printer.serial}</td>
-            <td data-label="Díj">{booking.printer.category.fee}</td>
+            <td data-label="Printer">{booking.printer?.name}</td>
+            <td data-label="Cikkszám">{booking.printer?.serial}</td>
+            <td data-label="Díj">{booking.printer?.category.fee}</td>
             <td data-label="Start">
               {booking.createdAt.toString().slice(0, 16)}
             </td>
@@ -54,16 +54,16 @@ export default async function BookingsTable({
               <NewWorksheetButton id={booking.id} />
             </td>
             <td>
-            <div className="container">
-                  <div className="row">
-                    <div className="col">
-                <UpdateBooking id={booking.id} />
-                </div>
-                    <div className="col">
-                <DeleteBooking id={booking.id} />
-                </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col">
+                    <UpdateBooking id={booking.id} />
+                  </div>
+                  <div className="col">
+                    <DeleteBooking id={booking.id} />
                   </div>
                 </div>
+              </div>
             </td>
           </tr>
         ))}
