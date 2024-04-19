@@ -43,9 +43,9 @@ export default async function WorksheetsTable({
               <td data-label="Cím">{worksheet.booking.booker.address}</td>
               <td data-label="Telefon">{worksheet.booking.booker.phone}</td>
               <td data-label="Email">{worksheet.booking.booker.email}</td>
-              <td data-label="Cikkszám">{worksheet.booking.printer.serial}</td>
-              <td data-label="Printer">{worksheet.booking.printer.name}</td>
-              <td data-label="Hiba neve">{worksheet.service.name}</td>
+              <td data-label="Cikkszám">{worksheet.booking.printer?.serial}</td>
+              <td data-label="Printer">{worksheet.booking.printer?.name}</td>
+              <td data-label="Hiba neve">{worksheet.service?.name}</td>
               <td data-label="Határidő">
                 {worksheet.repairDeadline.toString().slice(0, 16)}
               </td>
@@ -54,13 +54,13 @@ export default async function WorksheetsTable({
                 <div className="container">
                   <div className="row">
                     <div className="col">
-                      <UpdateWorksheet id={worksheet.id}/>
+                      <UpdateWorksheet id={worksheet.id} />
                     </div>
                     <div className="col">
-                      <DeleteWorksheet id={worksheet.id}/>
+                      <DeleteWorksheet id={worksheet.id} />
                     </div>
                     <div className="col">
-                      <PrintWorksheet id={worksheet.id}/>
+                      <PrintWorksheet id={worksheet.id} />
                     </div>
                   </div>
                 </div>

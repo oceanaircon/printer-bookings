@@ -34,7 +34,7 @@ const CategoriesPage = async () => {
                 <th>{category.name}</th>
                 <td>{category.fee}</td>
                 <td>
-                      <UpdateCategory id={category.id}></UpdateCategory>
+                  <UpdateCategory id={category.id}></UpdateCategory>
                 </td>
               </tr>
             ))}
