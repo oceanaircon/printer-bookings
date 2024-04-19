@@ -4,5 +4,5 @@ export default function PrintPage() {
   function handlePrint() {
     window.print();
   }
-  return <button onClick={handlePrint}>Nyomtatás</button>;
+  return <button className="btn btn-dark btn-sm" onClick={handlePrint}>Nyomtatás</button>;
 }
