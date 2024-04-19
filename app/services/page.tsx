@@ -1,8 +1,8 @@
 import React from "react";
 import prisma from "@/prisma/client";
-import { DeleteService } from "../ui/deletebuttons";
+import { DeleteService, DisabledDelete } from "../ui/deletebuttons";
 import { UpdateService } from "../ui/buttons";
-
+import { checkServiceOnWorksheet } from "../lib/actions";
 
 const ServicesPage = async () => {
   const services = await prisma.service.findMany();
@@ -29,7 +29,7 @@ const ServicesPage = async () => {
             </tr>
           </thead>
           <tbody>
-            {services.map((service) => (
+            {services.map(async (service) => (
               <tr key={service.id}>
                 <th>{service.id}</th>
                 <td>{service.name}</td>
@@ -39,7 +39,11 @@ const ServicesPage = async () => {
                       <UpdateService id={service.id}></UpdateService>
                     </div>
                     <div className="col-6">
-                      <DeleteService id={service.id}></DeleteService>
+                      {(await checkServiceOnWorksheet(service.id)) ? (
+                        <DisabledDelete />
+                      ) : (
+                        <DeleteService id={service.id} />
+                      )}
                     </div>
                   </div>
                 </td>

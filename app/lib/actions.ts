@@ -445,13 +445,31 @@ export async function deleteService(id: number) {
 
 export async function deleteBooking(id: number) {
   try {
-    await prisma.booking.delete({ where: { id: id } });
+    const deleteworksheets = await prisma.worksheet.deleteMany({
+      where: { bookingId: id },
+    });
+    const deletebooking = await prisma.booking.delete({ where: { id: id } });
+    revalidatePath("/bookings");
+
+    const printerid = (await prisma.booking.findUnique({
+      where: { id: id },
+      select: { printerId: true },
+    })) as any;
+    const updateprinterstatus = await prisma.printer.update({
+      where: {
+        id: Number(printerid),
+      },
+      data: {
+        status: "SZABAD",
+      },
+    });
   } catch (error) {
     return {
       message: "Nem sikerült törölni a szerződést.",
     };
   }
   revalidatePath("/bookings");
+  redirect("/bookings");
 }
 
 export async function deleteWorksheet(id: number) {
@@ -463,4 +481,25 @@ export async function deleteWorksheet(id: number) {
     };
   }
   revalidatePath("/worksheets");
+}
+
+export async function checkServiceOnWorksheet(id: number) {
+  try {
+    const idsWithStatusF = await prisma.worksheet.findMany({
+      where: {
+        serviceId: id,
+        status: "FOLYAMATBAN",
+      },
+      select: {
+        serviceId: true,
+      },
+    });
+    if (idsWithStatusF.length > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  } catch (error) {
+    return 1;
+  }
 }
