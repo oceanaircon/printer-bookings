@@ -70,7 +70,7 @@ export default function Form({
             <select
               name="printerId"
               id="printer"
-              defaultValue={booking.printerId}
+              defaultValue={booking.printerId as any}
               className="input-group-text col-12"
             >
               {printers.map((printer) => (
