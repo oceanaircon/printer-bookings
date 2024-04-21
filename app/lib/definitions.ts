@@ -58,3 +58,12 @@ export type UpdateWorksheetField = {
   createdBy: string;
   status: "FOLYAMATBAN" | "BEFEJEZETT";
 };
+
+export type UpdateBookingField = {
+  id: number;
+  bookerId: number;
+  printerId: number | null;
+  createdAt: string;
+  discount: number;
+  createdBy?: string;
+};

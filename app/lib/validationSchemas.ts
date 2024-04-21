@@ -46,3 +46,11 @@ export const updateWorksheetSchema = z.object({
   status: z.enum(["FOLYAMATBAN", "BEFEJEZETT"]),
   createdBy: z.string(),
 });
+
+export const updateBookingSchema = z.object({
+  bookerId: z.coerce.number(),
+  printerId: z.coerce.number(),
+  createdAt: z.string(),
+  discount: z.coerce.number(),
+  createdBy: z.string(),
+});
