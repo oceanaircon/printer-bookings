@@ -1,4 +1,4 @@
-import { BookerField, BookingField, PrinterField } from "@/app/lib/definitions";
+import { BookerField, UpdateBookingField, PrinterField } from "@/app/lib/definitions";
 import { updateBooking } from "@/app/lib/actions";
 
 export default function Form({
@@ -7,7 +7,7 @@ export default function Form({
   printers,
   userId,
 }: {
-  booking: BookingField;
+  booking: UpdateBookingField;
   bookers: BookerField[];
   printers: PrinterField[];
   userId: string;
@@ -79,6 +79,18 @@ export default function Form({
                 </option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <label htmlFor="createdAt">Start:</label>
+          </div>
+          <div>
+            <input
+              type="datetime"
+              name="createdAt"
+              className="input-group-text mb-3 col-12"
+              defaultValue={booking.createdAt}
+            ></input>
           </div>
 
           <div className="mb-4">

@@ -11,6 +11,7 @@ import {
   createBookingSchema,
   createWorksheetSchema,
   updateWorksheetSchema,
+  updateBookingSchema,
 } from "./validationSchemas";
 
 export async function createUser(email: string, userid: string) {
@@ -288,10 +289,11 @@ export async function updatePrinter(id: number, formData: FormData) {
 }
 
 export async function updateBooking(id: number, formData: FormData) {
-  const { bookerId, printerId, discount, createdBy } =
-    createBookingSchema.parse({
+  const { bookerId, printerId, createdAt, discount, createdBy } =
+    updateBookingSchema.parse({
       bookerId: formData.get("bookerId"),
       printerId: formData.get("printerId"),
+      createdAt: formData.get("createdAt"),
       discount: formData.get("discount"),
       createdBy: formData.get("userId"),
     });
@@ -303,6 +305,7 @@ export async function updateBooking(id: number, formData: FormData) {
       data: {
         bookerId: bookerId,
         printerId: printerId,
+        createdAt: createdAt,
         discount: discount,
         createdBy: createdBy,
       },
@@ -500,6 +503,6 @@ export async function checkServiceOnWorksheet(id: number) {
       return 0;
     }
   } catch (error) {
-    return 1;
+    return error;
   }
 }
