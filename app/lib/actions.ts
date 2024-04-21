@@ -305,7 +305,7 @@ export async function updateBooking(id: number, formData: FormData) {
       data: {
         bookerId: bookerId,
         printerId: printerId,
-        createdAt: createdAt,
+        createdAt: new Date(createdAt),
         discount: discount,
         createdBy: createdBy,
       },
