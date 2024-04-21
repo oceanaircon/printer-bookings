@@ -13,45 +13,70 @@ async function Print({ params }: { params: { id: number } }) {
   const date2 = new Date(value[2]);
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
+    <div style={{ margin: "3rem" }}>
+
       <div>
         <br />
-        <ul>
-          <h6>
-            <PrintPage />
-          </h6>
-          <br />
-          <li>Worksheet ID: {id}</li>
-          <br />
-          <li>Error Reporting Date: {date1.toLocaleDateString("hu-HU")}</li>
-          <br />
-          <li>Repair Deadline: {date2.toLocaleDateString("hu-HU")}</li>
-          <br />
-          <li>
-            <b>Name: {Object.values(Object.values(value[3])[0])[0]}</b>
-          </li>
-          <li>Email: {Object.values(Object.values(value[3])[0])[1]}</li>
-          <br />
-          <li>
-            <b>Address: {Object.values(Object.values(value[3])[0])[2]}</b>
-          </li>
-          <li>Phone: {Object.values(Object.values(value[3])[0])[3]}</li>
-          <br />
-          <li>
-            <b>Printer: {Object.values(Object.values(value[3])[1])[0]}</b>
-          </li>
-          <li>Serial: {Object.values(Object.values(value[3])[1])[1]}</li>
-          <br />
-          <li>
-            <b>Service: {Object.values(value[4])[0]}</b>
-          </li>
-          <br />
-          <li>Status: {value[5]}</li>
-        </ul>
+        <table>
+          <tbody>
+            <tr>
+              <th>Munkalap azonosító:</th>
+              <td>{id}</td>
+            </tr>
+            <tr>
+              <th>Hiba bejelentés dátuma:</th>
+              <td>{date1.toLocaleDateString("hu-HU")}</td>
+            </tr>
+            <tr>
+              <th>Javítási határidő:</th>
+              <td>{date2.toLocaleDateString("hu-HU")}</td>
+            </tr>
+            <tr>
+              <th>Név:</th>
+              <td><b>{Object.values(Object.values(value[3])[0])[0]}</b></td>
+            </tr>
+            <tr>
+              <th>Email cím:</th>
+              <td>{Object.values(Object.values(value[3])[0])[1]}</td>
+            </tr>
+            <tr>
+              <th>Cím:</th>
+              <td><b>{Object.values(Object.values(value[3])[0])[2]}</b></td>
+            </tr>
+            <tr>
+              <th>Telefonszám:</th>
+              <td>{Object.values(Object.values(value[3])[0])[3]}</td>
+            </tr>
+            <tr>
+              <th>Nyomtató típusa:</th>
+              <td><b>{Object.values(Object.values(value[3])[1])[0]}</b></td>
+            </tr>
+            <tr>
+              <th>Szériaszám:</th>
+              <td>{Object.values(Object.values(value[3])[1])[1]}</td>
+            </tr>
+            <tr>
+              <th>Szerviz:</th>
+              <td><b>{Object.values(value[4])[0]}</b></td>
+            </tr>
+            <tr>
+              <th>Ügyfél aláírása:</th>
+              <td>_____________________</td>
+            </tr>
+            <tr>
+              <th>Szerviz aláírása:</th>
+              <td>_____________________</td>
+            </tr>
+            <tr>
+              <th>Dátum:</th>
+              <td>_____________________</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <br />
+      <br />
+      <h6><PrintPage /></h6>
     </div>
   );
 }
