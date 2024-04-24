@@ -146,14 +146,8 @@ export async function createBooking(formData: FormData) {
         createdBy: createdBy,
       },
     });
-  } catch (error) {
-    return {
-      message: "Nem sikerült létrehozni a szerződést.",
-    };
-  }
 
-  // szükséges, hogy új szerződés létrejötte után a printer státusza FOGLALT legyen
-  try {
+    // szükséges, hogy új szerződés létrejötte után a printer státusza FOGLALT legyen
     await prisma.printer.update({
       where: {
         id: printerId,
@@ -164,7 +158,7 @@ export async function createBooking(formData: FormData) {
     });
   } catch (error) {
     return {
-      message: "Nem sikerült frissíteni a nyomtató állapotát.",
+      message: "Nem sikerült létrehozni a szerződést.",
     };
   }
   revalidatePath("/printers");
