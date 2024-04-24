@@ -47,7 +47,7 @@ export default async function BookingsTable({
               {booking.printer ? booking.printer.name : "TÖRÖLT PRINTER"}
             </td>
             <td data-label="Cikkszám">
-              {booking.printer ? booking.printer.serial : "TÖRÖLT PRINTER"}
+              {booking.printer ? booking.printer.serial : "0"}
             </td>
             <td data-label="Díj">
               {booking.printer ? booking.printer.category.fee : "TÖRÖLVE"}
