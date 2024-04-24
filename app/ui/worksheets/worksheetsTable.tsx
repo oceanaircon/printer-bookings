@@ -1,4 +1,3 @@
-import React from "react";
 import { PrintWorksheet, UpdateWorksheet } from "../buttons";
 import { DeleteWorksheet } from "../deletebuttons";
 import { fetchFilteredWorksheets } from "../../lib/data";
@@ -43,11 +42,7 @@ export default async function WorksheetsTable({
               <td data-label="Cím">{worksheet.booking.booker.address}</td>
               <td data-label="Telefon">{worksheet.booking.booker.phone}</td>
               <td data-label="Email">{worksheet.booking.booker.email}</td>
-              <td data-label="Cikkszám">
-                {worksheet.booking.printer
-                  ? worksheet.booking.printer.serial
-                  : "TÖRÖLT PRINTER"}
-              </td>
+              <td data-label="Cikkszám">{worksheet.booking.printer?.serial}</td>
               <td data-label="Printer">
                 {worksheet.booking.printer
                   ? worksheet.booking.printer.name
