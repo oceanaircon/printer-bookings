@@ -1,4 +1,8 @@
-import { BookerField, UpdateBookingField, PrinterField } from "@/app/lib/definitions";
+import {
+  BookerField,
+  UpdateBookingField,
+  PrinterField,
+} from "@/app/lib/definitions";
 import { updateBooking } from "@/app/lib/actions";
 
 export default function Form({
@@ -70,7 +74,7 @@ export default function Form({
             <select
               name="printerId"
               id="printer"
-              defaultValue={booking.printerId as any}
+              defaultValue={booking.printerId}
               className="input-group-text col-12"
             >
               {printers.map((printer) => (
