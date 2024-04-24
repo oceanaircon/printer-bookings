@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import prisma from "@/prisma/client";
 import { UpdateCategory } from "../ui/buttons";
 

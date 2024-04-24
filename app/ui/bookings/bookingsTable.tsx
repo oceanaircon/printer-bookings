@@ -43,9 +43,15 @@ export default async function BookingsTable({
             <td data-label="ID">{booking.id}</td>
             <td data-label="Név">{booking.booker.name}</td>
             <td data-label="Email">{booking.booker.email}</td>
-            <td data-label="Printer">{booking.printer?.name}</td>
-            <td data-label="Cikkszám">{booking.printer?.serial}</td>
-            <td data-label="Díj">{booking.printer?.category.fee}</td>
+            <td data-label="Printer">
+              {booking.printer ? booking.printer.name : "TÖRÖLT PRINTER"}
+            </td>
+            <td data-label="Cikkszám">
+              {booking.printer ? booking.printer.serial : "TÖRÖLT PRINTER"}
+            </td>
+            <td data-label="Díj">
+              {booking.printer ? booking.printer.category.fee : "TÖRÖLVE"}
+            </td>
             <td data-label="Start">
               {booking.createdAt.toString().slice(0, 16)}
             </td>
