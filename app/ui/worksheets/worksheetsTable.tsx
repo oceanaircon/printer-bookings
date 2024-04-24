@@ -45,7 +45,9 @@ export default async function WorksheetsTable({
               <td data-label="Email">{worksheet.booking.booker.email}</td>
               <td data-label="Cikkszám">{worksheet.booking.printer?.serial}</td>
               <td data-label="Printer">{worksheet.booking.printer?.name}</td>
-              <td data-label="Hiba neve">{worksheet.service?.name}</td>
+              <td data-label="Hiba neve">
+                {worksheet.service ? worksheet.service.name : "TÖRÖLT HIBA"}
+              </td>
               <td data-label="Határidő">
                 {worksheet.repairDeadline.toString().slice(0, 16)}
               </td>
