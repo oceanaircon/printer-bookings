@@ -20,7 +20,7 @@ export type BookerField = {
 };
 
 export type PrinterField = {
-  id: number;
+  id: number | any;
   categoryId: number;
   name: string;
   serial: string;
@@ -62,7 +62,7 @@ export type UpdateWorksheetField = {
 export type UpdateBookingField = {
   id: number;
   bookerId: number;
-  printerId: number | null;
+  printerId: any;
   createdAt: string;
   discount: number;
   createdBy?: string;

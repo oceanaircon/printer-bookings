@@ -429,7 +429,7 @@ export async function fetchWorksheetByIdToPDF(id: number) {
       },
       where: {
         id: Number(id),
-      }
+      },
     });
 
     return worksheet as any;
@@ -478,13 +478,14 @@ async function getFeesPerMonth() {
 
   try {
     feesPerMonth =
-      await prisma.$queryRaw`SELECT SUM(Category.fee) AS "fee", MONTH(createdAt) AS "month" FROM Booking 
+      await prisma.$queryRaw`SELECT COUNT(*) AS "bookers", SUM(Category.fee) AS "fee", MONTH(createdAt) AS "month" FROM Booking 
       INNER JOIN Printer ON Booking.printerId = Printer.id 
       INNER JOIN Category ON Printer.categoryId = Category.id
-      WHERE YEAR(createdAt) LIKE (YEAR(CURDATE())-1)
+      WHERE YEAR(createdAt) = (YEAR(CURDATE())-1)
       GROUP BY MONTH(createdAt)
       ORDER BY MONTH(createdAt);`;
 
+    console.log(feesPerMonth);
     return feesPerMonth;
   } catch (error) {
     console.error("Hiba: havi bevétel lekérdezés");
@@ -493,15 +494,9 @@ async function getFeesPerMonth() {
 
 export async function fetchCardData() {
   noStore();
-  let feesPerYear = 0;
+  let incomes = (await getChartData()).income;
 
   try {
-    const feesPerMonth = (await getFeesPerMonth()) as any;
-
-    for (let index = 0; index < feesPerMonth.length; index++) {
-      feesPerYear += Number(feesPerMonth[index].fee);
-    }
-
     const pendingWorksheetsPromise = await prisma.worksheet.count({
       where: {
         status: "FOLYAMATBAN",
@@ -519,8 +514,13 @@ export async function fetchCardData() {
       closedWorksheetsPromise,
     ]);
 
-    const monthlyIncome = feesPerYear / 12;
-    const yearIncome = feesPerYear;
+    let yearIncome = 0;
+    for (let index = 0; index < incomes.length; index++) {
+      const element = incomes[index];
+      yearIncome += Number(element);
+    }
+
+    const monthlyIncome = Math.floor(yearIncome / 12);
     const pendingWorksheets = Number(data[0] ?? "0");
     const closedWorksheets = Number(data[1] ?? "0");
 
@@ -538,31 +538,23 @@ export async function fetchCardData() {
 export const getChartData = async () => {
   noStore();
 
-  type bookersData = [{ bookers: number; month: number }];
-
   let bookers = [];
   let income = [];
 
   const feesPerMonth = (await getFeesPerMonth()) as any;
+  income[0] = Number(feesPerMonth[0].fee);
+
+  for (let index = 1; index < feesPerMonth.length; index++) {
+    const element = feesPerMonth[index];
+    income[index] = Number(element.fee) + income[index - 1];
+  }
 
   for (let index = 0; index < feesPerMonth.length; index++) {
     const element = feesPerMonth[index];
-    income[index] = Number(element.fee);
+    bookers[index] = Number(Number(element.bookers) * 10000);
   }
 
-  try {
-    const bookersPerMonth: bookersData =
-      await prisma.$queryRaw`SELECT COUNT(bookerId) AS "bookers", MONTH(createdAt) AS "month"
-  FROM Booking GROUP BY MONTH(createdAt) ORDER BY MONTH(createdAt);`;
-
-    for (let index = 0; index < bookersPerMonth.length; index++) {
-      const element = bookersPerMonth[index];
-      bookers[index] = Number(Number(element.bookers) * 10000);
-    }
-  } catch (error) {
-    console.error("Hiba: havi ügyfélszám lekérdezés");
-  }
-
+  console.log(bookers, income);
   return { bookers, income };
 };
 
@@ -603,6 +595,7 @@ export async function getDoughnutData() {
 
 // A lejárt munkalap állapota BEFEJEZETT ******************************************
 
+const ActualDate = Number(Date.now());
 export async function updateWorksheetStatus() {
   noStore();
   const statuses = await prisma.worksheet.findMany({
@@ -614,7 +607,7 @@ export async function updateWorksheetStatus() {
   });
 
   statuses.forEach(async (element) => {
-    if (Number(element.repairDeadline) < Number(Date.now())) {
+    if (Number(element.repairDeadline) < ActualDate) {
       await prisma.worksheet.update({
         where: {
           id: element.id,

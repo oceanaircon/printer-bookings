@@ -14,6 +14,8 @@ import {
   updateBookingSchema,
 } from "./validationSchemas";
 
+// CREATE ***********************************************************************************************************
+
 export async function createUser(email: string, userid: string) {
   try {
     await prisma.user.create({
@@ -201,7 +203,7 @@ export async function createWorksheet(formData: FormData) {
   redirect("/worksheets");
 }
 
-// UPDATE
+// UPDATE ***********************************************************************************************************
 
 export async function updateBooker(id: number, formData: FormData) {
   const { name, address, taxnumber, phone, email } = createBookerSchema.parse({
@@ -400,7 +402,7 @@ export async function updateWorksheet(id: number, formData: FormData) {
   redirect("/worksheets");
 }
 
-// DELETE
+// DELETE **************************************************************************************************************
 
 export async function deleteBooker(id: number) {
   try {
@@ -484,25 +486,4 @@ export async function deleteWorksheet(id: number) {
     };
   }
   revalidatePath("/worksheets");
-}
-
-export async function checkServiceOnWorksheet(id: number) {
-  try {
-    const idsWithStatusF = await prisma.worksheet.findMany({
-      where: {
-        serviceId: id,
-        status: "FOLYAMATBAN",
-      },
-      select: {
-        serviceId: true,
-      },
-    });
-    if (idsWithStatusF.length > 0) {
-      return 1;
-    } else {
-      return 0;
-    }
-  } catch (error) {
-    return error;
-  }
 }
