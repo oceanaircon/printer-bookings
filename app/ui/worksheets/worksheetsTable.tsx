@@ -42,7 +42,11 @@ export default async function WorksheetsTable({
               <td data-label="Cím">{worksheet.booking.booker.address}</td>
               <td data-label="Telefon">{worksheet.booking.booker.phone}</td>
               <td data-label="Email">{worksheet.booking.booker.email}</td>
-              <td data-label="Cikkszám">{worksheet.booking.printer?.serial}</td>
+              <td data-label="Cikkszám">
+                {worksheet.booking.printer
+                  ? worksheet.booking.printer.serial
+                  : "0"}
+              </td>
               <td data-label="Printer">
                 {worksheet.booking.printer
                   ? worksheet.booking.printer.name
