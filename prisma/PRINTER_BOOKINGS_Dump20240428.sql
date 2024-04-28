@@ -18,7 +18,7 @@ CREATE TABLE `Booker` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Booker_email_key` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --
@@ -28,7 +28,7 @@ CREATE TABLE `Booker` (
 CREATE TABLE `Booking` (
   `id` int NOT NULL AUTO_INCREMENT,
   `bookerId` int NOT NULL,
-  `printerId` int NOT NULL,
+  `printerId` int DEFAULT NULL,
   `createdAt` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `discount` int NOT NULL DEFAULT '0',
   `createdBy` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE `Booking` (
   KEY `Booking_createdBy_fkey` (`createdBy`),
   CONSTRAINT `Booking_bookerId_fkey` FOREIGN KEY (`bookerId`) REFERENCES `Booker` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Booking_createdBy_fkey` FOREIGN KEY (`createdBy`) REFERENCES `User` (`userId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Booking_printerId_fkey` FOREIGN KEY (`printerId`) REFERENCES `Printer` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `Booking_printerId_fkey` FOREIGN KEY (`printerId`) REFERENCES `Printer` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `Category` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fee` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `Printer` (
   UNIQUE KEY `Printer_serial_key` (`serial`),
   KEY `Printer_categoryId_fkey` (`categoryId`),
   CONSTRAINT `Printer_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `Category` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE `Service` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Teszt Munka',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `User_email_key` (`email`),
   UNIQUE KEY `User_userId_key` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --
@@ -105,19 +105,19 @@ CREATE TABLE `User` (
 CREATE TABLE `Worksheet` (
   `id` int NOT NULL AUTO_INCREMENT,
   `bookingId` int NOT NULL,
-  `serviceId` int NOT NULL,
+  `serviceId` int DEFAULT NULL,
   `errorReportingTime` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `repairDeadline` datetime(3) NOT NULL,
   `status` enum('FOLYAMATBAN','BEFEJEZETT') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FOLYAMATBAN',
   `createdBy` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Worksheet_bookingId_fkey` (`bookingId`),
-  KEY `Worksheet_serviceId_fkey` (`serviceId`),
   KEY `Worksheet_createdBy_fkey` (`createdBy`),
+  KEY `Worksheet_serviceId_fkey` (`serviceId`),
   CONSTRAINT `Worksheet_bookingId_fkey` FOREIGN KEY (`bookingId`) REFERENCES `Booking` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Worksheet_createdBy_fkey` FOREIGN KEY (`createdBy`) REFERENCES `User` (`userId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Worksheet_serviceId_fkey` FOREIGN KEY (`serviceId`) REFERENCES `Service` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `Worksheet_serviceId_fkey` FOREIGN KEY (`serviceId`) REFERENCES `Service` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
--- Dump completed on 2024-04-16 14:55:44
+-- Dump completed on 2024-04-28 14:55:44
