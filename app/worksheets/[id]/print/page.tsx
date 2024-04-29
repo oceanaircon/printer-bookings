@@ -14,7 +14,6 @@ async function Print({ params }: { params: { id: number } }) {
 
   return (
     <div style={{ margin: "3rem" }}>
-
       <div>
         <br />
         <table>
@@ -33,7 +32,9 @@ async function Print({ params }: { params: { id: number } }) {
             </tr>
             <tr>
               <th>Név:</th>
-              <td><b>{Object.values(Object.values(value[3])[0])[0]}</b></td>
+              <td>
+                <b>{Object.values(Object.values(value[3])[0])[0]}</b>
+              </td>
             </tr>
             <tr>
               <th>Email cím:</th>
@@ -41,7 +42,9 @@ async function Print({ params }: { params: { id: number } }) {
             </tr>
             <tr>
               <th>Cím:</th>
-              <td><b>{Object.values(Object.values(value[3])[0])[2]}</b></td>
+              <td>
+                <b>{Object.values(Object.values(value[3])[0])[2]}</b>
+              </td>
             </tr>
             <tr>
               <th>Telefonszám:</th>
@@ -49,15 +52,31 @@ async function Print({ params }: { params: { id: number } }) {
             </tr>
             <tr>
               <th>Nyomtató típusa:</th>
-              <td><b>{Object.values(Object.values(value[3])[1])[0]}</b></td>
+              <td>
+                <b>
+                  {Object.values(Object.values(value[3] || {})[1] || {})[0]
+                    ? Object.values(Object.values(value[3])[1])[0]
+                    : "TÖRÖLT PRINTER"}
+                </b>
+              </td>
             </tr>
             <tr>
-              <th>Szériaszám:</th>
-              <td>{Object.values(Object.values(value[3])[1])[1]}</td>
+              <th>Cikkszám:</th>
+              <td>
+                {Object.values(Object.values(value[3] || {})[1] || {})[1]
+                  ? Object.values(Object.values(value[3])[1])[1]
+                  : "0"}
+              </td>
             </tr>
             <tr>
-              <th>Szerviz:</th>
-              <td><b>{Object.values(value[4])[0]}</b></td>
+              <th>Hiba:</th>
+              <td>
+                <b>
+                  {Object.values(value[4] || {})[0]
+                    ? Object.values(value[4])[0]
+                    : "TÖRÖLT HIBA"}
+                </b>
+              </td>
             </tr>
             <tr>
               <th>Ügyfél aláírása:</th>
@@ -76,7 +95,9 @@ async function Print({ params }: { params: { id: number } }) {
       </div>
       <br />
       <br />
-      <h6><PrintPage /></h6>
+      <h6>
+        <PrintPage />
+      </h6>
     </div>
   );
 }
