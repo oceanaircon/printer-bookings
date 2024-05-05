@@ -1,3 +1,0 @@
-update Worksheet 
-set repairDeadline = FROM_UNIXTIME(UNIX_TIMESTAMP('2024-01-01 00:00:27.000') + FLOOR(0 + (RAND() * 31535000)))
-where id = 4; 
