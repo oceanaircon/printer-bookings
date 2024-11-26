@@ -8,20 +8,20 @@ const CategoriesPage = async () => {
   return (
     <div className="my-4 py-5">
       <div className="table-responsive text-center">
-        <h3>Kategóriák</h3>
+        <h3>Categories</h3>
         <table className="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Név</th>
-              <th>Díj</th>
+              <th>Name</th>
+              <th>Price</th>
               <th>
                 <a
                   href="/categories/new"
                   className=" btn btn-secondary btn-sm"
                   aria-current="page"
                 >
-                  Új kategória
+                  New Category
                 </a>
               </th>
             </tr>

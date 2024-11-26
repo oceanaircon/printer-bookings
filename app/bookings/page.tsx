@@ -21,10 +21,10 @@ const BookingsPage = async ({
   return (
     <div className=" py-5 my-4 row justify-content-evenly">
       <div className="col row-auto text-center">
-        <h3>Szerződések</h3>
-        <Search placeholder="ügyfél neve, email-címe vagy cikkszám..." />
+        <h3>Bookings</h3>
+        <Search placeholder="Booker's name, email or serial..." />
         <a href="/bookings/new" className="mobile-button" aria-current="page">
-        Új szerződés
+        New Booking
       </a>
         <Suspense key={query + currentPage} fallback={""}>
           <BookingsTable query={query} currentPage={currentPage} />
