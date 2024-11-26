@@ -5,10 +5,10 @@ export default function NotFound() {
     <div className="flex items-center justify-center h-screen mt-5 pt-5">
       <div className="bg-white shadow-md rounded-lg p-8 text-center">
         <h2 className="text-2xl font-semibold">404 Not Found</h2>
-        <p className="mt-4">A keresett ügyfél nem található.</p>
+        <p className="mt-4">Booker not found</p>
         <div className="mt-6">
           <Link href="/bookers">
-            Vissza
+            Back
           </Link>
         </div>
       </div>

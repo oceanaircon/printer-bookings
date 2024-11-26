@@ -21,11 +21,11 @@ const BookersPage = async ({
 
   return (
     <div className="my-4 py-5 text-center">
-      <h3>Ügyfelek</h3>
+      <h3>Bookers</h3>
 
-      <Search placeholder="ügyfél neve, címe vagy email-címe..." />
+      <Search placeholder="Booker's name, address or email..." />
       <a href="/bookers/new" className="mobile-button" aria-current="page">
-        Új ügyfél
+        New Booker
       </a>
       <Suspense key={query + currentPage} fallback={""}>
         <BookersTable query={query} currentPage={currentPage} />
