@@ -21,10 +21,10 @@ export default function Form({ booker }: { booker: BookerField }) {
           flexDirection: "column",
         }}
       >
-        <h3 className="mb-4">Ügyfél szerkesztése</h3>
+        <h3 className="mb-4">Edit Booker</h3>
 
         <input type="hidden" name="id" value={booker.id} />
-        <label htmlFor="name">Név</label>
+        <label htmlFor="name">Name</label>
 
         <input
           type="text"
@@ -33,7 +33,7 @@ export default function Form({ booker }: { booker: BookerField }) {
           defaultValue={booker.name}
         />
 
-        <label htmlFor="address">Cím</label>
+        <label htmlFor="address">Address</label>
 
         <input
           type="text"
@@ -42,7 +42,7 @@ export default function Form({ booker }: { booker: BookerField }) {
           defaultValue={booker.address}
         />
 
-        <label htmlFor="taxnumber">Adószám</label>
+        <label htmlFor="taxnumber">Tax Number</label>
 
         <input
           type="text"
@@ -51,7 +51,7 @@ export default function Form({ booker }: { booker: BookerField }) {
           defaultValue={booker.taxnumber}
         />
 
-        <label htmlFor="phone">Telefon</label>
+        <label htmlFor="phone">Phone</label>
 
         <input
           type="text"
@@ -71,7 +71,7 @@ export default function Form({ booker }: { booker: BookerField }) {
         <div className="mb-3 d-flex justify-content-between">
           <input
             type="submit"
-            value="Mehet"
+            value="Submit"
             className="btn btn-outline-success"
           />
           <a
@@ -80,7 +80,7 @@ export default function Form({ booker }: { booker: BookerField }) {
             className="btn btn-outline-danger"
             style={{ marginLeft: "10px" }}
           >
-            Mégse
+            Cancel
           </a>
           </div>
       </form>

@@ -18,18 +18,18 @@ export default async function BookersTable({
         <thead>
           <tr>
             <th>ID</th>
-            <th>Név</th>
+            <th>Name</th>
             <th>Email</th>
-            <th>Telefon</th>
-            <th>Cím</th>
-            <th>Adószám</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Tax Number</th>
             <th>
               <a
                 href="/bookers/new"
                 className=" btn btn-secondary btn-sm"
                 aria-current="page"
               >
-                Új ügyfél
+                New Booker
               </a>
             </th>
           </tr>

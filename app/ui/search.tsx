@@ -9,7 +9,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
 
   const handleSearch = useDebouncedCallback((term) => {
-    console.log(`Keresés... ${term}`);
+    console.log(`Search... ${term}`);
 
     const params = new URLSearchParams(searchParams);
 
@@ -26,7 +26,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   return (
     <div className="input-group mb-3" id="inputGroup-sizing-default">
       <label htmlFor="search" className="sr-only">
-        <span className="input-group-text">Keresés:</span>
+        <span className="input-group-text">Search:</span>
       </label>
       &nbsp;&nbsp;
       <input

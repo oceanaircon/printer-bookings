@@ -16,10 +16,10 @@ export default async function CardWrapper() {
 
   return (
     <>
-      <Card title="Havi átlag" value={monthlyIncome} type="first" />
-      <Card title="Éves bevétel" value={yearIncome} type="second" />
-      <Card title="Függő munkalapok" value={pendingWorksheets} type="third" />
-      <Card title="Lezárt munkalapok" value={closedWorksheets} type="fourth" />
+      <Card title="Monthly Average" value={monthlyIncome} type="first" />
+      <Card title="Year Income" value={yearIncome} type="second" />
+      <Card title="Pending Worksheets" value={pendingWorksheets} type="third" />
+      <Card title="Closed Worksheets" value={closedWorksheets} type="fourth" />
     </>
   );
 }

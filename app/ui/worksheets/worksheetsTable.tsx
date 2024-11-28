@@ -2,6 +2,7 @@ import { PrintWorksheet, UpdateWorksheet } from "../buttons";
 import { DeleteWorksheet } from "../deletebuttons";
 import { fetchFilteredWorksheets } from "../../lib/data";
 import "../custom.scss";
+import { auth } from "@clerk/nextjs";
 
 export default async function WorksheetsTable({
   query,
@@ -12,22 +13,24 @@ export default async function WorksheetsTable({
 }) {
   const worksheets = await fetchFilteredWorksheets(query, currentPage);
 
+  const { userId } = auth();
+
   return (
     <div className="table-responsive">
       <table className="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Időpont</th>
-            <th>Bejelentő</th>
-            <th>Cím</th>
-            <th>Telefon</th>
+            <th>Time</th>
+            <th>Booker</th>
+            <th>Address</th>
+            <th>Phone</th>
             <th>Email</th>
-            <th>Printer cikkszám</th>
+            <th>Serial</th>
             <th>Printer</th>
-            <th>Hiba neve</th>
-            <th>Határidő</th>
-            <th>Állapot</th>
+            <th>Service</th>
+            <th>Deadline</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
@@ -50,10 +53,10 @@ export default async function WorksheetsTable({
               <td data-label="Printer">
                 {worksheet.booking.printer
                   ? worksheet.booking.printer.name
-                  : "TÖRÖLT PRINTER"}
+                  : "DELETED PRINTER"}
               </td>
               <td data-label="Hiba neve">
-                {worksheet.service ? worksheet.service.name : "TÖRÖLT HIBA"}
+                {worksheet.service ? worksheet.service.name : "DELETED SERVICE"}
               </td>
               <td data-label="Határidő">
                 {worksheet.repairDeadline.toString().slice(0, 16)}
@@ -65,7 +68,12 @@ export default async function WorksheetsTable({
                     <div className="col">
                       <UpdateWorksheet id={worksheet.id} />
                     </div>
-                    <div className="col">
+                    <div
+                      className="col"
+                      style={{
+                        display: userId ? "block" : "none",
+                      }}
+                    >
                       <DeleteWorksheet id={worksheet.id} />
                     </div>
                     <div className="col">

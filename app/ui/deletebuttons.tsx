@@ -12,7 +12,7 @@ export function DeletePrinter({ id }: { id: number }) {
   const deletePrinterWithId = deletePrinter.bind(null, id);
 
   const onSubmit = () => {
-    if (confirm("Biztosan törölni akarod?")) {
+    if (confirm("Are you sure?")) {
       deletePrinterWithId();
     }
   };
@@ -36,7 +36,7 @@ export function DeleteCategory({ id }: { id: number }) {
   const deleteCategoryWithId = deleteCategory.bind(null, id);
 
   const onSubmit = () => {
-    if (confirm("Biztosan törölni akarod?")) {
+    if (confirm("Are you sure?")) {
       deleteCategoryWithId();
     }
   };
@@ -60,7 +60,7 @@ export function DeleteService({ id }: { id: number }) {
   const deleteServiceWithId = deleteService.bind(null, id);
 
   const onSubmit = () => {
-    if (confirm("Biztosan törölni akarod?")) {
+    if (confirm("Are you sure?")) {
       deleteServiceWithId();
     }
   };
@@ -84,7 +84,7 @@ export function DeleteBooking({ id }: { id: number }) {
   const deleteBookingWithId = deleteBooking.bind(null, id);
 
   const onSubmit = () => {
-    if (confirm("Biztosan törölni akarod?")) {
+    if (confirm("Are you sure?")) {
       deleteBookingWithId();
     }
   };
@@ -108,7 +108,7 @@ export function DeleteWorksheet({ id }: { id: number }) {
   const deleteWorksheetWithId = deleteWorksheet.bind(null, id);
 
   const onSubmit = () => {
-    if (confirm("Biztosan törölni akarod?")) {
+    if (confirm("Are you sure?")) {
       deleteWorksheetWithId();
     }
   };

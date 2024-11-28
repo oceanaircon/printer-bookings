@@ -16,7 +16,7 @@ const DoughnutChart = ({
     <div>
       <Doughnut
         data={{
-          labels: ["Új", "Javított", "Javítás alatt"],
+          labels: ["New", "Repaired", "Repairing"],
           datasets: [
             {
               label: "Printerek",
