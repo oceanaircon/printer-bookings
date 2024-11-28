@@ -2,7 +2,8 @@ import React from "react";
 import { UpdatePrinter } from "../buttons";
 import { DeletePrinter } from "../deletebuttons";
 import { fetchFilteredPrinters } from "../../lib/data";
-import '../custom.scss';
+import "../custom.scss";
+import { auth } from "@clerk/nextjs";
 
 export default async function PrintersTable({
   query,
@@ -13,17 +14,19 @@ export default async function PrintersTable({
 }) {
   const printers = await fetchFilteredPrinters(query, currentPage);
 
+  const { userId } = auth();
+
   return (
     <div className="table-responsive">
       <table className="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Cikkszám</th>
-            <th>Név</th>
-            <th>Kategória</th>
-            <th>Leírás</th>
-            <th>Állapot</th>
+            <th>Serial</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Status</th>
             <th>
               {" "}
               <a
@@ -51,7 +54,12 @@ export default async function PrintersTable({
                     <div className="col-6">
                       <UpdatePrinter id={printer.id} />
                     </div>
-                    <div className="col-6">
+                    <div
+                      className="col-6"
+                      style={{
+                        display: userId ? "block" : "none",
+                      }}
+                    >
                       <DeletePrinter id={printer.id} />
                     </div>
                   </div>

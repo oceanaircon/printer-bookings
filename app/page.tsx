@@ -7,7 +7,7 @@ export default async function Home() {
       <div className="row py-3 px-4">
         <div className="text-center mb-4 pt-4">
           &nbsp;&nbsp;&nbsp;
-          <h1 className="h3 mb-0 py-2 text-gray-800">Adatok</h1>
+          <h1 className="h3 mb-0 py-2 text-gray-800">Data</h1>
         </div>
         <div className="col-md-12">
           <div className="row col-md-12 px-2">

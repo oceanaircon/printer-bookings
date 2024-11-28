@@ -3,6 +3,7 @@ import { NewWorksheetButton, UpdateBooking } from "../buttons";
 import { DeleteBooking } from "../deletebuttons";
 import { fetchFilteredBookings } from "../../lib/data";
 import "../custom.scss";
+import { auth } from "@clerk/nextjs";
 
 export default async function BookingsTable({
   query,
@@ -13,26 +14,28 @@ export default async function BookingsTable({
 }) {
   const bookings = await fetchFilteredBookings(query, currentPage);
 
+  const { userId } = auth();
+
   return (
     <table className="table table-hover">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Név</th>
+          <th>Name</th>
           <th>Email</th>
           <th>Printer</th>
-          <th>Cikkszám</th>
-          <th>Díj</th>
+          <th>Serial</th>
+          <th>Fee</th>
           <th>Start</th>
-          <th>Kedvezmény</th>
-          <th>Munkalap</th>
+          <th>Discount</th>
+          <th>Worksheet</th>
           <th>
             <a
               href="/bookings/new"
               className=" btn btn-secondary btn-sm"
               aria-current="page"
             >
-              Új szerződés
+              New Booking
             </a>
           </th>
         </tr>
@@ -65,7 +68,12 @@ export default async function BookingsTable({
                   <div className="col">
                     <UpdateBooking id={booking.id} />
                   </div>
-                  <div className="col">
+                  <div
+                    className="col"
+                    style={{
+                      display: userId ? "block" : "none",
+                    }}
+                  >
                     <DeleteBooking id={booking.id} />
                   </div>
                 </div>

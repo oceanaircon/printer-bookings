@@ -14,7 +14,7 @@ const Chart = async () => {
         <div className="card shadow mb-4 mx-2">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">
-              Bevétel és ügyfélszám ({year})
+              Income and Bookers ({year})
             </h6>
           </div>
           <div className="card-body">
@@ -28,7 +28,7 @@ const Chart = async () => {
       <div className="col-xl-5 col-md-5 mb-4">
         <div className="card shadow mb-4 mx-2">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Printerek</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Printers</h6>
           </div>
           <div className="card-body">
             <div className="chart-bar">

@@ -27,13 +27,13 @@ function Topnav() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav activeKey={pathname} className="me-auto">
-            <Nav.Link href="/">Főoldal</Nav.Link>
-            <Nav.Link href="/bookings">Szerződések</Nav.Link>
-            <Nav.Link href="/bookers">Ügyfelek</Nav.Link>
-            <Nav.Link href="/printers">Printerek</Nav.Link>
-            <Nav.Link href="/worksheets">Munkalapok</Nav.Link>
-            <Nav.Link href="/services">Hibák</Nav.Link>
-            <Nav.Link href="/categories">Kategóriák</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/bookings">Bookings</Nav.Link>
+            <Nav.Link href="/bookers">Bookers</Nav.Link>
+            <Nav.Link href="/printers">Printers</Nav.Link>
+            <Nav.Link href="/worksheets">Worksheets</Nav.Link>
+            <Nav.Link href="/services">Services</Nav.Link>
+            <Nav.Link href="/categories">Categories</Nav.Link>
           </Nav>
           <UserButton afterSignOutUrl="/" />
         </Navbar.Collapse>

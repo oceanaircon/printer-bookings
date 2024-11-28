@@ -18,7 +18,7 @@ const WorksheetsPage = async ({
   } catch (error) {
     console.error("A státuszfrissítés sikertelen volt.");
   }
-  
+
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -26,8 +26,8 @@ const WorksheetsPage = async ({
 
   return (
     <div className="my-4 py-5 text-center">
-      <h3>Munkalapok</h3>
-      <Search placeholder="bejelentő, printer vagy hiba neve ..." />
+      <h3>Worksheets</h3>
+      <Search placeholder="Booker, printer or service ..." />
       <Suspense key={query + currentPage} fallback={""}>
         <WorksheetsTable query={query} currentPage={currentPage} />
       </Suspense>

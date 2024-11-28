@@ -54,10 +54,10 @@ export default function Form() {
           flexDirection: "column",
         }}
       >
-        <h3 className="mb-4">Ügyfél létrehozása</h3>
+        <h3 className="mb-4">Add Booker</h3>
         <div className="mb-3">
           <label htmlFor="name" className="block text-sm font-medium">
-            Név
+            Name
           </label>
           <input
             type="text"
@@ -68,7 +68,7 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="address" className="block text-sm font-medium">
-            Cím
+            Address
           </label>
           <input
             type="text"
@@ -79,7 +79,7 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="taxnumber" className="block text-sm font-medium">
-            Adószám
+            Tax Number
           </label>
           <input
             type="text"
@@ -90,7 +90,7 @@ export default function Form() {
         </div>
         <div className="mb-3">
           <label htmlFor="phone" className="block text-sm font-medium">
-            Telefon
+            Phone
           </label>
           <input
             type="text"
@@ -117,7 +117,7 @@ export default function Form() {
             value="Mehet"
             className="btn btn-outline-success"
           >
-            Mehet
+            Submit
           </button>
           <a
             href="/bookers"
@@ -125,7 +125,7 @@ export default function Form() {
             className="btn btn-outline-danger"
             style={{ marginLeft: "10px" }}
           >
-            Mégse
+            Cancel
           </a>
         </div>
       </form>

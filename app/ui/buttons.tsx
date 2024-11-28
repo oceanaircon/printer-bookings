@@ -7,7 +7,7 @@ export function NewWorksheetButton({ id }: { id: number }) {
       className="btn btn-dark btn-sm"
       href={`/worksheets/${id}/new`}
     >
-      Új munkalap
+      New Worksheet
     </a>
   );
 }

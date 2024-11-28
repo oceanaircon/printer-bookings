@@ -21,14 +21,14 @@ const PrintersPage = async ({
 
   return (
     <div className="my-4 py-5 text-center">
-      <h3>Printerek</h3>
-      <Search placeholder="printer neve vagy cikkszáma..." />
+      <h3>Printers</h3>
+      <Search placeholder="Name of the Printer or Serial..." />
       <a
         href="/printers/new"
         className="mobile-button"
         aria-current="page"
       >
-        Új printer
+        New Printer
       </a>
       <Suspense key={query + currentPage} fallback={""}>
         <PrintersTable query={query} currentPage={currentPage} />
