@@ -15,7 +15,7 @@ function Topnav() {
     <Navbar
       fixed="top"
       collapseOnSelect
-      expand="md"
+      expand="xl"
       className="bg-body-tertiary"
       data-bs-theme="dark"
     >
