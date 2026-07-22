@@ -4,18 +4,21 @@ import { Suspense } from "react";
 import PrintersTable from "../ui/printers/printersTable";
 import Pagination from "@/app/ui/pagination";
 import { fetchPrinterPages } from "../lib/data";
+
+export const dynamic = "force-dynamic";
 import "../ui/custom.scss";
 
 const PrintersPage = async ({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) => {
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams?.query || "";
+  const currentPage = Number(resolvedSearchParams?.page) || 1;
 
   const totalPages = await fetchPrinterPages(query);
 

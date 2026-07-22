@@ -8,7 +8,9 @@ export default function Form({
   printer: PrinterField;
   categories: CategoryField[];
 }) {
-  const updatePrinterWithId = updatePrinter.bind(null, printer.id);
+  const updatePrinterWithId = async (formData: FormData) => {
+    await updatePrinter(printer.id, formData);
+  };
 
   return (
     <div className="py-5 my-5">

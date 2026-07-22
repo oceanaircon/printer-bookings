@@ -10,7 +10,9 @@ export default function Form({
   services: ServiceField[];
   userId: string;
 }) {
-  const updateWorksheetById = updateWorksheet.bind(null, worksheet.id);
+  const updateWorksheetById = async (formData: FormData) => {
+    await updateWorksheet(worksheet.id, formData);
+  };
 
   return (
     <div className="container py-5 my-5 mx-auto text-center">

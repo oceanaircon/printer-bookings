@@ -16,7 +16,9 @@ export default function Form({
   printers: PrinterField[];
   userId: string;
 }) {
-  const updateBookingWithId = updateBooking.bind(null, booking.id);
+  const updateBookingWithId = async (formData: FormData) => {
+    await updateBooking(booking.id, formData);
+  };
 
   return (
     <div className="container py-5 my-5 mx-auto text-center">

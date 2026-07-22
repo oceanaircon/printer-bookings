@@ -35,7 +35,7 @@ function Topnav() {
             <Nav.Link href="/services">Services</Nav.Link>
             <Nav.Link href="/categories">Categories</Nav.Link>
           </Nav>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         </Navbar.Collapse>
       </Container>
     </Navbar>

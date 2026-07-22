@@ -2,12 +2,14 @@ import { fetchCategoryById } from "@/app/lib/data";
 import Form from "@/app/ui/categories/edit-form";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function UpdateCategoryPage({
   params,
 }: {
-  params: { id: number };
+  params: Promise<{ id: number }>;
 }) {
-  const id = params.id;
+  const { id } = await params;
   const category = await fetchCategoryById(id);
   console.log(category);
 

@@ -35,7 +35,9 @@ export default function Form() {
   return (
     <div className="container py-5 my-5 mx-auto text-center">
       <form
-        action={createService}
+        action={async (formData: FormData) => {
+          await createService(formData);
+        }}
         className="py-4 my-5"
         style={{
           maxWidth: "400px",

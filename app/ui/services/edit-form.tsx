@@ -2,7 +2,9 @@ import { ServiceField } from "@/app/lib/definitions";
 import { updateService } from "@/app/lib/actions";
 
 export default function Form({ service }: { service: ServiceField }) {
-  const updateServiceWithId = updateService.bind(null, service.id);
+  const updateServiceWithId = async (formData: FormData) => {
+    await updateService(service.id, formData);
+  };
 
   return (
     <div className="container py-5 my-5 mx-auto text-center">

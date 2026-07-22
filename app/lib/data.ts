@@ -538,10 +538,15 @@ export async function fetchCardData() {
 export const getChartData = async () => {
   noStore();
 
-  let bookers = [];
-  let income = [];
+  let bookers: number[] = [];
+  let income: number[] = [];
 
   const feesPerMonth = (await getFeesPerMonth()) as any;
+
+  if (feesPerMonth.length === 0) {
+    return { bookers, income };
+  }
+
   income[0] = Number(feesPerMonth[0].fee);
 
   for (let index = 1; index < feesPerMonth.length; index++) {

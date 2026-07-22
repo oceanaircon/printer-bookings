@@ -3,7 +3,7 @@ import { UpdatePrinter } from "../buttons";
 import { DeletePrinter } from "../deletebuttons";
 import { fetchFilteredPrinters } from "../../lib/data";
 import "../custom.scss";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function PrintersTable({
   query,
@@ -14,7 +14,7 @@ export default async function PrintersTable({
 }) {
   const printers = await fetchFilteredPrinters(query, currentPage);
 
-  const { userId } = auth();
+  const { userId } = await auth();
 
   return (
     <div className="table-responsive">
