@@ -35,7 +35,9 @@ export default function Form() {
     <div className="container py-5 my-5 mx-auto text-center">
       <form
         className="container mx-auto p-4 bg-white shadow-md rounded-md text-center"
-        action={createCategory}
+        action={async (formData: FormData) => {
+          await createCategory(formData);
+        }}
         style={{
           maxWidth: "400px",
           margin: "auto",

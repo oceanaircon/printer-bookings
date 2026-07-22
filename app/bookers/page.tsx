@@ -4,18 +4,21 @@ import Search from "../ui/search";
 import { Suspense } from "react";
 import BookersTable from "../ui/bookers/bookersTable";
 import { fetchBookerPages } from "../lib/data";
+
+export const dynamic = "force-dynamic";
 import "../ui/custom.scss";
 
 const BookersPage = async ({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) => {
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams?.query || "";
+  const currentPage = Number(resolvedSearchParams?.page) || 1;
 
   const totalPages = await fetchBookerPages(query);
 

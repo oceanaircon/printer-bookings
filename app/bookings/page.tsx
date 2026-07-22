@@ -5,16 +5,19 @@ import BookingsTable from "../ui/bookings/bookingsTable";
 import Pagination from "@/app/ui/pagination";
 import { fetchBookingPages } from "../lib/data";
 
+export const dynamic = "force-dynamic";
+
 const BookingsPage = async ({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) => {
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams?.query || "";
+  const currentPage = Number(resolvedSearchParams?.page) || 1;
 
   const totalPages = await fetchBookingPages(query);
 

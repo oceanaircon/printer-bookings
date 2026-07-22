@@ -5,13 +5,15 @@ import { Suspense } from "react";
 import { fetchWorksheetPages, updateWorksheetStatus } from "@/app/lib/data";
 import WorksheetsTable from "../ui/worksheets/worksheetsTable";
 
+export const dynamic = "force-dynamic";
+
 const WorksheetsPage = async ({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) => {
   try {
     await updateWorksheetStatus();
@@ -19,8 +21,9 @@ const WorksheetsPage = async ({
     console.error("A státuszfrissítés sikertelen volt.");
   }
 
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams?.query || "";
+  const currentPage = Number(resolvedSearchParams?.page) || 1;
 
   const totalPages = await fetchWorksheetPages(query);
 

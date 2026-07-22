@@ -2,6 +2,8 @@ import React from "react";
 import prisma from "@/prisma/client";
 import { UpdateCategory } from "../ui/buttons";
 
+export const dynamic = "force-dynamic";
+
 const CategoriesPage = async () => {
   const categories = await prisma.category.findMany();
 

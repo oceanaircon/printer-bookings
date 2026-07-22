@@ -1,6 +1,8 @@
 import Cards from "./ui/dashboard/cards";
 import Chart from "./ui/dashboard/chart";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   return (
     <div className="container-fluid">

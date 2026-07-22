@@ -2,7 +2,7 @@ import { PrintWorksheet, UpdateWorksheet } from "../buttons";
 import { DeleteWorksheet } from "../deletebuttons";
 import { fetchFilteredWorksheets } from "../../lib/data";
 import "../custom.scss";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function WorksheetsTable({
   query,
@@ -13,7 +13,7 @@ export default async function WorksheetsTable({
 }) {
   const worksheets = await fetchFilteredWorksheets(query, currentPage);
 
-  const { userId } = auth();
+  const { userId } = await auth();
 
   return (
     <div className="table-responsive">

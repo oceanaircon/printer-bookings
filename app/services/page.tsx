@@ -2,12 +2,14 @@ import React from "react";
 import prisma from "@/prisma/client";
 import { DeleteService } from "../ui/deletebuttons";
 import { UpdateService } from "../ui/buttons";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+
+export const dynamic = "force-dynamic";
 
 const ServicesPage = async () => {
   const services = await prisma.service.findMany();
 
-  const { userId } = auth();
+  const { userId } = await auth();
 
   return (
     <div className="my-4 py-5">

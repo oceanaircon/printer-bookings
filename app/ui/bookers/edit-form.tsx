@@ -2,7 +2,9 @@ import { BookerField } from "@/app/lib/definitions";
 import { updateBooker } from "@/app/lib/actions";
 
 export default function Form({ booker }: { booker: BookerField }) {
-  const updateBookerWithId = updateBooker.bind(null, booker.id);
+  const updateBookerWithId = async (formData: FormData) => {
+    await updateBooker(booker.id, formData);
+  };
 
   return (
     <div className="container py-5 my-5 mx-auto text-center">

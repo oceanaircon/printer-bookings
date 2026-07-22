@@ -2,12 +2,14 @@ import { fetchPrinterById, loadCategories } from "@/app/lib/data";
 import Form from "@/app/ui/printers/edit-form";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function UpdatePrinterPage({
   params,
 }: {
-  params: { id: number };
+  params: Promise<{ id: number }>;
 }) {
-  const id = params.id;
+  const { id } = await params;
   const printer = await fetchPrinterById(id);
   const categories = await loadCategories();
   console.log(printer);

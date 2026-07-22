@@ -2,7 +2,9 @@ import { CategoryField } from "@/app/lib/definitions";
 import { updateCategory } from "@/app/lib/actions";
 
 export default function Form({ category }: { category: CategoryField }) {
-  const updateCategoryWithId = updateCategory.bind(null, category.id);
+  const updateCategoryWithId = async (formData: FormData) => {
+    await updateCategory(category.id, formData);
+  };
 
   return (
     <div className="container py-5 my-5 mx-auto text-center">

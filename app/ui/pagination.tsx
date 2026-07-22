@@ -78,11 +78,7 @@ function PaginationNumber({
   isActive: boolean;
 }) {
   const className = clsx("", {
-    "": position === "first" || position === "single",
-    "": position === "last" || position === "single",
     "text-secondary": isActive,
-    "": !isActive && position !== "middle",
-    "": position === "middle",
   });
 
   return isActive || position === "middle" ? (
@@ -103,12 +99,7 @@ function PaginationArrow({
   direction: "left" | "right";
   isDisabled?: boolean;
 }) {
-  const className = clsx("", {
-    "": isDisabled,
-    "": !isDisabled,
-    "": direction === "left",
-    "": direction === "right",
-  });
+  const className = clsx("");
 
   const icon =
     direction === "left" ? (

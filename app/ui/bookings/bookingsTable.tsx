@@ -3,7 +3,7 @@ import { NewWorksheetButton, UpdateBooking } from "../buttons";
 import { DeleteBooking } from "../deletebuttons";
 import { fetchFilteredBookings } from "../../lib/data";
 import "../custom.scss";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function BookingsTable({
   query,
@@ -14,7 +14,7 @@ export default async function BookingsTable({
 }) {
   const bookings = await fetchFilteredBookings(query, currentPage);
 
-  const { userId } = auth();
+  const { userId } = await auth();
 
   return (
     <table className="table table-hover">
